@@ -6,7 +6,8 @@
   "configurations": [
     {
       "args": [
-        // ""
+        "gem",
+        "blah"
       ],
       "cwd": "${workspaceRoot}",
       "name": "Run creategem",
