@@ -1,28 +1,25 @@
-$LOAD_PATH.unshift File.expand_path('../lib', __FILE__)
-require '<%= @gem_name %>/version'
+require_relative '<%= @gem_name %>/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "<%= @gem_name %>"
-  spec.version       = <%= @class_name %>::VERSION
   spec.authors       = ["<%= @repository.user_name %>"]
-  spec.email         = ["<%= @repository.user_email %>"]
-  spec.summary       = %q{TODO Summary what the gem is for}
+  <% if @executable -%>
+    spec.bindir        = "exe"
+    spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
+  <% end -%>
   spec.description   = %q{TODO Longer description of the gem}
-  spec.homepage      = "<%= @repository.url %>"
-<% if @repository.public? -%>
-  spec.license       = "MIT"
-<% end -%>
-
-<% if @repository.private? -%>
-  spec.metadata['allowed_push_host'] = "<%= @repository.gem_server_url %>"
-<% end -%>
-
+  spec.email         = ["<%= @repository.user_email %>"]
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^test/}) }
-<% if @executable -%>
-  spec.bindir        = "exe"
-  spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
-<% end -%>
+  spec.homepage      = "<%= @repository.url %>"
+  <% if @repository.public? -%>
+    spec.license       = "MIT"
+  <% end -%>
+  <% if @repository.private? -%>
+    spec.metadata['allowed_push_host'] = "<%= @repository.gem_server_url %>"
+  <% end -%>
+  spec.name          = "<%= @gem_name %>"
   spec.require_paths = ["lib"]
+  spec.summary       = %q{TODO Summary what the gem is for}
+  spec.version       = <%= @class_name %>::VERSION
 
   spec.add_development_dependency "bundler", "~> 1.11"
   spec.add_development_dependency "rake", "~> 11.1"

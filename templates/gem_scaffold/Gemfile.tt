@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in <%= @gem_name %>.gemspec
+# The @gem_name gem dependencies are defined in <%= @gem_name %>.gemspec
 gemspec
 
 # path '../'  # uncomment to use unreleased gem dependencies from same directory

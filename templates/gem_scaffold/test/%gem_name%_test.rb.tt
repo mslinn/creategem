@@ -1,4 +1,4 @@
-require 'test_helper'
+require_relative 'test_helper'
 
 class <%= @class_name %>Test < Minitest::Test
     def test_it_is_a_module

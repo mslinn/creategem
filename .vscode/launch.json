@@ -5,6 +5,18 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "args": [
+        // ""
+      ],
+      "cwd": "${workspaceRoot}",
+      "name": "Run creategem",
+      "program": "${workspaceRoot}/exe/creategem",
+      "request": "launch",
+      "showDebuggerOutput": false,
+      "type": "Ruby",
+      "useBundler": true,
+    },
+    {
       "cwd": "${workspaceRoot}",
       "name": "Attach rdebug-ide",
       "request": "attach",

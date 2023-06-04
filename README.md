@@ -31,9 +31,17 @@ Features:
     $ gem install creategem
 
 
-## Usage
+## Syntax
+`Creategem` has 3 subcommands `gem`, `help` and `plugin`:
 
-    $ creategem gem GEM_NAME [--private] [--no-executable] [--bitbucket]
+  $ creategem gem GEM_NAME [--private] [--no-executable] [--bitbucket]
+
+  # Describe available commands or one subcommand
+  $ creategem help [COMMAND]
+
+  # Create a new Rails plugin with the given NAME:
+  $ creategem plugin NAME [OPTIONS]
+  # OPTIONS are: --private (Geminabox), --executable, --engine, --mountable, --bitbucket
 
 When invoked without any options,
 it is assumed that you want a gem with an executable,
