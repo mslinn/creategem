@@ -32,7 +32,7 @@ or provides detail for the specified subcommand.
 
     $ creategem help [COMMAND]
 
-**The `gem` subcommand** creates a scaffold for a gem:
+**The `gem` subcommand** creates a scaffold for a gem within the `generated/` directory:
 
     $ creategem gem GEM_NAME [--private] [--no-executable] [--bitbucket]
 

@@ -9,7 +9,7 @@ module Creategem
     include Creategem::Git
 
     # There must be a method called gem_name.
-    # To use gem_name in the file names in the template directory: %gem_name%
+    # To use gem_name in the file names in the template directory: "generated/%gem_name%"
     attr_accessor :gem_name
 
     # this is where the thor generator templates are found
@@ -72,7 +72,7 @@ module Creategem
     private
 
     def create_gem_scaffold(gem_name)
-      say "Create a scaffold for a gem named: #{gem_name}", :green
+      say "Create a scaffold for a gem named #{gem_name} in generated/#{gem_name}", :green
       @gem_name = gem_name
       @class_name = Thor::Util.camel_case gem_name.tr('-', '_')
       @executable = options[:executable]
@@ -83,26 +83,26 @@ module Creategem
                                               gem_server_url: gem_server_url(@host),
                                               private:        options[:private])
       directory 'gem_scaffold', "generated/#{gem_name}"
-      directory 'executable_scaffold', gem_name if @executable
+      directory 'executable_scaffold', "generated/#{gem_name}" if @executable
       template 'LICENCE.txt', "#{gem_name}/LICENCE.txt" if @repository.public?
     end
 
     def create_plugin_scaffold(gem_name)
-      say "Create a rails plugin scaffold for gem named: #{gem_name}", :green
-      directory 'plugin_scaffold', gem_name
+      say "Create a rails plugin scaffold for gem named #{gem_name} in generated/#{gem_name}", :green
+      directory 'plugin_scaffold', "generated/#{gem_name}"
       Dir.chdir gem_name do
         run 'chmod +x test/dummy/bin/*'
       end
     end
 
     def create_engine_scaffold(gem_name)
-      say "Create a rails engine scaffold for gem named: #{gem_name}", :green
-      directory 'engine_scaffold', gem_name
+      say "Create a rails engine scaffold for gem named #{gem_name} in generated/#{gem_name}", :green
+      directory 'engine_scaffold', "generated/#{gem_name}"
     end
 
     def create_mountable_scaffold(gem_name)
-      say "Create a rails mountable engine scaffold for gem named: #{gem_name}", :green
-      directory 'mountable_scaffold', gem_name
+      say "Create a rails mountable engine scaffold for gem named #{gem_name} in generated/#{gem_name}", :green
+      directory 'mountable_scaffold', "generated/#{gem_name}"
     end
 
     def initialize_repository(gem_name)
