@@ -6,7 +6,7 @@ Gem::Specification.new do |spec|
     spec.bindir        = "exe"
     spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   <% end -%>
-  spec.description   = %q{TODO Longer description of the gem}
+  spec.description   = %q{TODO: Longer description of the gem}
   spec.email         = ["<%= @repository.user_email %>"]
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^test/}) }
   spec.homepage      = "<%= @repository.url %>"
@@ -18,7 +18,7 @@ Gem::Specification.new do |spec|
   <% end -%>
   spec.name          = "<%= @gem_name %>"
   spec.require_paths = ["lib"]
-  spec.summary       = %q{TODO Summary what the gem is for}
+  spec.summary       = %q{TODO: Summary what the gem is for}
   spec.version       = <%= @class_name %>::VERSION
 
   spec.add_development_dependency "bundler", "~> 1.11"

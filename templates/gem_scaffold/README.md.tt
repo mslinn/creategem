@@ -10,7 +10,7 @@
 [coveralls]: https://coveralls.io/r/<%= @repository.user %>/<%= gem_name %>
 <% end %>
 
-TODO Description of <%= @class_name %>
+TODO: Description of <%= @class_name %>
 
 
 ## Installation
@@ -32,7 +32,7 @@ Or install it manually:
 
 ## Usage
 
-TODO Describe how to use this gem
+TODO: Describe how to use this gem
 
 
 ## Development
@@ -46,7 +46,7 @@ To release a new version, run `bundle exec rake release_patch`, `bundle exec rak
 
 ## Contributing
 
-Bug reports and pull requests are welcome on <%= @repository.vendor %> at <%= @repository.url %>.
+Bug reports and pull requests are welcome on <%= @repository.host %> at <%= @repository.url %>.
 
 
 <% if @repository.public? -%>

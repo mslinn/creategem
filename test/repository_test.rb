@@ -2,7 +2,7 @@ require_relative 'test_helper'
 
 class RepositoryTest < Minitest::Test
   def test_bitbucket
-    repo = Creategem::Repository.new(vendor:         :bitbucket,
+    repo = Creategem::Repository.new(host:           :bitbucket,
                                      private:        true,
                                      user:           'maxmustermann',
                                      name:           :testrepo,
@@ -13,7 +13,7 @@ class RepositoryTest < Minitest::Test
   end
 
   def test_github
-    repo = Creategem::Repository.new(vendor:         :github,
+    repo = Creategem::Repository.new(host:           :github,
                                      user:           'maxmustermann',
                                      name:           :testrepo,
                                      gem_server_url: 'https://rubygems.org')

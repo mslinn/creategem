@@ -3,44 +3,44 @@ require 'git'
 # Creategem::Repository contains informations about the git repository and the git user
 module Creategem
   class Repository
-    REPOSITORIES = { github: "github.com", bitbucket: "bitbucket.org" }
-
-    attr_reader :vendor, :name, :user, :user_name, :user_email, :gem_server_url, :private
+    REPOSITORIES = { github: 'github.com', bitbucket: 'bitbucket.org' }.freeze
 
     def initialize(options)
-      @vendor = options[:vendor]
+      @host = options[:host]
       @private = options[:private]
       @name = options[:name]
       @user = options[:user]
-      @user_name = ::Git.global_config "user.name"
-      @user_email = ::Git.global_config "user.email"
+      @user_name = ::Git.global_config 'user.name'
+      @user_email = ::Git.global_config 'user.email'
       @gem_server_url = options[:gem_server_url]
       @private = options[:private]
     end
 
     def github?
-      vendor == :github
+      @host == :github
     end
 
     def bitbucket?
-      vendor == :bitbucket
+      @host == :bitbucket
     end
 
-    # this could change later. For now all private repositories are on bitbucket and all private ones on github
+    # TODO: Currently all private repositories are on BitBucket and all public repos are on GitHub
+    # TODO: Drop BitBucket?
+    # TODO: Support private repos on GitHub
     def private?
-      self.private
+      @private
     end
 
     def public?
-      !private?
+      !@private
     end
 
     def url
-      "https://#{REPOSITORIES[vendor]}/#{user}/#{name}"
+      "https://#{REPOSITORIES[@host]}/#{@user}/#{@name}"
     end
 
     def origin
-      "git@#{REPOSITORIES[vendor]}:#{user}/#{name}.git"
+      "git@#{REPOSITORIES[@host]}:#{@user}/#{@name}.git"
     end
   end
 end
