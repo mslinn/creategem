@@ -27,7 +27,7 @@ module Creategem
       instead of the default, which is to publish the gem on Rubygems.
     END_DESC
 
-    option :executable, type: :boolean, default: true,
+    option :executable, type: :boolean, default: false,
       desc: 'Create an executable for the gem.'
 
     option :bitbucket, type: :boolean, default: false, desc: <<~END_DESC
@@ -72,23 +72,24 @@ module Creategem
     private
 
     def create_gem_scaffold(gem_name)
-      say "Create a scaffold for a gem named #{gem_name} in generated/#{gem_name}", :green
+      say "Creating a scaffold for a new gem named #{gem_name} in generated/#{gem_name}.", :green
       @gem_name = gem_name
       @class_name = Thor::Util.camel_case gem_name.tr('-', '_')
       @executable = options[:executable]
       @host = options[:bitbucket] ? :bitbucket : :github
+      @private = options[:private]
       @repository = Creategem::Repository.new(host:           @host,
                                               user:           git_repository_user_name(@host),
                                               name:           gem_name,
-                                              gem_server_url: gem_server_url(@host),
-                                              private:        options[:private])
+                                              gem_server_url: gem_server_url(@private),
+                                              private:        @private)
       directory 'gem_scaffold', "generated/#{gem_name}"
       directory 'executable_scaffold', "generated/#{gem_name}" if @executable
       template 'LICENCE.txt', "#{gem_name}/LICENCE.txt" if @repository.public?
     end
 
     def create_plugin_scaffold(gem_name)
-      say "Create a rails plugin scaffold for gem named #{gem_name} in generated/#{gem_name}", :green
+      say "Creating a new Rails plugin scaffold for gem named #{gem_name} in generated/#{gem_name}", :green
       directory 'plugin_scaffold', "generated/#{gem_name}"
       Dir.chdir gem_name do
         run 'chmod +x test/dummy/bin/*'
@@ -96,12 +97,12 @@ module Creategem
     end
 
     def create_engine_scaffold(gem_name)
-      say "Create a rails engine scaffold for gem named #{gem_name} in generated/#{gem_name}", :green
+      say "Creating a new Rails engine scaffold for a new gem named #{gem_name} in generated/#{gem_name}", :green
       directory 'engine_scaffold', "generated/#{gem_name}"
     end
 
     def create_mountable_scaffold(gem_name)
-      say "Create a rails mountable engine scaffold for gem named #{gem_name} in generated/#{gem_name}", :green
+      say "Creating a mountable Rails engine scaffold for a new gem named #{gem_name} in generated/#{gem_name}", :green
       directory 'mountable_scaffold', "generated/#{gem_name}"
     end
 
