@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
-set -euo pipefail
-IFS=$'\n\t'
-set -vx
 
-bundle install
+rm -f Gemfile.lock
 
-# Do any other automated setup that you need to do here
+bundle
+
+bundle binstubs rspec-core     --force --path binstub
+bundle binstubs rubocop        --force --path binstub
+bundle binstubs ruby-debug-ide --force --path binstub

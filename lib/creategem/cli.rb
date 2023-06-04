@@ -1,6 +1,6 @@
 require 'thor'
 require 'git'
-require 'creategem'
+# require 'creategem'
 
 # Creategem::CLI is a Thor class that is invoked when a user runs a creategem executable
 module Creategem

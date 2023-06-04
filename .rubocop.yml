@@ -1,0 +1,67 @@
+require:
+  # - rubocop-jekyll
+  - rubocop-md
+  - rubocop-performance
+  - rubocop-rake
+  - rubocop-rspec
+
+AllCops:
+  Exclude:
+    - exe/**/*
+    - vendor/**/*
+    - Gemfile*
+  NewCops: enable
+  TargetRubyVersion: 2.6
+
+Gemspec/DeprecatedAttributeAssignment:
+  Enabled: false
+
+Gemspec/RequireMFA:
+  Enabled: false
+
+Layout/HashAlignment:
+  EnforcedColonStyle: table
+  EnforcedHashRocketStyle: table
+
+Layout/LineLength:
+  Max: 150
+
+Metrics/AbcSize:
+  Max: 35
+
+Metrics/BlockLength:
+  Exclude:
+    - jekyll_pre.gemspec
+  Max: 30
+
+Metrics/CyclomaticComplexity:
+  Max: 15
+
+Metrics/MethodLength:
+  Max: 30
+
+Metrics/PerceivedComplexity:
+  Max: 15
+
+Naming/FileName:
+  Exclude:
+    - Rakefile
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: comma
+
+RSpec/FilePath:
+  IgnoreMethods: true
+  SpecSuffixOnly: true
+
+RSpec/ExampleLength:
+  Max: 30
+
+RSpec/MultipleExpectations:
+  Max: 15
