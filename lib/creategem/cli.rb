@@ -18,45 +18,45 @@ module Creategem
     end
 
     desc 'gem NAME', <<~END_DESC
-      Creates a new gem with a given NAME with Github git repository.
-      Options: --private (Geminabox), --no-executable, --bitbucket.
+      Creates a new gem with the given NAME, hosted by GitHub and published on RubyGems.
+      Options: --private, --no-executable, --bitbucket.
     END_DESC
 
     option :private, type: :boolean, default: false, desc: <<~END_DESC
-      When true, the gem is published in a private geminabox repository,
-      otherwise the gem is published to Rubygems (default).
+      Publish the gem in a private repository,
+      instead of the default, which is to publish the gem on Rubygems.
     END_DESC
 
     option :executable, type: :boolean, default: true,
-      desc: 'When true, a gem with an executable is created.'
+      desc: 'Create an executable for the gem.'
 
     option :bitbucket, type: :boolean, default: false, desc: <<~END_DESC
-      When true, a BitBucket repository is created, otherwise GitHub is used (default).
+      Create the repository on BitBucket, otherwise host the repository on GitHub (default).
     END_DESC
 
     def gem(gem_name)
-      create_gem_scaffold(gem_name)
-      initialize_repository(gem_name)
+      create_gem_scaffold gem_name
+      initialize_repository gem_name
     end
 
     desc 'plugin NAME', <<~END_DESC
-      Creates a new rails plugin with a given NAME with Github git repository.
-      Options: --private (Geminabox), --executable, --engine, --mountable, --bitbucket
+      Create a new Rails plugin with the given NAME, hosted on GitHub.
+      Options: --private, --executable, --engine, --mountable, --bitbucket
     END_DESC
 
     option :private, type: :boolean, default: false, desc: <<~END_DESC
-      When true, the gem is published in a private geminabox repository,
-      otherwise the gem is published to Rubygems (default).
+      Publish the gem on a private Geminabox repository,
+      instead of the default, which is to publish the gem on Rubygems.
     END_DESC
 
     option :engine, type: :boolean, default: false,
-      desc: 'When true, a gem containing rails engine is created.'
+      desc: 'Create a gem containing a Rails engine.'
     option :mountable, type: :boolean, default: false,
-      desc: 'When true, a gem containing a mountable rails engine is created.'
+      desc: 'Create a gem containing a mountable rails engine.'
     option :executable, type: :boolean, default: false,
-      desc: 'When true, a gem containing an executable is created.'
+      desc: 'Create a gem containing an executable.'
     option :bitbucket, type: :boolean, default: false,
-      desc: 'When true, a BitBucket repository is created, otherwise GitHub is used (default).'
+      desc: 'Host the repository on BitBucket, instead of the default, which is to host on GitHub.'
 
     def plugin(gem_name)
       @plugin = true
@@ -82,7 +82,7 @@ module Creategem
                                               name:           gem_name,
                                               gem_server_url: gem_server_url(@host),
                                               private:        options[:private])
-      directory 'gem_scaffold', gem_name
+      directory 'gem_scaffold', "generated/#{gem_name}"
       directory 'executable_scaffold', gem_name if @executable
       template 'LICENCE.txt', "#{gem_name}/LICENCE.txt" if @repository.public?
     end
