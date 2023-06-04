@@ -1,5 +1,0 @@
-#!/usr/bin/env ruby
-
-require 'test/cli'
-
-Test::CLI.start
