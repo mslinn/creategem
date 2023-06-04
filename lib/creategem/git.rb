@@ -22,9 +22,14 @@ module Creategem
             -d '{"name":"#{repository.name}", "private":#{repository.private?}}'
         END_CURL
       else # BitBucket
-        password = ask('Please enter yout Bitbucket password', echo: false)
+        password = ask('Please enter your Bitbucket password', echo: false)
         fork_policy = repository.public? ? 'allow_forks' : 'no_public_forks'
-        run "curl --request POST --user #{repository.user}:#{password} https://api.bitbucket.org/2.0/repositories/#{repository.user}/#{repository.name} -d '{\"scm\":\"git\", \"fork_policy\":\"#{fork_policy}\", \"is_private\":\"#{repository.private?}\"}'"
+        run <<~END_BITBUCKET
+          curl --request POST \
+            --user #{repository.user}:#{password} \
+            https://api.bitbucket.org/2.0/repositories/#{repository.user}/#{repository.name} \
+            -d '{"scm":"git", "fork_policy":"#{fork_policy}", "is_private":"#{repository.private?}"}'
+        END_BITBUCKET
       end
       run "git remote add origin #{repository.origin}"
       say "Push initial commit to remote #{repository.host} repository", :green
@@ -41,8 +46,8 @@ module Creategem
       user
     end
 
-    def gem_server_url(private)
-      if private
+    def gem_server_url(private_)
+      if private_
         git_config_key = 'creategem.gemserver'
         url = ::Git.global_config(git_config_key)
         if url.nil? || url.empty?
