@@ -1,23 +1,27 @@
 module Creategem
   class CLI < Thor
-    desc 'plugin NAME', <<~END_DESC
-      Create a new Rails plugin with the given NAME, hosted on GitHub.
-      Options: --private, --executable, --engine, --mountable, --bitbucket
+    desc 'plugin NAME', 'Create a new Rails plugin .scaffold'
+
+    long_desc <<~END_DESC
+      Create a new Rails plugin scaffold with the given NAME,
+      by default hosted by GitHub and published on RubyGems.
     END_DESC
 
     option :private, type: :boolean, default: false, desc: <<~END_DESC
-      Publish the gem on a private Geminabox repository,
-      instead of the default, which is to publish the gem on Rubygems.
+      Publish the gem on a private repository.
     END_DESC
 
     option :engine, type: :boolean, default: false,
       desc: 'Create a gem containing a Rails engine.'
+
     option :mountable, type: :boolean, default: false,
       desc: 'Create a gem containing a mountable rails engine.'
+
     option :executable, type: :boolean, default: false,
-      desc: 'Create a gem containing an executable.'
+      desc: 'Include an executable for the gem.'
+
     option :bitbucket, type: :boolean, default: false,
-      desc: 'Host the repository on BitBucket, instead of the default, which is to host on GitHub.'
+      desc: 'Host the repository on BitBucket.'
 
     def plugin(gem_name)
       @plugin = true
@@ -32,14 +36,6 @@ module Creategem
 
     private
 
-    def create_plugin_scaffold(gem_name)
-      say "Creating a new Rails plugin scaffold for gem named #{gem_name} in generated/#{gem_name}", :green
-      directory 'plugin_scaffold', "generated/#{gem_name}"
-      Dir.chdir gem_name do
-        run 'chmod +x test/dummy/bin/*'
-      end
-    end
-
     def create_engine_scaffold(gem_name)
       say "Creating a new Rails engine scaffold for a new gem named #{gem_name} in generated/#{gem_name}", :green
       directory 'engine_scaffold', "generated/#{gem_name}"
@@ -48,6 +44,14 @@ module Creategem
     def create_mountable_scaffold(gem_name)
       say "Creating a mountable Rails engine scaffold for a new gem named #{gem_name} in generated/#{gem_name}", :green
       directory 'mountable_scaffold', "generated/#{gem_name}"
+    end
+
+    def create_plugin_scaffold(gem_name)
+      say "Creating a new Rails plugin scaffold for gem named #{gem_name} in generated/#{gem_name}", :green
+      directory 'plugin_scaffold', "generated/#{gem_name}"
+      Dir.chdir gem_name do
+        run 'chmod +x test/dummy/bin/*'
+      end
     end
   end
 end
