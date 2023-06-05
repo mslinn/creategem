@@ -1,6 +1,8 @@
 require 'thor'
 require 'git'
 require_relative '../creategem'
+require_relative 'cli/cli_gem'
+require_relative 'cli/cli_rails'
 
 # Creategem::CLI is a Thor class that is invoked when a user runs a creategem executable
 module Creategem
@@ -17,94 +19,7 @@ module Creategem
       File.expand_path('../../templates', __dir__)
     end
 
-    desc 'gem NAME', <<~END_DESC
-      Creates a new gem with the given NAME, hosted by GitHub and published on RubyGems.
-      Options: --private, --no-executable, --bitbucket.
-    END_DESC
-
-    option :private, type: :boolean, default: false, desc: <<~END_DESC
-      Publish the gem in a private repository,
-      instead of the default, which is to publish the gem on Rubygems.
-    END_DESC
-
-    option :executable, type: :boolean, default: false,
-      desc: 'Create an executable for the gem.'
-
-    option :bitbucket, type: :boolean, default: false, desc: <<~END_DESC
-      Create the repository on BitBucket, otherwise host the repository on GitHub (default).
-    END_DESC
-
-    def gem(gem_name)
-      create_gem_scaffold gem_name
-      initialize_repository gem_name
-    end
-
-    desc 'plugin NAME', <<~END_DESC
-      Create a new Rails plugin with the given NAME, hosted on GitHub.
-      Options: --private, --executable, --engine, --mountable, --bitbucket
-    END_DESC
-
-    option :private, type: :boolean, default: false, desc: <<~END_DESC
-      Publish the gem on a private Geminabox repository,
-      instead of the default, which is to publish the gem on Rubygems.
-    END_DESC
-
-    option :engine, type: :boolean, default: false,
-      desc: 'Create a gem containing a Rails engine.'
-    option :mountable, type: :boolean, default: false,
-      desc: 'Create a gem containing a mountable rails engine.'
-    option :executable, type: :boolean, default: false,
-      desc: 'Create a gem containing an executable.'
-    option :bitbucket, type: :boolean, default: false,
-      desc: 'Host the repository on BitBucket, instead of the default, which is to host on GitHub.'
-
-    def plugin(gem_name)
-      @plugin = true
-      @engine = options[:engine] || options[:mountable]
-      @mountable = options[:mountable]
-      create_gem_scaffold gem_name
-      create_plugin_scaffold gem_name
-      create_engine_scaffold gem_name if @engine
-      create_mountable_scaffold gem_name if @mountable
-      initialize_repository gem_name
-    end
-
     private
-
-    def create_gem_scaffold(gem_name)
-      say "Creating a scaffold for a new gem named #{gem_name} in generated/#{gem_name}.", :green
-      @gem_name = gem_name
-      @class_name = Thor::Util.camel_case gem_name.tr('-', '_')
-      @executable = options[:executable]
-      @host = options[:bitbucket] ? :bitbucket : :github
-      @private = options[:private]
-      @repository = Creategem::Repository.new(host:           @host,
-                                              user:           git_repository_user_name(@host),
-                                              name:           gem_name,
-                                              gem_server_url: gem_server_url(@private),
-                                              private:        @private)
-      directory 'gem_scaffold', "generated/#{gem_name}"
-      directory 'executable_scaffold', "generated/#{gem_name}" if @executable
-      template 'LICENCE.txt', "#{gem_name}/LICENCE.txt" if @repository.public?
-    end
-
-    def create_plugin_scaffold(gem_name)
-      say "Creating a new Rails plugin scaffold for gem named #{gem_name} in generated/#{gem_name}", :green
-      directory 'plugin_scaffold', "generated/#{gem_name}"
-      Dir.chdir gem_name do
-        run 'chmod +x test/dummy/bin/*'
-      end
-    end
-
-    def create_engine_scaffold(gem_name)
-      say "Creating a new Rails engine scaffold for a new gem named #{gem_name} in generated/#{gem_name}", :green
-      directory 'engine_scaffold', "generated/#{gem_name}"
-    end
-
-    def create_mountable_scaffold(gem_name)
-      say "Creating a mountable Rails engine scaffold for a new gem named #{gem_name} in generated/#{gem_name}", :green
-      directory 'mountable_scaffold', "generated/#{gem_name}"
-    end
 
     def initialize_repository(gem_name)
       Dir.chdir gem_name do
