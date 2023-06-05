@@ -2,4 +2,4 @@
 
 require '<%= @gem_name %>/cli'
 
-<%= @class_name %>::CLI.start
+<%= @class_name %>::Cli.start

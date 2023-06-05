@@ -6,4 +6,4 @@ else
   require 'creategem/cli'
 end
 
-Creategem::CLI.start
+Creategem::Cli.start

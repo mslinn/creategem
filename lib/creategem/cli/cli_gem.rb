@@ -1,6 +1,6 @@
-# Creategem::CLI is a Thor class that is invoked when a user runs a creategem executable
+# Creategem::Cli is a Thor class that is invoked when a user runs a creategem executable
 module Creategem
-  class CLI < Thor
+  class Cli < Thor
     desc 'gem NAME', 'Creates a new gem scaffold.'
 
     long_desc <<~END_DESC
@@ -27,7 +27,9 @@ module Creategem
     private
 
     def create_gem_scaffold(gem_name)
-      say "Creating a scaffold for a new gem named #{gem_name} in generated/#{gem_name}.", :green
+      dir = "generated/#{gem_name}"
+
+      say "Creating a scaffold for a new gem named #{gem_name} in #{dir}.", :green
       @gem_name = gem_name
       @class_name = Thor::Util.camel_case gem_name.tr('-', '_')
       @executable = options[:executable]
@@ -38,9 +40,9 @@ module Creategem
                                               name:           gem_name,
                                               gem_server_url: gem_server_url(@private),
                                               private:        @private)
-      directory 'gem_scaffold', "generated/#{gem_name}"
-      directory 'executable_scaffold', "generated/#{gem_name}" if @executable
-      template 'LICENCE.txt', "#{gem_name}/LICENCE.txt" if @repository.public?
+      directory 'gem_scaffold',        dir
+      directory 'executable_scaffold', dir if @executable
+      template  'LICENCE.txt',         "#{dir}/LICENCE.txt" if @repository.public?
     end
   end
 end

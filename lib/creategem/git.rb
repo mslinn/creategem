@@ -40,7 +40,7 @@ module Creategem
       global_config = Rugged::Config.global
       git_config_key = "creategem.#{host}user"
       user = global_config[git_config_key]
-      if user.nil? || user.empty?
+      if user.to_s.empty?
         user = ask("What is your #{host} user name?")
         global_config[git_config_key] = user
       end
@@ -53,7 +53,7 @@ module Creategem
         git_config_key = 'creategem.gemserver'
         url = global_config[git_config_key]
 
-        if url.nil? || url.empty?
+        if url.to_s.empty?
           url = ask('What is the url of your Geminabox server?')
           global_config[git_config_key] = url
         end

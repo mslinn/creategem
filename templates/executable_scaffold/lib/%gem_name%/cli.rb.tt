@@ -2,7 +2,7 @@ require 'thor'
 require '<%= @gem_name %>'
 
 module <%= @class_name %>
-  class CLI < Thor
+  class Cli < Thor
     include Thor::Actions
 
     desc "do_something NAME", "TODO: task description"

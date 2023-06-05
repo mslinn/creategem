@@ -1,8 +1,8 @@
-require 'git'
-
 # Creategem::Repository contains informations about the git repository and the git user
 module Creategem
   class Repository
+    attr_reader :gem_server_url, :global_config, :host, :name, :private, :user, :user_name, :user_email
+
     REPOSITORIES = { github: 'github.com', bitbucket: 'bitbucket.org' }.freeze
 
     def initialize(options)
@@ -10,8 +10,11 @@ module Creategem
       @private = options[:private]
       @name = options[:name]
       @user = options[:user]
-      @user_name = ::Git.global_config 'user.name'
-      @user_email = ::Git.global_config 'user.email'
+      @global_config = Rugged::Config.global
+      abort 'Git global config not found' if @global_config.nil?
+
+      @user_name  = @global_config['user.name']
+      @user_email = @global_config['user.email']
       @gem_server_url = options[:gem_server_url]
       @private = options[:private]
     end

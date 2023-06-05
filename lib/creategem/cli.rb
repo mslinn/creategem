@@ -4,11 +4,11 @@ require_relative '../creategem'
 require_relative 'cli/cli_gem'
 require_relative 'cli/cli_rails'
 
-# Creategem::CLI is a Thor class that is invoked when a user runs a creategem executable.
+# Creategem::Cli is a Thor class that is invoked when a user runs a creategem executable.
 # This file defines the common aspects of the Thor class.
 # The cli/ directory contains class extensions specific to each Thor subcommand.
 module Creategem
-  class CLI < Thor
+  class Cli < Thor
     include Thor::Actions
     include Creategem::Git
 
@@ -21,10 +21,14 @@ module Creategem
       File.expand_path '../../templates', __dir__
     end
 
+    def self.exit_on_failure?
+      true
+    end
+
     private
 
     def count_todos(filename)
-      content = File.read "#{source_root}/#{filename}"
+      content = File.read "#{CLI.source_root}/#{filename}"
       content.scan(/TODO:/).length
     end
 

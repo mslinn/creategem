@@ -1,5 +1,5 @@
 module Creategem
-  class CLI < Thor
+  class Cli < Thor
     desc 'plugin NAME', 'Create a new Rails plugin .scaffold'
 
     long_desc <<~END_DESC
@@ -15,7 +15,7 @@ module Creategem
       desc: 'Create a gem containing a Rails engine.'
 
     option :mountable, type: :boolean, default: false,
-      desc: 'Create a gem containing a mountable rails engine.'
+      desc: 'Create a gem containing a mountable Rails engine.'
 
     option :executable, type: :boolean, default: false,
       desc: 'Include an executable for the gem.'
@@ -37,19 +37,22 @@ module Creategem
     private
 
     def create_engine_scaffold(gem_name)
-      say "Creating a new Rails engine scaffold for a new gem named #{gem_name} in generated/#{gem_name}", :green
-      directory 'engine_scaffold', "generated/#{gem_name}"
+      dir = "generated/#{gem_name}"
+      say "Creating a new Rails engine scaffold for a new gem named #{gem_name} in #{dir}", :green
+      directory 'engine_scaffold', dir
     end
 
     def create_mountable_scaffold(gem_name)
-      say "Creating a mountable Rails engine scaffold for a new gem named #{gem_name} in generated/#{gem_name}", :green
-      directory 'mountable_scaffold', "generated/#{gem_name}"
+      dir = "generated/#{gem_name}"
+      say "Creating a mountable Rails engine scaffold for a new gem named #{gem_name} in #{dir}", :green
+      directory 'mountable_scaffold', dir
     end
 
     def create_plugin_scaffold(gem_name)
-      say "Creating a new Rails plugin scaffold for gem named #{gem_name} in generated/#{gem_name}", :green
-      directory 'plugin_scaffold', "generated/#{gem_name}"
-      Dir.chdir gem_name do
+      dir = "generated/#{gem_name}"
+      say "Creating a new Rails plugin scaffold for gem named #{gem_name} in #{dir}", :green
+      directory 'plugin_scaffold', dir
+      Dir.chdir dir do
         run 'chmod +x test/dummy/bin/*'
       end
     end
