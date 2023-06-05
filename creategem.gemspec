@@ -18,6 +18,6 @@ Gem::Specification.new do |spec|
   spec.summary       = 'Creategem creates a scaffold project for new gems.'
   spec.version       = Creategem::VERSION
 
-  spec.add_dependency 'git'
+  spec.add_dependency 'rugged'
   spec.add_dependency 'thor'
 end

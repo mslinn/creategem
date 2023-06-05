@@ -32,27 +32,30 @@ module Creategem
         END_BITBUCKET
       end
       run "git remote add origin #{repository.origin}"
-      say "Push initial commit to remote #{repository.host} repository", :green
+      say "Pushing initial commit to remote #{repository.host} repository", :green
       run 'git push -u origin master'
     end
 
     def git_repository_user_name(host)
+      global_config = Rugged::Config.global
       git_config_key = "creategem.#{host}user"
-      user = ::Git.global_config(git_config_key)
+      user = global_config[git_config_key]
       if user.nil? || user.empty?
         user = ask("What is your #{host} user name?")
-        ::Git.global_config(git_config_key, user)
+        global_config[git_config_key] = user
       end
       user
     end
 
     def gem_server_url(private_)
       if private_
+        global_config = Rugged::Config.global
         git_config_key = 'creategem.gemserver'
-        url = ::Git.global_config(git_config_key)
+        url = global_config[git_config_key]
+
         if url.nil? || url.empty?
-          url = ask('What is the url of your geminabox server?')
-          ::Git.global_config(git_config_key, url)
+          url = ask('What is the url of your Geminabox server?')
+          global_config[git_config_key] = url
         end
         url
       else

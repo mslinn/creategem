@@ -1,5 +1,5 @@
 require 'thor'
-require 'git'
+require 'rugged'
 require_relative '../creategem'
 require_relative 'cli/cli_gem'
 require_relative 'cli/cli_rails'
