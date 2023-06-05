@@ -1,9 +1,6 @@
 # Creategem::CLI is a Thor class that is invoked when a user runs a creategem executable
 module Creategem
   class CLI < Thor
-    include Thor::Actions
-    include Creategem::Git
-
     desc 'gem NAME', <<~END_DESC
       Creates a new gem with the given NAME, hosted by GitHub and published on RubyGems.
       Options: --private, --no-executable, --bitbucket.

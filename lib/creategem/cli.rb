@@ -5,6 +5,8 @@ require_relative 'cli/cli_gem'
 require_relative 'cli/cli_rails'
 
 # Creategem::CLI is a Thor class that is invoked when a user runs a creategem executable
+# This file defines the common aspects of the Thor class.
+# The cli/ directory contains class extensions specific to each Thor subcommand.
 module Creategem
   class CLI < Thor
     include Thor::Actions

@@ -1,8 +1,5 @@
 module Creategem
   class CLI < Thor
-    include Thor::Actions
-    include Creategem::Git
-
     desc 'plugin NAME', <<~END_DESC
       Create a new Rails plugin with the given NAME, hosted on GitHub.
       Options: --private, --executable, --engine, --mountable, --bitbucket
