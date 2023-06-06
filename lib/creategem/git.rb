@@ -12,7 +12,6 @@ module Creategem
 
       # See https://github.com/rails/thor/blob/v1.2.2/lib/thor/actions.rb#L236-L278
       run "git commit -aqm 'Initial commit'", abort_on_failure: false
-      say 'Created the local git repository', :yellow
     end
 
     def github_config

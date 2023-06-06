@@ -42,14 +42,14 @@ module Creategem
 
     def initialize_repository(gem_name)
       Dir.chdir Creategem.dest_root(gem_name) do
-        # say "Working in #{Dir.pwd}", :yellow
+        # say "Working in #{Dir.pwd}", :green
         run 'chmod +x bin/*'
         run 'chmod +x exe/*' if @executable
         create_local_git_repository
         FileUtils.rm_f 'Gemfile.lock'
-        say "Running 'bundle install'", :yellow
+        say "Running 'bundle install'", :green
         run 'bundle'
-        say 'Creating remote repository', :yellow
+        say 'Creating remote repository', :green
         create_remote_git_repository @repository \
           if yes? "Do you want to create a repository on #{@repository.host_camel_case} named #{gem_name}? (y/n)"
       end
@@ -69,7 +69,7 @@ module Creategem
       msg << " the #{gemspec_todos} TODOs in #{gem_name}.gemspec" if gemspec_todos.positive?
       msg << ' and ' if gemspec_todos.positive? && readme_todos.positive?
       msg << " the #{readme_todos} TODOs in README.md." if readme_todos.positive?
-      say msg, :blue
+      say msg, :yellow
     end
   end
 end
