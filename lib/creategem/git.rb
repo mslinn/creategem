@@ -9,7 +9,7 @@ module Creategem
       say 'Creating the local git repository', :green
       run 'git init'
       run 'git add .'
-      run "git commit -aqm 'Initial commit'"
+      run "git commit -aqm 'Initial commit'", abort_on_failure: false
       say 'Created the local git repository', :yellow
     end
 

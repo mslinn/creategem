@@ -1,5 +1,6 @@
-require 'thor'
+require 'fileutils'
 require 'rugged'
+require 'thor'
 require_relative '../creategem'
 require_relative 'cli/cli_gem'
 require_relative 'cli/cli_jekyll'
@@ -46,9 +47,9 @@ module Creategem
         run 'chmod +x exe/*' if @executable
         create_local_git_repository
         FileUtils.rm_f 'Gemfile.lock'
-        say 'About to run bundle install', :yellow
+        say "Running 'bundle install'", :yellow
         run 'bundle'
-        say 'About to create remote repo', :yellow
+        say 'Creating remote repository', :yellow
         create_remote_git_repository @repository \
           if yes? "Do you want to create a repository on #{@repository.host_camel_case} named #{gem_name}? (y/n)"
       end
