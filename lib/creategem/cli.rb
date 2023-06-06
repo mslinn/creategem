@@ -33,7 +33,8 @@ module Creategem
     end
 
     def initialize_repository(gem_name)
-      Dir.chdir gem_name do
+      dir = "generated/#{gem_name}"
+      Dir.chdir dir do
         run 'chmod +x bin/*'
         run 'chmod +x exe/*' if @executable
         create_local_git_repository

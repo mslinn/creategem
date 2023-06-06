@@ -1,20 +1,31 @@
 require 'thor'
+require 'yaml'
 
 module Creategem
   module Git
     include Thor::Actions
 
     def create_local_git_repository
-      say 'Create local git repository', :green
+      say 'Creating the local git repository', :green
       run 'git init'
       run 'git add .'
       run "git commit -aqm 'Initial commit'"
     end
 
+    def github_config
+      gh_hosts_file = MslinnUtil.expand_env('$HOME/.config/gh/hosts.yml')
+      return nil unless File.exist? gh_hosts_file
+
+      YAML.safe_load(File.read(gh_hosts_file))
+    end
+
     def create_remote_git_repository(repository)
-      say "Create remote #{repository.host} repository", :green
+      say "Creating a remote #{repository.host} repository", :green
       if repository.github?
-        token = ask('Please enter your Github personal access token', echo: false)
+        gh_config = github_config
+        token = gh_config&.dig('github.com', 'oauth_token')
+
+        token ||= ask('What is your Github personal access token', echo: false)
         run <<~END_CURL
           curl --request POST \
             --user '#{repository.user}:#{token}' \
@@ -40,10 +51,12 @@ module Creategem
       global_config = Rugged::Config.global
       git_config_key = "creategem.#{host}user"
       user = global_config[git_config_key]
-      if user.to_s.empty?
-        user = ask("What is your #{host} user name?")
-        global_config[git_config_key] = user
-      end
+
+      gh_config = github_config
+      user ||= gh_config&.dig('github.com', 'user')
+
+      user = ask "What is your #{host} user name?" if user.to_s.empty?
+      global_config[git_config_key] = user if user != global_config[git_config_key]
       user
     end
 

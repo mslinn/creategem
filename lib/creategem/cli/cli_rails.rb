@@ -1,9 +1,9 @@
 module Creategem
   class Cli < Thor
-    desc 'plugin NAME', 'Create a new Rails plugin .scaffold'
+    desc 'plugin NAME', 'Creates a new Rails plugin .scaffold'
 
     long_desc <<~END_DESC
-      Create a new Rails plugin scaffold with the given NAME,
+      Creates a new Rails plugin scaffold with the given NAME,
       by default hosted by GitHub and published on RubyGems.
     END_DESC
 
