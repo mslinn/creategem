@@ -10,8 +10,8 @@ require_relative 'cli/cli_rails'
 # The cli/ directory contains class extensions specific to each Thor subcommand.
 module Creategem
   # @return Path to the generated gem
-  def self.dest_root
-    File.expand_path '../../generated', __dir__
+  def self.dest_root(gem_name)
+    File.expand_path "../../generated/#{gem_name}", __dir__
   end
 
   class Cli < Thor
@@ -22,31 +22,31 @@ module Creategem
     # For example: "generated/%gem_name%"
     attr_accessor :gem_name
 
+    def self.exit_on_failure?
+      true
+    end
+
     # @return Path to the Thor generator templates
     def self.source_root
       File.expand_path '../../templates', __dir__
     end
 
-    def self.exit_on_failure?
-      true
-    end
-
     private
 
     def count_todos(filename)
-      content = File.read "#{CLI.source_root}/#{filename}"
-      content.scan(/TODO:/).length
+      content = File.read "#{Creategem.source_root}/#{filename}"
+      content.scan(/TODO/).length
     end
 
     def initialize_repository(gem_name)
-      dir = "generated/#{gem_name}"
-      Dir.chdir dir do
+      Dir.chdir Creategem.dest_root(gem_name) do
+        say "Working in #{Dir.pwd}", :yellow
         run 'chmod +x bin/*'
         run 'chmod +x exe/*' if @executable
         create_local_git_repository
         run 'bundle update'
         create_remote_git_repository @repository \
-          if yes? "Do you want to create a repository on #{@host} named #{gem_name}? (y/n)"
+          if yes? "Do you want to create a repository on #{@repository.host_camel_case} named #{gem_name}? (y/n)"
       end
       say "The #{gem_name} gem was successfully created.", :green
       msg <<~END_TODO

@@ -36,11 +36,13 @@ module Creategem
       @executable = options[:executable]
       @host = options[:bitbucket] ? :bitbucket : :github
       @private = options[:private]
-      @repository = Creategem::Repository.new(host:           @host,
-                                              user:           git_repository_user_name(@host),
-                                              name:           gem_name,
-                                              gem_server_url: gem_server_url(@private),
-                                              private:        @private)
+      @repository = Creategem::Repository.new(
+        host:           @host,
+        user:           git_repository_user_name(@host),
+        name:           gem_name,
+        gem_server_url: gem_server_url(@private),
+        private:        @private
+      )
       directory 'gem_scaffold',        @dir
       directory 'executable_scaffold', @dir if @executable
       template  'LICENCE.txt',         "#{@dir}/LICENCE.txt" if @repository.public?

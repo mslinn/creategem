@@ -19,12 +19,27 @@ module Creategem
       @private = options[:private]
     end
 
-    def github?
-      @host == :github
+    def host_camel_case
+      case @host
+      when :bitbucket
+        'BitBucket'
+      when :github
+        'GitHub'
+      else
+        abort "Error: Invalid @host value: '#{@host}'"
+      end
     end
 
     def bitbucket?
       @host == :bitbucket
+    end
+
+    def github?
+      @host == :github
+    end
+
+    def origin
+      "git@#{REPOSITORIES[@host]}:#{@user}/#{@name}.git"
     end
 
     # TODO: Currently all private repositories are on BitBucket and all public repos are on GitHub
@@ -40,10 +55,6 @@ module Creategem
 
     def url
       "https://#{REPOSITORIES[@host]}/#{@user}/#{@name}"
-    end
-
-    def origin
-      "git@#{REPOSITORIES[@host]}:#{@user}/#{@name}.git"
     end
   end
 end

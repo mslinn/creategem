@@ -20,7 +20,7 @@ module Creategem
       desc: 'Host the repository on BitBucket.'
 
     def jekyll(gem_name)
-      @dir = "#{Creategem.dest_root}/#{gem_name}"
+      @dir = Creategem.dest_root gem_name
       @jekyll = true
       @jekyll_type = options[:type] || :tag
       create_gem_scaffold gem_name
@@ -42,8 +42,8 @@ module Creategem
 
     private
 
-    def create_jekyll_scaffold(gem_name)
-      # TODO: write me
+    def create_jekyll_scaffold(_gem_name)
+      directory 'jekyll_scaffold', @dir
     end
 
     def create_jekyll_tag_scaffold(gem_name)
