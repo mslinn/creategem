@@ -11,7 +11,7 @@ require_relative 'cli/cli_rails'
 module Creategem
   # @return Path to the generated gem
   def self.dest_root(gem_name)
-    File.expand_path "../../generated/#{gem_name}", __dir__
+    File.expand_path "../../generated/#{gem_name}"
   end
 
   class Cli < Thor
@@ -34,13 +34,14 @@ module Creategem
     private
 
     def count_todos(filename)
-      content = File.read "#{Creategem.source_root}/#{filename}"
+      filename_fq = "#{Creategem.dest_root(gem_name)}/#{filename}"
+      content = File.read filename_fq
       content.scan(/TODO/).length
     end
 
     def initialize_repository(gem_name)
       Dir.chdir Creategem.dest_root(gem_name) do
-        say "Working in #{Dir.pwd}", :yellow
+        # say "Working in #{Dir.pwd}", :yellow
         run 'chmod +x bin/*'
         run 'chmod +x exe/*' if @executable
         create_local_git_repository
@@ -49,7 +50,7 @@ module Creategem
           if yes? "Do you want to create a repository on #{@repository.host_camel_case} named #{gem_name}? (y/n)"
       end
       say "The #{gem_name} gem was successfully created.", :green
-      msg <<~END_TODO
+      msg = <<~END_TODO
         Please complete the #{count_todos "#{gem_name}.gemspec"} TODOs in #{gem_name}.gemspec
         and the #{count_todos 'README.md'} TODOs in README.md.
       END_TODO
