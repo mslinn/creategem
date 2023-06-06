@@ -1,49 +1,49 @@
-require_relative '<%= @gem_name %>/version'
+require_relative 'lib/<%= @gem_name %>/version'
 
 Gem::Specification.new do |spec|
-  spec.authors       = ["<%= @repository.user_name %>"]
+  spec.authors       = ['<%= @repository.user_name %>']
   <% if @executable -%>
-    spec.bindir        = "exe"
+    spec.bindir        = 'exe'
     spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   <% end -%>
   spec.description   = %q{TODO: Longer description of the gem}
-  spec.email         = ["<%= @repository.user_email %>"]
+  spec.email         = ['<%= @repository.user_email %>']
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^test/}) }
-  spec.homepage      = "<%= @repository.url %>"
+  spec.homepage      = '<%= @repository.url %>'
   <% if @repository.public? -%>
-    spec.license       = "MIT"
+    spec.license       = 'MIT'
   <% end -%>
   <% if @repository.private? -%>
-    spec.metadata['allowed_push_host'] = "<%= @repository.gem_server_url %>"
+    spec.metadata['allowed_push_host'] = '<%= @repository.gem_server_url %>'
   <% end -%>
-  spec.name          = "<%= @gem_name %>"
-  spec.require_paths = ["lib"]
+  spec.name          = '<%= @gem_name %>'
+  spec.require_paths = ['lib']
   spec.summary       = %q{TODO: Summary what the gem is for}
   spec.version       = <%= @class_name %>::VERSION
 
-  spec.add_development_dependency "bundler", "~> 1.11"
-  spec.add_development_dependency "rake", "~> 11.1"
-  spec.add_development_dependency "minitest", "~> 5.8"
-  spec.add_development_dependency "minitest-reporters", "~> 1.1"
-  spec.add_development_dependency "gem-release", "~> 0.7"
-  spec.add_development_dependency "geminabox", "~> 0.13"
+  spec.add_development_dependency 'bundler', '>= 2.4.6'
+  spec.add_development_dependency 'rake', '~> 13.0.6'
+  spec.add_development_dependency 'minitest', '>= 5.18.0'
+  spec.add_development_dependency 'minitest-reporters', '>= 1.6.0'
+  spec.add_development_dependency 'gem-release', '>= 2.2.2'
+  spec.add_development_dependency 'geminabox', '>= 2.1.0'
 <% if @repository.public? -%>
-  spec.add_development_dependency "coveralls"
+  spec.add_development_dependency 'coveralls'
 <% end %>
 <% if @plugin -%>
-  spec.add_development_dependency "sqlite3"
-  spec.add_development_dependency "quiet_assets"
-  spec.add_development_dependency "minitest-screenshot-reporter", "~> 0.0.2"
-  spec.add_development_dependency "capybara", "~> 2.6.0"
-  spec.add_development_dependency "capybara_minitest_spec", "~> 1.0.5"
-  spec.add_development_dependency "selenium-webdriver", "~> 2.49.0"
-  spec.add_development_dependency "poltergeist", "~> 1.8.1"
-  spec.add_development_dependency "database_cleaner", "~> 1.5.2"
+  spec.add_development_dependency 'sqlite3'
+  spec.add_development_dependency 'quiet_assets'
+  spec.add_development_dependency 'minitest-screenshot-reporter', '~> 0.0.6'
+  spec.add_development_dependency 'capybara', '~> 3.39.1'
+  spec.add_development_dependency 'capybara_minitest_spec', '~> 1.0.7'
+  spec.add_development_dependency 'selenium-webdriver', '~> 4.9.1'
+  spec.add_development_dependency 'poltergeist', '~> 1.10.1'
+  spec.add_development_dependency 'database_cleaner', '~> 2.0.2'
 <% end %>
 <% if @executable %>
-  spec.add_dependency "thor", "~> 0.19"
+  spec.add_dependency 'thor', '~> 1.2.2'
 <% end %>
 <% if @plugin -%>
-  spec.add_dependency "rails", "~> 4.2.6"
+  spec.add_dependency 'rails', '~> 7.0.5'
 <% end %>
 end
