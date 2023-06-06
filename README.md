@@ -8,15 +8,19 @@ that is ready to be released to a public or private gem server.
 This project was inspired by the [Bundler](http://bundler.io)'s `bundle gem` subcommand,
 and by [Deveoping a RubyGem using Bundler](https://github.com/radar/guides/blob/master/gem-development.md).
 
-Similar to what Bundler's `bundle gem` command does, this gem generates a scaffold with all files you need to start, with the following additional features.
+Similar to what Bundler's `bundle gem` command does,
+this gem generates a scaffold with all files you need to start,
+with the following additional features:
 
-- Automatically creates local and remote git repository (github or bitbucket) for your gem.
-- Optionally creates private GitHub and BitBucket repositories.
+- Generates a README with badges.
+- Automatically creates local and remote git repositories (on GitHub or BitBucket) for your gem.
+- Remote repositories can be private or public.
 - Creates an executable based on [Thor](http://whatisthor.com) (can be omited with `--no-executable`).
 - Creates a test infrastructure based on `minitest` and `minitest-reporters`.
-- Ready to release to rubygems.org or to a private geminabox gem server.
-- Optionaly create a Rails plugin gem, possibly with a mountable engine
-- Generates a README with badges.
+- Ready to publicly release to rubygems.org or to a private Geminabox gem server.
+- Optionally create the gem as a:
+  - A Rails plugin, possibly with a mountable engine.
+  - A Jekyll plugin (tag, block tag, or generator).
 
 
 ## Installation
@@ -25,7 +29,7 @@ Similar to what Bundler's `bundle gem` command does, this gem generates a scaffo
 
 
 ## Syntax
-`Creategem` has 3 subcommands `gem`, `help` and `plugin`:
+`Creategem` has 4 subcommands `gem`, `help`, `jekyll` and `plugin`:
 
 **The `help` subcommand** lists the available subcommands,
 or provides detail for the specified subcommand.
@@ -55,7 +59,19 @@ Then commit the changes to git and invoke `rake release`,
 and your gem will be published.
 
 
-**The `plugin` subcommand** creates a new Rails plugin with the given NAME:
+**The `jekyll` subcommand** extends the `gem` command and creates a new Jekyll plugin with the given NAME:
+
+    $ creategem jekyll NAME [OPTIONS]
+
+OPTIONS are:
+
+    --private, --type, --bitbucket
+
+The `--type` option must be used, and requires one of the following values: `tag`, `block`, or `generator`.
+
+
+
+**The `plugin` subcommand** extends the `gem` command and creates a new Rails plugin with the given NAME:
 
     $ creategem plugin NAME [OPTIONS]
 
