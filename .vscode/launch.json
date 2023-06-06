@@ -7,7 +7,7 @@
     {
       "args": [
         "gem",
-        "blah"
+        "x"
       ],
       "cwd": "${workspaceRoot}",
       "name": "Run creategem",

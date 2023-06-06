@@ -22,7 +22,7 @@ module Creategem
     END_DESC
 
     def gem(gem_name)
-      @dir = "#{Creategem.dest_root}/#{gem_name}"
+      @dir = Creategem.dest_root gem_name
       create_gem_scaffold gem_name
       initialize_repository gem_name
     end
