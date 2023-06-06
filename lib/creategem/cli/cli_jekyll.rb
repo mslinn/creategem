@@ -1,3 +1,5 @@
+require_relative '../cli'
+
 module Creategem
   class Cli < Thor
     desc 'jekyll NAME', 'Creates a new Jekyll plugin scaffold.'
@@ -7,24 +9,34 @@ module Creategem
       by default hosted by GitHub and published on RubyGems.
     END_DESC
 
-    option :private, type: :boolean, default: false, desc: <<~END_DESC
+    method_option :private, type: :boolean, default: false, desc: <<~END_DESC
       Publish the gem on a private repository.
     END_DESC
 
-    option :type, type: :string, default: 'tag',
+    method_option :type, type: :string, default: 'tag',
       desc: 'Specifies the type of plugin. Allowable values are: tag, block and generator.'
 
-    option :bitbucket, type: :boolean, default: false,
+    method_option :bitbucket, type: :boolean, default: false,
       desc: 'Host the repository on BitBucket.'
 
     def jekyll(gem_name)
+      @dir = "#{Creategem.dest_root}/#{gem_name}"
       @jekyll = true
-      @jekyll_type = options[:type]
+      @jekyll_type = options[:type] || :tag
       create_gem_scaffold gem_name
       create_jekyll_scaffold gem_name
-      create_jekyll_tag_scaffold gem_name if @jekyll_type == 'tag'
-      create_jekyll_block_scaffold gem_name if @jekyll_type == 'block'
-      create_jekyll_generator_scaffold gem_name if @jekyll_type == 'generator'
+
+      case @jekyll_type
+      when 'tag' || ''
+        create_jekyll_tag_scaffold gem_name
+      when 'block'
+        create_jekyll_block_scaffold gem_name
+      when 'generator'
+        create_jekyll_generator_scaffold gem_name
+      else
+        abort "Error: Invalid jekyll --type: #{@jekyll_type}"
+      end
+
       initialize_repository gem_name
     end
 

@@ -4,3 +4,26 @@ source 'https://rubygems.org'
 gemspec
 
 # path '../'  # uncomment to use unreleased gem dependencies from same directory
+
+group :test, :development do
+  gem 'bundler', '>= 2.4.6', require: false
+  gem 'gem-release', '>= 2.2.2', require: false
+  gem 'geminabox', '>= 2.1.0', require: false
+  gem 'minitest', '>= 5.18.0', require: false
+  gem 'minitest-reporters', '>= 1.6.0', require: false
+  gem 'rake', '>= 13.0.6', require: false
+
+<% if @repository.public? -%>
+  gem 'coveralls', require: false
+<% end %>
+<% if @plugin -%>
+  gem 'capybara', '~> 3.39.1', require: false
+  gem 'capybara_minitest_spec', '~> 1.0.7', require: false
+  gem 'database_cleaner', '~> 2.0.2', require: false
+  gem 'minitest-screenshot-reporter', '~> 0.0.6', require: false
+  gem 'selenium-webdriver', '~> 4.9.1', require: false
+  gem 'poltergeist', '~> 1.10.1', require: false
+  gem 'sqlite3'
+  gem 'quiet_assets'
+<% end %>
+end

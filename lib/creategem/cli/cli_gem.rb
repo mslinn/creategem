@@ -1,4 +1,6 @@
 # Creategem::Cli is a Thor class that is invoked when a user runs a creategem executable
+require_relative '../cli'
+
 module Creategem
   class Cli < Thor
     desc 'gem NAME', 'Creates a new gem scaffold.'
@@ -8,18 +10,19 @@ module Creategem
       by default hosted by GitHub and published on RubyGems.
     END_DESC
 
-    option :private, type: :boolean, default: false, desc: <<~END_DESC
+    method_option :private, type: :boolean, default: false, desc: <<~END_DESC
       Publish the gem in a private repository.
     END_DESC
 
-    option :executable, type: :boolean, default: false,
+    method_option :executable, type: :boolean, default: false,
       desc: 'Include an executable for the gem.'
 
-    option :bitbucket, type: :boolean, default: false, desc: <<~END_DESC
+    method_option :bitbucket, type: :boolean, default: false, desc: <<~END_DESC
       Host the repository on BitBucket.
     END_DESC
 
     def gem(gem_name)
+      @dir = "#{Creategem.dest_root}/#{gem_name}"
       create_gem_scaffold gem_name
       initialize_repository gem_name
     end
@@ -27,10 +30,8 @@ module Creategem
     private
 
     def create_gem_scaffold(gem_name)
-      dir = "generated/#{gem_name}"
-
-      say "Creating a scaffold for a new gem named #{gem_name} in #{dir}.", :green
       @gem_name = gem_name
+      say "Creating a scaffold for a new gem named #{gem_name} in #{@dir}.", :green
       @class_name = Thor::Util.camel_case gem_name.tr('-', '_')
       @executable = options[:executable]
       @host = options[:bitbucket] ? :bitbucket : :github
@@ -40,9 +41,9 @@ module Creategem
                                               name:           gem_name,
                                               gem_server_url: gem_server_url(@private),
                                               private:        @private)
-      directory 'gem_scaffold',        dir
-      directory 'executable_scaffold', dir if @executable
-      template  'LICENCE.txt',         "#{dir}/LICENCE.txt" if @repository.public?
+      directory 'gem_scaffold',        @dir
+      directory 'executable_scaffold', @dir if @executable
+      template  'LICENCE.txt',         "#{@dir}/LICENCE.txt" if @repository.public?
     end
   end
 end

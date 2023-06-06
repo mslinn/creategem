@@ -9,6 +9,11 @@ require_relative 'cli/cli_rails'
 # This file defines the common aspects of the Thor class.
 # The cli/ directory contains class extensions specific to each Thor subcommand.
 module Creategem
+  # @return Path to the generated gem
+  def self.dest_root
+    File.expand_path '../../generated', __dir__
+  end
+
   class Cli < Thor
     include Thor::Actions
     include Creategem::Git
