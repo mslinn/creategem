@@ -82,6 +82,33 @@ OPTIONS are:
 You can specify if the plugin should be an engine (`--engine`) or a mountable engine (`--mountable`).
 
 
+## Did It Work?
+The following command shows all files that have been committed to the newly created git repository:
+
+```shell
+$ git ls-tree --name-only --full-tree -r HEAD
+.envrc
+.gitignore
+.simplecov
+.travis.yml
+.vscode/launch.json
+.vscode/settings.json
+CHANGELOG.md
+Gemfile
+LICENCE.txt
+README.md
+Rakefile
+bin/console
+bin/rake
+bin/setup
+lib/x.rb
+lib/x/version.rb
+test/test_helper.rb
+test/x_test.rb
+x.gemspec
+```
+
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
