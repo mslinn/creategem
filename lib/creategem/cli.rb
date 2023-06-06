@@ -2,6 +2,7 @@ require 'thor'
 require 'rugged'
 require_relative '../creategem'
 require_relative 'cli/cli_gem'
+require_relative 'cli/cli_jekyll'
 require_relative 'cli/cli_rails'
 
 # Creategem::Cli is a Thor class that is invoked when a user runs a creategem executable.
