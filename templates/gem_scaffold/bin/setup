@@ -3,4 +3,8 @@
 rm -f Gemfile.lock
 bundle
 
+bundle binstubs rspec-core     --force --path binstub
+bundle binstubs rubocop        --force --path binstub
+bundle binstubs ruby-debug-ide --force --path binstub
+
 # Do any other automated setup that you need to do here
