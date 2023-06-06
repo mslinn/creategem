@@ -10,6 +10,7 @@ module Creategem
       run 'git init'
       run 'git add .'
       run "git commit -aqm 'Initial commit'"
+      say 'Created the local git repository', :yellow
     end
 
     def github_config

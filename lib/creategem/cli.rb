@@ -45,15 +45,29 @@ module Creategem
         run 'chmod +x bin/*'
         run 'chmod +x exe/*' if @executable
         create_local_git_repository
+        say 'About to run bundle', :yellow
+        run 'bundle'
         run 'bundle update'
+        say 'About to create remote repo', :yellow
         create_remote_git_repository @repository \
           if yes? "Do you want to create a repository on #{@repository.host_camel_case} named #{gem_name}? (y/n)"
       end
       say "The #{gem_name} gem was successfully created.", :green
-      msg = <<~END_TODO
-        Please complete the #{count_todos "#{gem_name}.gemspec"} TODOs in #{gem_name}.gemspec
-        and the #{count_todos 'README.md'} TODOs in README.md.
-      END_TODO
+      report_todos gem_name
+    end
+
+    def report_todos(gem_name)
+      gemspec_todos = count_todos "#{gem_name}.gemspec"
+      readme_todos  = count_todos 'README.md'
+      if readme_todos.zero? && gemspec_todos.zero?
+        say 'There are no TODOs.', :blue
+        return
+      end
+
+      msg = 'Please complete'
+      msg << " the #{gemspec_todos} TODOs in #{gem_name}.gemspec" if gemspec_todos.positive?
+      msg << ' and ' if gemspec_todos.positive? && readme_todos.positive?
+      msg << " the #{readme_todos} TODOs in README.md." if readme_todos.positive?
       say msg, :blue
     end
   end
