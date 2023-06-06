@@ -11,7 +11,7 @@ require_relative 'cli/cli_rails'
 module Creategem
   # @return Path to the generated gem
   def self.dest_root(gem_name)
-    File.expand_path "../../generated/#{gem_name}"
+    File.expand_path "generated/#{gem_name}"
   end
 
   class Cli < Thor
@@ -34,7 +34,7 @@ module Creategem
     private
 
     def count_todos(filename)
-      filename_fq = "#{Creategem.dest_root(gem_name)}/#{filename}"
+      filename_fq = "#{Creategem.dest_root gem_name}/#{filename}"
       content = File.read filename_fq
       content.scan(/TODO/).length
     end
@@ -45,9 +45,9 @@ module Creategem
         run 'chmod +x bin/*'
         run 'chmod +x exe/*' if @executable
         create_local_git_repository
-        say 'About to run bundle', :yellow
+        FileUtils.rm_f 'Gemfile.lock'
+        say 'About to run bundle install', :yellow
         run 'bundle'
-        run 'bundle update'
         say 'About to create remote repo', :yellow
         create_remote_git_repository @repository \
           if yes? "Do you want to create a repository on #{@repository.host_camel_case} named #{gem_name}? (y/n)"

@@ -27,7 +27,7 @@ module Creategem
 
     def plugin(gem_name)
       @plugin = true
-      @dir = "#{Creategem.dest_root}/#{gem_name}"
+      @dir = Creategem.dest_root gem_name
       @engine = options[:engine] || options[:mountable]
       @mountable = options[:mountable]
       create_gem_scaffold gem_name
