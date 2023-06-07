@@ -1,27 +1,47 @@
 require_relative 'lib/<%= @gem_name %>/version'
 
 Gem::Specification.new do |spec|
+<% if @repository.github? -%>
+  host = 'https://github.com/<%= @repository.user %>/<%= @gem_name %>'
+<% else -%>
+  host = 'https://bitbucket.com/<%= @repository.user %>/<%= @gem_name %>'
+<% end -%>
+
   spec.authors               = ['<%= @repository.user_name %>']
 <% if @executable -%>
   spec.bindir                = 'exe'
   spec.executables           = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
 <% end -%>
   spec.description           = <<~END_DESC
-     Longer description of the gem
+    TODO: write a longer description of the gem.
+    Use as many lines as you like.
   END_DESC
   spec.email                 = ['<%= @repository.user_email %>']
-  spec.files                 = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^test/}) }
+  spec.files                 = `git ls-files -z` \
+                               .split("\x0") \
+                               .reject { |f| f.match(%r{^test/}) }
   spec.homepage              = '<%= @repository.url %>'
 <% if @repository.public? -%>
   spec.license               = 'MIT'
 <% end -%>
-<% if @repository.private? -%>
-  spec.metadata['allowed_push_host'] = '<%= @repository.gem_server_url %>'
+  spec.metadata = {
+    'allowed_push_host' => '<%= @repository.gem_server_url %>',
+<% unless @repository.private? -%>
+    'bug_tracker_uri'   => "#{host}/issues",
+    'changelog_uri'     => "#{host}/CHANGELOG.md",
+    'homepage_uri'      => spec.homepage,
+    'source_code_uri'   => host,
 <% end -%>
+  }
   spec.name                  = '<%= @gem_name %>'
+  spec.post_install_message = <<~END_MESSAGE
+
+    Thanks for installing #{spec.name}!
+
+  END_MESSAGE
   spec.require_paths         = ['lib']
   spec.required_ruby_version = '>= 3.1.0'
-  spec.summary               = 'Summary of what the gem is for'
+  spec.summary               = 'TODO: Write summary of what the gem is for'
   spec.version               = <%= @class_name %>::VERSION
 <% if @executable -%>
 

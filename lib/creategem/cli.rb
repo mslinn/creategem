@@ -47,8 +47,8 @@ module Creategem
         run 'chmod +x exe/*' if @executable
         create_local_git_repository
         FileUtils.rm_f 'Gemfile.lock'
-        say "Running 'bundle install'", :green
-        run 'bundle'
+        # say "Running 'bundle install'", :green
+        # run 'bundle', abort_on_failure: false
         say 'Creating remote repository', :green
         create_remote_git_repository @repository \
           if yes? "Do you want to create a repository on #{@repository.host_camel_case} named #{gem_name}? (y/n)"
@@ -61,13 +61,13 @@ module Creategem
       gemspec_todos = count_todos "#{gem_name}.gemspec"
       readme_todos  = count_todos 'README.md'
       if readme_todos.zero? && gemspec_todos.zero?
-        say 'There are no TODOs.', :blue
+        say "There are no TODOs. You can run 'bundle install' from within your new gem project now.", :blue
         return
       end
 
       msg = 'Please complete'
       msg << " the #{gemspec_todos} TODOs in #{gem_name}.gemspec" if gemspec_todos.positive?
-      msg << ' and ' if gemspec_todos.positive? && readme_todos.positive?
+      msg << ' and' if gemspec_todos.positive? && readme_todos.positive?
       msg << " the #{readme_todos} TODOs in README.md." if readme_todos.positive?
       say msg, :yellow
     end
