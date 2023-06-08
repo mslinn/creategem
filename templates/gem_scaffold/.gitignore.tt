@@ -17,3 +17,12 @@ test/dummy/log/*.log
 test/dummy/tmp/
 test/dummy/.sass-cache
 <% end -%>
+
+<% if @jekyll %->
+spec/status_persistence.txt
+.jekyll-cache/
+.jekyll-metadata
+_site/
+demo/_site/
+demo/.jekyll-cache/
+<% end -%>

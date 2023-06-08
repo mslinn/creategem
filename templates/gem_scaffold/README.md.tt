@@ -8,18 +8,26 @@
 [gem]: https://rubygems.org/gems/<%= gem_name %>
 [gemnasium]: https://gemnasium.com/<%= @repository.user %>/<%= gem_name %>
 [coveralls]: https://coveralls.io/r/<%= @repository.user %>/<%= gem_name %>
-<% end %>
+<% end -%>
 
 TODO: Description of <%= @class_name %>
 
 
 ## Installation
 
+<% if @jekyll? -%>
+Add this line to your Jekyll website's Gemfile, within the jekyll_plugins group:
+
+group :jekyll_plugins do
+  gem '<%= @gem_name %>'
+end
+<% else -%>
 Add this line to your application's Gemfile:
 
 ```ruby
 gem '<%= @gem_name %>'
 ```
+<% end -%>
 
 And then execute:
 

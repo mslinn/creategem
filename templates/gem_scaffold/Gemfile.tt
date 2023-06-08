@@ -7,11 +7,20 @@ gemspec
 
 group :test, :development do
   gem 'bundler', '>= 2.4.6', require: false
+  gem 'debase', '0.2.5.beta2', require: false
   gem 'geminabox', '>= 2.1.0', require: false
   gem 'gem-release', '>= 2.2.2', require: false
+  gem 'rake', require: false
+  gem 'rspec', require: false
+  gem 'rubocop', require: false
+  gem 'rubocop-md', require: false
+  gem 'rubocop-performance', require: false
+  gem 'rubocop-rake', require: false
+  gem 'rubocop-rspec', require: false
+  gem 'ruby-debug-ide', require: false
+
   gem 'minitest', '>= 5.18.0', require: false
   gem 'minitest-reporters', '>= 1.6.0', require: false
-  gem 'rake', '>= 13.0.6', require: false
 
 <% if @repository.public? -%>
   gem 'coveralls', require: false

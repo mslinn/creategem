@@ -3,6 +3,10 @@
 rm -f Gemfile.lock
 bundle
 
+bundle binstubs debase         --force --path exe
+<% if @jekyll -%>
+bundle binstubs jekyll         --force --path exe
+<% end -%>
 bundle binstubs rspec-core     --force --path binstub
 bundle binstubs rubocop        --force --path binstub
 bundle binstubs ruby-debug-ide --force --path binstub
