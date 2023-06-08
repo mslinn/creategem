@@ -29,6 +29,7 @@ module Creategem
 
     private
 
+    # Defines globals for templates
     def create_gem_scaffold(gem_name)
       @gem_name = gem_name
       say "Creating a scaffold for a new gem named #{gem_name} in #{@dir}.", :green

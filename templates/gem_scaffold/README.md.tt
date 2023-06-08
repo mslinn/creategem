@@ -15,13 +15,14 @@ TODO: Description of <%= @class_name %>
 
 ## Installation
 
-<% if @jekyll? -%>
+<% if @jekyll %>
 Add this line to your Jekyll website's Gemfile, within the jekyll_plugins group:
 
 group :jekyll_plugins do
   gem '<%= @gem_name %>'
 end
-<% else -%>
+<% end -%>
+<% unless @jekyll %>
 Add this line to your application's Gemfile:
 
 ```ruby
