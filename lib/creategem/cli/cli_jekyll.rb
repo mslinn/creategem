@@ -43,6 +43,7 @@ module Creategem
     private
 
     def create_jekyll_scaffold(_gem_name)
+      say "Creating a new Jekyll scaffold for a new gem named #{gem_name} in #{@dir}", :green
       directory 'jekyll_scaffold', @dir
     end
 
