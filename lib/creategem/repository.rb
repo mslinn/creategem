@@ -3,10 +3,14 @@ module Creategem
   class Repository
     attr_reader :gem_server_url, :global_config, :host, :name, :private, :user, :user_name, :user_email
 
-    REPOSITORIES = { github: 'github.com', bitbucket: 'bitbucket.org' }.freeze
+    Host = Struct.new(:domain, :camel_case, :id, keyword_init: true)
+    HOSTS = [
+      Host.new(domain: 'github.com',    camel_case: 'GitHub',    id: :github),
+      Host.new(domain: 'bitbucket.org', camel_case: 'BitBucket', id: :bitbucket)
+    ].freeze
 
     def initialize(options)
-      @host = options[:host]
+      @host = HOSTS.find { |host| host.id == options[:host] }
       @private = options[:private]
       @name = options[:name]
       @user = options[:user]
@@ -19,27 +23,16 @@ module Creategem
       @private = options[:private]
     end
 
-    def host_camel_case
-      case @host
-      when :bitbucket
-        'BitBucket'
-      when :github
-        'GitHub'
-      else
-        abort "Error: Invalid @host value: '#{@host}'"
-      end
-    end
-
     def bitbucket?
-      @host == :bitbucket
+      @host.id == :bitbucket
     end
 
     def github?
-      @host == :github
+      @host.id == :github
     end
 
     def origin
-      "git@#{REPOSITORIES[@host]}:#{@user}/#{@name}.git"
+      "git@#{@host.domain}:#{@user}/#{@name}.git"
     end
 
     # TODO: Currently all private repositories are on BitBucket and all public repos are on GitHub
@@ -54,7 +47,7 @@ module Creategem
     end
 
     def url
-      "https://#{REPOSITORIES[@host]}/#{@user}/#{@name}"
+      "https://#{@host.domain}/#{@user}/#{@name}"
     end
   end
 end

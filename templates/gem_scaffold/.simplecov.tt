@@ -1,7 +1,7 @@
 SimpleCov.start do
   coverage_dir 'test/coverage'
-
 <% if @engine -%>
+
   load_profile 'rails'
 
   add_group 'Controllers', 'app/controllers'

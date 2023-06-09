@@ -51,7 +51,7 @@ module Creategem
         # run 'bundle', abort_on_failure: false
         say 'Creating remote repository', :green
         create_remote_git_repository @repository \
-          if yes? "Do you want to create a repository on #{@repository.host_camel_case} named #{gem_name}? (y/n)"
+          if yes? "Do you want to create a repository on #{@repository.host.camel_case} named #{gem_name}? (y/n)"
       end
       say "The #{gem_name} gem was successfully created.", :green
       report_todos gem_name

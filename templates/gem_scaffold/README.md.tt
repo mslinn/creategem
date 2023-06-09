@@ -15,14 +15,14 @@ TODO: Description of <%= @class_name %>
 
 ## Installation
 
-<% if @jekyll %>
+<% if @jekyll -%>
 Add this line to your Jekyll website's Gemfile, within the jekyll_plugins group:
 
 group :jekyll_plugins do
   gem '<%= @gem_name %>'
 end
 <% end -%>
-<% unless @jekyll %>
+<% unless @jekyll -%>
 Add this line to your application's Gemfile:
 
 ```ruby
@@ -62,4 +62,4 @@ Bug reports and pull requests are welcome on <%= @repository.host %> at <%= @rep
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-<% end %>
+<% end -%>
