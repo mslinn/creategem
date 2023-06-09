@@ -6,11 +6,26 @@
   "configurations": [
     {
       "args": [
-        "gem",
-        "x"
+        "test",
+        "--type", "block"
       ],
       "cwd": "${workspaceRoot}",
-      "name": "Run creategem",
+      "name": "Run test tag",
+      "program": "${workspaceRoot}/lib/test.rb",
+      "request": "launch",
+      "showDebuggerOutput": false,
+      "type": "Ruby",
+      "useBundler": true,
+    },
+    {
+      "args": [
+        "jekyll",
+        "tag_test",
+        "--type", "generator",
+        "--type", "block"
+      ],
+      "cwd": "${workspaceRoot}",
+      "name": "Run creategem tag & block",
       "program": "${workspaceRoot}/exe/creategem",
       "request": "launch",
       "showDebuggerOutput": false,

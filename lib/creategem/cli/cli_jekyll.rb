@@ -13,16 +13,16 @@ module Creategem
       Publish the gem on a private repository.
     END_DESC
 
-    method_option :type, type: :string, default: 'tag',
-      desc: 'Specifies the type of plugin. Allowable values are: tag, block and generator.'
+    method_option :type, type: :string, default: 'tag', enum: %w[tag block generator], repeatable: true,
+      desc: 'Specifies the types of plugin.'
 
-    method_option :bitbucket, type: :boolean, default: false,
-      desc: 'Host the repository on BitBucket.'
+    method_option :host, type: :string, default: 'github', enum: %w[bitbucket github],
+      desc: 'Repository host.'
 
     def jekyll(gem_name)
       @dir = Creategem.dest_root gem_name
       @jekyll = true
-      @jekyll_type = options[:type] || :tag
+      @jekyll_type = options[:type] || ['tag']
       create_gem_scaffold gem_name
       create_jekyll_scaffold gem_name
 
