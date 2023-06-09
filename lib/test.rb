@@ -1,5 +1,7 @@
 require 'thor'
 
+# Call like this:
+# $ ruby lib/test.rb test --type block
 class Cli < Thor
   desc 'test NAME', 'I do not exist therefore I am confused.'
 
@@ -7,8 +9,7 @@ class Cli < Thor
     desc: 'Specifies the types of plugin.'
 
   def test
-    type = options[:type]
-    puts type
+    puts options[:type]
   end
 end
 
