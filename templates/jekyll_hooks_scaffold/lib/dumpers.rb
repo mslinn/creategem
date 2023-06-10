@@ -41,7 +41,7 @@ module Dumpers
   #   attr_reader :path, :extname, :collection, :type; :site is too big to dump here, we already have it anyway
   #   Selected methods: date
   def dump_document(logger, msg, document)
-    attributes = attributes_as_string(document, [:@path, :@extname, :@type])
+    attributes = attributes_as_string(document, %i[@path @extname @type])
     data = document.data.map { |k, v| "    #{k} = #{safe_to_s(v)}" }
     logger.info do
       <<~END_DOC
@@ -104,7 +104,7 @@ module Dumpers
     lines = string ? string.split("\n")[0..4] : []
     return "\n    first 5 lines:\n    #{lines.join("\n    ")}\n" if lines.length.positive?
 
-    ""
+    ''
   end
 
   # @param msg[String]
@@ -117,7 +117,7 @@ module Dumpers
   #     :unpublished
   #   attr_reader :cache_dir, :config, :dest, :filter_cache, :includes_load_paths,
   #     :liquid_renderer, :profiler, :regenerator, :source
-  def dump_site(logger, msg, site) # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+  def dump_site(logger, msg, site) # rubocop:disable Metrics/AbcSize
     logger.info do
       <<~END_INFO
         #{msg} site
@@ -130,15 +130,15 @@ module Dumpers
       mode = env['JEKYLL_ENV']
       logger.info { "site.config['env']['JEKYLL_ENV'] = #{mode}" }
     else
-      logger.info { "site.config['env'] is undefined" }
+      logger.info { 'site.config['env'] is undefined' }
     end
     site.collections.each do |key, _|
       logger.info { "site.collections.#{key}" }
     end
 
-    # key env contains all environment variables, quite verbose so output is reduced to just the "env" key
+    # key env contains all environment variables, quite verbose so output is reduced to just the 'env' key
     logger.info { "site.config has #{site.config.length} entries:" }
-    site.config.sort.each { |key, value| logger.info { "  site.config.#{key} = '#{value}'" unless key == "env" } }
+    site.config.sort.each { |key, value| logger.info { "  site.config.#{key} = '#{value}'" unless key == 'env' } }
 
     logger.info { "site.data has #{site.data.length} entries:" }
     site.data.sort.each { |key, value| logger.info { "  site.data.#{key} = '#{value}'" } }
@@ -164,7 +164,7 @@ module Dumpers
   end
 
   def attributes_as_string(object, attrs)
-    attrs.map { |attr| "    #{attr.to_s.delete_prefix("@")} = #{object.instance_variable_get(attr)}" }
+    attrs.map { |attr| "    #{attr.to_s.delete_prefix('@')} = #{object.instance_variable_get(attr)}" }
   end
 
   module_function :attributes_as_string, :collection_as_string, :count_lines, :dump_document, :dump_page,

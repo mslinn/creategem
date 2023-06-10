@@ -18,9 +18,9 @@ module MyJekyllFilter
     input_string.strip!
     self.logger.debug { "input_string=#{input_string}" }
     "<pre>#{input_string} = #{eval input_string}</pre>"
-    end
+  end
 
-  PluginMetaLogger.instance.logger.info { "Loaded MyJekyllFilter plugin." }
+  PluginMetaLogger.instance.logger.info { 'Loaded MyJekyllFilter plugin.' }
 end
 
 Liquid::Template.register_filter(MyJekyllFilter)

@@ -24,7 +24,7 @@ require_relative 'dumpers'
 # Default value is false.
 # The hooks for pages, posts and documents access safe via pages.site.safe, posts.site.safe and documents.site.safe, respectively.
 module JekyllPluginHooks
-  PLUGIN_NAME = 'my_plugin_hooks'
+  PLUGIN_NAME = 'my_plugin_hooks'.freeze
 
   ########## :site hooks
   # These hooks influence the entire site
