@@ -89,7 +89,7 @@ module Creategem
 
     def create_jekyll_tag_scaffold(tag_name)
       @tag_name = tag_name
-      @jekyll_class_name = Creategem.camel_case tag_name
+      @jekyll_class_name = Creategem.camel_case @tag_name
       say "Creating Jekyll tag #{@tag_name} scaffold within #{@jekyll_class_name}", :green
       directory 'jekyll_tag_scaffold', @dir
     end

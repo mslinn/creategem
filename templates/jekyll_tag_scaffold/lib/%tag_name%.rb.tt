@@ -6,18 +6,18 @@ require 'jekyll_plugin_support'
 # See https://www.mslinn.com/jekyll/10400-jekyll-plugin-template-collection.html
 #
 # @example Heading for this example
-#   {% my_tag param1='value1' %}
+#   {% <%= @tag_name %> param1='value1' %}
 #
 # The Jekyll log level defaults to :info, which means all the Jekyll.logger statements below will not generate output.
 # You can control the log level when you start Jekyll.
 # To set the log level to :debug, write an entery into _config.yml, like this:
 # plugin_loggers:
-#   MyTag: debug
+#   <%= @jekyll_class_name %>: debug
 module JekyllTagPlugin
-  PLUGIN_NAME = 'my_tag'.freeze
+  PLUGIN_NAME = '<%= @tag_name %>'.freeze
 
-  # This class implements the Jekyll mytag functionality
-  class MyTag < JekyllSupport::JekyllTag
+  # This class implements the Jekyll <%= @tag_name %> functionality
+  class <%= @jekyll_class_name %> < JekyllSupport::JekyllTag
     # @param tag_name [String] is the name of the tag, which we already know.
     # @param argument_string [String] the arguments from the web page.
     # @param tokens [Liquid::ParseContext] tokenized command line
