@@ -53,11 +53,6 @@ module Creategem
       directory 'jekyll_scaffold', @dir
     end
 
-    def create_jekyll_tag_scaffold
-      say 'Creating a new Jekyll tag scaffold', :green
-      directory 'jekyll_tag_scaffold', @dir
-    end
-
     def create_jekyll_block_scaffold
       say 'Creating a new Jekyll tag block scaffold', :green
       directory 'jekyll_block_scaffold', @dir
@@ -71,6 +66,16 @@ module Creategem
     def create_jekyll_generator_scaffold
       say 'Creating a new Jekyll generator scaffold', :green
       directory 'jekyll_generator_scaffold', @dir
+    end
+
+    def create_jekyll_hooks_scaffold
+      say 'Creating a new Jekyll hook scaffold', :green
+      directory 'jekyll_hooks_scaffold', @dir
+    end
+
+    def create_jekyll_tag_scaffold
+      say 'Creating a new Jekyll tag scaffold', :green
+      directory 'jekyll_tag_scaffold', @dir
     end
   end
 end
