@@ -2,6 +2,9 @@ require_relative '../cli'
 
 module Creategem
   class Cli < Thor
+    # These declarations make the class instance variable values available as an accessor,
+    # which is necessary to name template files that are named '%variable_name%.extension'.
+    # See https://www.rubydoc.info/gems/thor/Thor/Actions#directory-instance_method
     attr_reader :block_name, :filter_name, :generator_name, :tag_name
 
     desc 'jekyll NAME', 'Creates a new Jekyll plugin scaffold.'
