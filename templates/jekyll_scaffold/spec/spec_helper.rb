@@ -3,15 +3,15 @@ require 'jekyll_plugin_logger'
 require 'liquid'
 require 'fileutils'
 require 'yaml'
-require_relative "../lib/<%= @gem_name %>"
+require_relative '../lib/<%= @gem_name %>'
 
 RSpec.configure do |config|
   config.filter_run :focus
-  # config.order = "random"
+  # config.order = 'random'
   config.run_all_when_everything_filtered = true
 
   # See https://relishapp.com/rspec/rspec-core/docs/command-line/only-failures
-  config.example_status_persistence_file_path = "../spec/status_persistence.txt"
+  config.example_status_persistence_file_path = '../spec/status_persistence.txt'
 
   config.filter_run_when_matching focus: true
 end
@@ -44,18 +44,18 @@ class TestLiquidContext < Liquid::Context
     super
 
     page = {
-      "content"     => "blah blah",
-      "description" => "Jekyll plugin support demo",
-      "dir"         => "/",
-      "excerpt"     => nil,
-      "layout"      => "default",
-      "name"        => "index.html",
-      "path"        => "index.html",
-      "title"       => "Welcome",
-      "url"         => "/",
+      'content'     => 'blah blah',
+      'description' => 'Jekyll plugin support demo',
+      'dir'         => '/',
+      'excerpt'     => nil,
+      'layout'      => 'default',
+      'name'        => 'index.html',
+      'path'        => 'index.html',
+      'title'       => 'Welcome',
+      'url'         => '/',
     }
 
-    @content = "Interior of the tag"
+    @content = 'Interior of the tag'
     @registers = Registers.new(
       page,
       SiteMock.new
