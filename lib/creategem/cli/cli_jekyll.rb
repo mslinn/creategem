@@ -9,40 +9,41 @@ module Creategem
       by default hosted by GitHub and published on RubyGems.
     END_DESC
 
-    method_option :private, type: :boolean, default: false, desc: <<~END_DESC
-      Publish the gem on a private repository.
-    END_DESC
+    # rubocop:disable Layout/HashAlignment
+    method_option :private, type: :boolean, default: false,
+      desc: 'Publish the gem on a private repository.'
 
-    method_option :block, name: :string, repeatable: true,
+    method_option :block, type: :string, repeatable: true,
       desc: 'Specifies the name of a Jekyll block tag plugin.'
 
-    method_option :filter, name: :string, repeatable: true,
+    method_option :filter, type: :string, repeatable: true,
       desc: 'Specifies the name of a Jekyll/Liquid filter.'
 
-    method_option :generator, name: :string, repeatable: true,
-      desc: 'Specifies the name of a Jekyll generator plugin.'
+    method_option :generator, type: :boolean,
+      desc: 'Specifies a Jekyll generator plugin.'
 
-    method_option :host, type: :string, default: 'github', enum: %w[bitbucket github],
-      desc: 'Repository host.'
+    method_option :host, type: :string, default: 'github',
+      enum: %w[bitbucket github], desc: 'Repository host.'
 
     method_option :tag, name: :string, repeatable: true,
       desc: 'Specifies the name of a Jekyll tag plugin.'
+    # rubocop:enable Layout/HashAlignment
 
     def jekyll(gem_name)
       @gem_name = gem_name
       @dir = Creategem.dest_root gem_name
       @jekyll = true
-      @jekyll_types = [options[:type] || 'tag']
 
       create_gem_scaffold gem_name
       create_jekyll_scaffold
 
-      create_jekyll_block_scaffold     if @jekyll_types.include? 'block'
-      create_jekyll_filter_scaffold    if @jekyll_types.include? 'filter'
-      create_jekyll_generator_scaffold if @jekyll_types.include? 'generator'
-      create_jekyll_hooks_scaffold     if @jekyll_types.include? 'hooks'
-      create_jekyll_tag_scaffold       if @jekyll_types.include? 'tag'
-
+      options.each do |option| # TODO: pass plugn name (except for hooks)
+        create_jekyll_block_scaffold     if option == 'block'
+        create_jekyll_filter_scaffold    if option == 'filter'
+        create_jekyll_generator_scaffold if option == 'generator'
+        create_jekyll_hooks_scaffold     if option == 'hooks'
+        create_jekyll_tag_scaffold       if option == 'tag'
+      end
       initialize_repository gem_name
     end
 
