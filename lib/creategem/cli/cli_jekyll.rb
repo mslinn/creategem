@@ -41,12 +41,13 @@ module Creategem
       create_jekyll_scaffold
 
       options.each do |option| # TODO: pass plugn name (except for hooks)
+        # puts ">>> option.first=#{option.first} option[1]=#{option[1]}"
         case option.first
-        when 'block' then     create_jekyll_block_scaffold option[1]
-        when 'filter' then    create_jekyll_filter_scaffold option[1]
-        when 'generator' then create_jekyll_generator_scaffold
+        when 'block' then     option[1].each { |o| create_jekyll_block_scaffold o }
+        when 'filter' then    option[1].each { |o| create_jekyll_filter_scaffold o }
+        when 'generator' then option[1].each { |o| create_jekyll_generator_scaffold o }
         when 'hooks' then     create_jekyll_hooks_scaffold option[1]
-        when 'tag' then       create_jekyll_tag_scaffold option[1]
+        when 'tag' then       option[1].each { |o| create_jekyll_tag_scaffold o }
         end
       end
       initialize_repository gem_name
