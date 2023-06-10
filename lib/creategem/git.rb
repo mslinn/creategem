@@ -15,7 +15,7 @@ module Creategem
     end
 
     def github_config
-      gh_hosts_file = expand_env('$HOME/.config/gh/hosts.yml')
+      gh_hosts_file = Creategem.expand_env('$HOME/.config/gh/hosts.yml')
       return nil unless File.exist? gh_hosts_file
 
       YAML.safe_load(File.read(gh_hosts_file))

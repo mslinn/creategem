@@ -61,21 +61,21 @@ module Creategem
 
     def create_jekyll_block_scaffold(block_name)
       @block_name = block_name
-      @jekyll_class_name = camel_case block_name
+      @jekyll_class_name = Creategem.camel_case block_name
       say "Creating Jekyll tag block #{@block_name} scaffold within #{@jekyll_class_name}", :green
       directory 'jekyll_block_scaffold', @dir
     end
 
     def create_jekyll_filter_scaffold(filter_name)
       @filter_name = filter_name
-      # @jekyll_class_name = camel_case filter_name
+      # @jekyll_class_name = Creategem.camel_case filter_name
       say "Creating a new Jekyll filter method scaffold #{@filter_name}", :green
       directory 'jekyll_filter_scaffold', @dir
     end
 
     def create_jekyll_generator_scaffold(generator_name)
       @generator_name = generator_name
-      @jekyll_class_name = camel_case generator_name
+      @jekyll_class_name = Creategem.camel_case generator_name
       say "Creating a new Jekyll generator class scaffold #{@jekyll_class_name}", :green
       directory 'jekyll_generator_scaffold', @dir
     end
@@ -87,7 +87,7 @@ module Creategem
 
     def create_jekyll_tag_scaffold(tag_name)
       @tag_name = tag_name
-      @jekyll_class_name = camel_case tag_name
+      @jekyll_class_name = Creategem.camel_case tag_name
       say "Creating Jekyll tag #{@tag_name} scaffold within #{@jekyll_class_name}", :green
       directory 'jekyll_tag_scaffold', @dir
     end
