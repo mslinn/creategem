@@ -16,8 +16,8 @@ module MyJekyllFilter
   #   {{ '11 + 21/3' | my_filter }} => "<pre>11 + 21/3 = 18</pre>"
   def my_filter(input_string)
     input_string.strip!
-    self.logger.debug { "input_string=#{input_string}" }
-    "<pre>#{input_string} = #{eval input_string}</pre>"
+    MyJekyllFilter.logger.debug { "input_string=#{input_string}" }
+    "<pre>#{input_string} = #{eval input_string}</pre>" # rubocop:disable Security/Eval
   end
 
   PluginMetaLogger.instance.logger.info { 'Loaded MyJekyllFilter plugin.' }

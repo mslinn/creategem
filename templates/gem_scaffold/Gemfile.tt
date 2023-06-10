@@ -26,13 +26,16 @@ group :test, :development do
   gem 'coveralls', require: false
 <% end -%>
 <% if @plugin -%>
+group :test, :development do
   gem 'capybara', '~> 3.39.1', require: false
   gem 'capybara_minitest_spec', '~> 1.0.7', require: false
   gem 'database_cleaner', '~> 2.0.2', require: false
   gem 'minitest-screenshot-reporter', '~> 0.0.6', require: false
+  gem 'rubocop-minitest', require: false
   gem 'selenium-webdriver', '~> 4.9.1', require: false
   gem 'poltergeist', '~> 1.10.1', require: false
   gem 'sqlite3'
   gem 'quiet_assets'
+end
 <% end -%>
 end

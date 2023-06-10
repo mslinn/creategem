@@ -33,5 +33,5 @@ module CategoryIndexGenerator
     # rubocop:enable Style/StringConcatenation, Metrics/AbcSize
   end
 
-  PluginMetaLogger.instance.logger.info { "Loaded CategoryGenerator plugin." }
+  PluginMetaLogger.instance.logger.info { 'Loaded CategoryGenerator plugin.' }
 end

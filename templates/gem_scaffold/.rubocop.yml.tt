@@ -2,6 +2,9 @@ require:
   # - rubocop-jekyll
   - rubocop-md
   - rubocop-performance
+  <% if @plugin -%>
+  - rubocop-minitest
+  <% end -%>
   - rubocop-rake
   - rubocop-rspec
 

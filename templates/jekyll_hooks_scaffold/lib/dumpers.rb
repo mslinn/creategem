@@ -64,7 +64,7 @@ module Dumpers
   #   attr_accessor :basename, :content, :data, :ext, :name, :output, :pager, :site
   #   Selected methods: dir, excerpt, path, permalink, url
   def dump_page(logger, msg, page)
-    attributes = attributes_as_string(page, [:@basename, :@ext, :@name])
+    attributes = attributes_as_string(page, %i[@basename @ext @name])
     # site = page.site available if you need it
     data = page.data.map { |k, v| "    #{k} = #{v}" }
     logger.info do
@@ -130,7 +130,7 @@ module Dumpers
       mode = env['JEKYLL_ENV']
       logger.info { "site.config['env']['JEKYLL_ENV'] = #{mode}" }
     else
-      logger.info { 'site.config['env'] is undefined' }
+      logger.info { "site.config['env'] is undefined" }
     end
     site.collections.each do |key, _|
       logger.info { "site.collections.#{key}" }

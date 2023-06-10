@@ -93,5 +93,4 @@ class WebTest < ActionDispatch::IntegrationTest
     DatabaseCleaner.clean
   end
 end
-
 <% end -%>

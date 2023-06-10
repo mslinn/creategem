@@ -9,6 +9,7 @@ AllCops:
   Exclude:
     - binstub/**/*
     - exe/**/*
+    - generated/**/binstub/*
     - vendor/**/*
     - Gemfile*
   NewCops: enable
