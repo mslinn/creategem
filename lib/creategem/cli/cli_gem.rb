@@ -32,15 +32,15 @@ module Creategem
     # Defines globals for templates
     def create_gem_scaffold(gem_name)
       @gem_name = gem_name
-      say "Creating a scaffold for a new gem named #{gem_name} in #{@dir}.", :green
-      @class_name = Creategem.camel_case gem_name
+      say "Creating a scaffold for a new gem named #{@gem_name} in #{@dir}.", :green
+      @class_name = Creategem.camel_case @gem_name
       @executable = options[:executable]
       @host = options[:bitbucket] ? :bitbucket : :github
       @private = options[:private]
       @repository = Creategem::Repository.new(
         host:           @host,
         user:           git_repository_user_name(@host),
-        name:           gem_name,
+        name:           @gem_name,
         gem_server_url: gem_server_url(@private),
         private:        @private
       )

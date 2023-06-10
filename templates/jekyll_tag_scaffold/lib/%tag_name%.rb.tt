@@ -10,7 +10,7 @@ require 'jekyll_plugin_support'
 #
 # The Jekyll log level defaults to :info, which means all the Jekyll.logger statements below will not generate output.
 # You can control the log level when you start Jekyll.
-# To set the log level to :debug, write an entery into _config.yml, like this:
+# To set the log level to :debug, write an entry into _config.yml, like this:
 # plugin_loggers:
 #   <%= @jekyll_class_name %>: debug
 module JekyllTagPlugin

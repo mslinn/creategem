@@ -2,6 +2,8 @@ require_relative '../cli'
 
 module Creategem
   class Cli < Thor
+    attr_reader :block_name, :filter_name, :generator_name, :tag_name
+
     desc 'jekyll NAME', 'Creates a new Jekyll plugin scaffold.'
 
     long_desc <<~END_DESC
