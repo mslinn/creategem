@@ -44,8 +44,8 @@ module Creategem
         when 'block' then     option[1].each { |name| create_jekyll_block_scaffold     name }
         when 'filter' then    option[1].each { |name| create_jekyll_filter_scaffold    name }
         when 'generator' then option[1].each { |name| create_jekyll_generator_scaffold name }
+        when 'hooks' then     option[1].each { |name| create_jekyll_hooks_scaffold     name }
         when 'tag' then       option[1].each { |name| create_jekyll_tag_scaffold       name }
-        when 'hooks' then     create_jekyll_hooks_scaffold
         end
       end
 
@@ -55,7 +55,7 @@ module Creategem
     private
 
     def create_jekyll_scaffold
-      say "Creating a new Jekyll scaffold for a new gem named #{@gem_name} in #{@dir}", :green
+      say "Creating a Jekyll scaffold for a new gem named #{@gem_name} in #{@dir}", :green
       directory 'jekyll_scaffold', @dir
     end
 
@@ -80,7 +80,9 @@ module Creategem
       directory 'jekyll_generator_scaffold', @dir
     end
 
-    def create_jekyll_hooks_scaffold
+    def create_jekyll_hooks_scaffold(plugin_name)
+      @plugin_name = plugin_name
+      @jekyll_class_name = Creategem.camel_case plugin_name
       say 'Creating a new Jekyll hook scaffold', :green
       directory 'jekyll_hooks_scaffold', @dir
     end

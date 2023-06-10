@@ -1,7 +1,7 @@
 require 'jekyll_plugin_logger'
 
 # Sample Jekyll filter.
-module MyJekyllFilter
+module <%= @jekyll_class_name %>
   class << self
     attr_accessor :logger
   end
@@ -20,7 +20,7 @@ module MyJekyllFilter
     "<pre>#{input_string} = #{eval input_string}</pre>" # rubocop:disable Security/Eval
   end
 
-  PluginMetaLogger.instance.logger.info { 'Loaded MyJekyllFilter plugin.' }
+  PluginMetaLogger.instance.logger.info { 'Loaded <%= @jekyll_class_name %> plugin.' }
 end
 
-Liquid::Template.register_filter(MyJekyllFilter)
+Liquid::Template.register_filter(<%= @jekyll_class_name %>)

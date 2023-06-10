@@ -23,8 +23,8 @@ require_relative 'dumpers'
 # for inclusion in core, it is best for this to be correct!
 # Default value is false.
 # The hooks for pages, posts and documents access safe via pages.site.safe, posts.site.safe and documents.site.safe, respectively.
-module JekyllPluginHooks
-  PLUGIN_NAME = 'my_plugin_hooks'.freeze
+module <%= @jekyll_class_name %>
+  PLUGIN_NAME = '<%= @plugin_name %>'.freeze
 
   ########## :site hooks
   # These hooks influence the entire site
@@ -48,7 +48,7 @@ module JekyllPluginHooks
     @log_posts = PluginMetaLogger.instance.new_logger(:PostHooks,     PluginMetaLogger.instance.config)
     @log_site  ||= PluginMetaLogger.instance.new_logger(:SiteHooks,   PluginMetaLogger.instance.config)
 
-    @log_site.info { "Loaded #{PLUGIN_NAME} plugin." }
+    @log_site.info { "Loaded #{<%= @plugin_name %>} plugin." }
     @log_site.info { 'Jekyll::Hooks.register(:site, :after_init) invoked.' }
     Dumpers.dump_site(@log_site, 'Jekyll::Hooks.register(:site, :after_init)', site)
   end

@@ -1,14 +1,12 @@
-# Inspired by the badly broken example on https://jekyllrb.com/docs/plugins/generators/, and completely redone so it works.
-module CategoryIndexGenerator
+module <%= @jekyll_class_name %>
   # Creates an index page for each catagory, plus a main index, all within a directory called _site/categories.
-  class CategoryGenerator < Jekyll::Generator
+  class <%= @jekyll_class_name %> < Jekyll::Generator
     safe true
 
     # Only generates content in development mode
-    # rubocop:disable Style/StringConcatenation, Metrics/AbcSize
-    def generate(site)
+    def generate(site) # rubocop:disable Style/StringConcatenation, Metrics/AbcSize
       # This plugin is disabled unless _config.yml contains an entry for category_generator_enable and the value is not false
-      return if site.config['category_generator_enable']
+      return if site.config['<%= @generator_name %>_enable']
 
       return if site.config['env']['JEKYLL_ENV'] == 'production'
 
@@ -30,8 +28,7 @@ module CategoryIndexGenerator
       index.content += '</p>'
       site.pages << index
     end
-    # rubocop:enable Style/StringConcatenation, Metrics/AbcSize
   end
 
-  PluginMetaLogger.instance.logger.info { 'Loaded CategoryGenerator plugin.' }
+  PluginMetaLogger.instance.logger.info { 'Loaded <%= @jekyll_class_name %> plugin.' }
 end
