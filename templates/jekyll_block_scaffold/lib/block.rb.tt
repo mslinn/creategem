@@ -1,0 +1,53 @@
+require 'jekyll_plugin_support'
+
+# This Jekyll block tag plugin is a minimal example.
+#
+# See https://www.mslinn.com/jekyll/10200-jekyll-plugin-background.html
+# See https://www.mslinn.com/jekyll/10400-jekyll-plugin-template-collection.html
+#
+# @example Heading for this example
+#   Describe what this example does
+#   {% my_block_tag param1="value1" %}
+#     Hello, world!
+#   {% endmy_block_tag %}
+#
+# The Jekyll log level defaults to :info, which means all the Jekyll.logger statements below will not generate output.
+# You can control the log level when you start Jekyll.
+# To set the log level to :debug, write an entery into _config.yml, like this:
+# plugin_loggers:
+#   MyBlockTag: debug
+
+module MyBlockTag
+  PLUGIN_NAME = 'my_block_tag'.freeze
+
+  # This class implements the Jekyll block tag functionality
+  class MyBlockTag < JekyllSupport::JekyllBlock
+    include <%= @class_name %>
+
+    # Method prescribed by the Jekyll support plugin.
+    # @return [String]
+    def render_impl(content)
+      @param1  = @helper.keys_values['param1'] # Obtain the value of parameter param1
+
+      @logger.debug do
+        <<~HEREDOC
+          tag_name = '#{@helper.tag_name}'
+          @param1 = '#{@param1}'
+          content = '<code>#{content}</code>'
+        HEREDOC
+      end
+
+      # Compute the return value of this Jekyll tag
+      <<~HEREDOC
+        <p style='color: green; background-color: yellow; padding: 1em; border: solid thin grey;'>
+          #{content} #{@param1}
+        </p>
+      HEREDOC
+    rescue StandardError => e
+      @logger.error { "#{self.class} died with a #{e.full_message}" }
+      exit 3
+    end
+
+    JekyllPluginHelper.register(self, PLUGIN_NAME)
+  end
+end

@@ -52,6 +52,11 @@ module Creategem
       directory 'jekyll_block_scaffold', @dir
     end
 
+    def create_jekyll_filter_scaffold
+      say 'Creating a new Jekyll filter scaffold', :green
+      directory 'jekyll_filter_scaffold', @dir
+    end
+
     def create_jekyll_generator_scaffold
       say 'Creating a new Jekyll generator scaffold', :green
       directory 'jekyll_generator_scaffold', @dir

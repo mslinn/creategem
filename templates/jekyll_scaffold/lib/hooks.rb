@@ -1,12 +1,8 @@
 require 'jekyll_plugin_logger'
-require_relative 'jekyll_plugin_template/version'
 require_relative 'dumpers'
 
-module JekyllPluginHooksName
-  PLUGIN_NAME = 'jekyll_plugin_hooks'
-end
-
-# The Jekyll processing steps are described in https://jekyllrb.com/tutorials/orderofinterpretation/
+# See https://www.mslinn.com/jekyll/10200-jekyll-plugin-background.html
+# See https://www.mslinn.com/jekyll/10400-jekyll-plugin-template-collection.html
 #
 # The Jekyll log level defaults to :info, which means all the Jekyll.logger statements below will not generate output.
 # You can control the log level when you start Jekyll.
@@ -28,6 +24,8 @@ end
 # Default value is false.
 # The hooks for pages, posts and documents access safe via pages.site.safe, posts.site.safe and documents.site.safe, respectively.
 module JekyllPluginHooks
+  PLUGIN_NAME = 'my_plugin_hooks'
+
   ########## :site hooks
   # These hooks influence the entire site
 
@@ -50,7 +48,7 @@ module JekyllPluginHooks
     @log_posts = PluginMetaLogger.instance.new_logger(:PostHooks,     PluginMetaLogger.instance.config)
     @log_site  ||= PluginMetaLogger.instance.new_logger(:SiteHooks,   PluginMetaLogger.instance.config)
 
-    @log_site.info { "Loaded #{JekyllPluginHooksName::PLUGIN_NAME} v#{JekyllPluginTemplateVersion::VERSION} plugin." }
+    @log_site.info { "Loaded #{PLUGIN_NAME} plugin." }
     @log_site.info { 'Jekyll::Hooks.register(:site, :after_init) invoked.' }
     Dumpers.dump_site(@log_site, 'Jekyll::Hooks.register(:site, :after_init)', site)
   end
