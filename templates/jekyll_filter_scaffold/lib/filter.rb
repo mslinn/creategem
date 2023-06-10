@@ -12,8 +12,8 @@ module MyJekyllFilter
   #
   # @param input_string [String].
   # @return [String] input string and the evaluation result.
-  # @example Use.
-  #   {{ '1+2/3' | my_filter }} => "<pre>1+2/3 = 2.5</pre>"
+  # @example Use like this:
+  #   {{ '11 + 21/3' | my_filter }} => "<pre>11 + 21/3 = 18</pre>"
   def my_filter(input_string)
     input_string.strip!
     self.logger.debug { "input_string=#{input_string}" }
@@ -23,4 +23,4 @@ module MyJekyllFilter
   PluginMetaLogger.instance.logger.info { "Loaded MyJekyllFilter plugin." }
 end
 
-Liquid::Template.register_filter(JekyllFilterTemplate)
+Liquid::Template.register_filter(MyJekyllFilter)

@@ -13,11 +13,20 @@ module Creategem
       Publish the gem on a private repository.
     END_DESC
 
-    method_option :type, type: :string, default: 'tag', enum: %w[tag block generator], repeatable: false,
-      desc: 'Specifies the types of plugin.'
+    method_option :block, name: :string, repeatable: true,
+      desc: 'Specifies the name of a Jekyll block tag plugin.'
+
+    method_option :filter, name: :string, repeatable: true,
+      desc: 'Specifies the name of a Jekyll/Liquid filter.'
+
+    method_option :generator, name: :string, repeatable: true,
+      desc: 'Specifies the name of a Jekyll generator plugin.'
 
     method_option :host, type: :string, default: 'github', enum: %w[bitbucket github],
       desc: 'Repository host.'
+
+    method_option :tag, name: :string, repeatable: true,
+      desc: 'Specifies the name of a Jekyll tag plugin.'
 
     def jekyll(gem_name)
       @gem_name = gem_name
@@ -28,9 +37,11 @@ module Creategem
       create_gem_scaffold gem_name
       create_jekyll_scaffold
 
-      create_jekyll_tag_scaffold       if @jekyll_types.include? 'tag'
       create_jekyll_block_scaffold     if @jekyll_types.include? 'block'
+      create_jekyll_filter_scaffold    if @jekyll_types.include? 'filter'
       create_jekyll_generator_scaffold if @jekyll_types.include? 'generator'
+      create_jekyll_hooks_scaffold     if @jekyll_types.include? 'hooks'
+      create_jekyll_tag_scaffold       if @jekyll_types.include? 'tag'
 
       initialize_repository gem_name
     end
