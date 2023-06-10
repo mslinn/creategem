@@ -17,7 +17,7 @@ require 'jekyll_plugin_support'
 # plugin_loggers:
 #   MyBlockTag: debug
 
-module MyBlockTag
+module <%= @class_name %>
   PLUGIN_NAME = 'my_block_tag'.freeze
 
   # This class implements the Jekyll block tag functionality

@@ -33,7 +33,7 @@ module Creategem
     def create_gem_scaffold(gem_name)
       @gem_name = gem_name
       say "Creating a scaffold for a new gem named #{gem_name} in #{@dir}.", :green
-      @class_name = Thor::Util.camel_case gem_name.tr('-', '_')
+      @class_name = camel_case gem_name
       @executable = options[:executable]
       @host = options[:bitbucket] ? :bitbucket : :github
       @private = options[:private]

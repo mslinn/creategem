@@ -39,17 +39,16 @@ module Creategem
 
       create_gem_scaffold gem_name
       create_jekyll_scaffold
-
-      options.each do |option| # TODO: pass plugn name (except for hooks)
-        # puts ">>> option.first=#{option.first} option[1]=#{option[1]}"
+      options.each do |option|
         case option.first
-        when 'block' then     option[1].each { |o| create_jekyll_block_scaffold o }
-        when 'filter' then    option[1].each { |o| create_jekyll_filter_scaffold o }
-        when 'generator' then option[1].each { |o| create_jekyll_generator_scaffold o }
+        when 'block' then     option[1].each { |name| create_jekyll_block_scaffold     name }
+        when 'filter' then    option[1].each { |name| create_jekyll_filter_scaffold    name }
+        when 'generator' then option[1].each { |name| create_jekyll_generator_scaffold name }
+        when 'tag' then       option[1].each { |name| create_jekyll_tag_scaffold       name }
         when 'hooks' then     create_jekyll_hooks_scaffold
-        when 'tag' then       option[1].each { |o| create_jekyll_tag_scaffold o }
         end
       end
+
       initialize_repository gem_name
     end
 
@@ -61,20 +60,23 @@ module Creategem
     end
 
     def create_jekyll_block_scaffold(block_name)
-      say "Creating a new Jekyll tag block scaffold called #{block_name}", :green
-      # TODO: use block_name
+      @block_name = block_name
+      @jekyll_class_name = camel_case block_name
+      say "Creating Jekyll tag block #{@block_name} scaffold within #{@jekyll_class_name}", :green
       directory 'jekyll_block_scaffold', @dir
     end
 
     def create_jekyll_filter_scaffold(filter_name)
-      say "Creating a new Jekyll filter scaffold called #{filter_name}", :green
-      # TODO: use filter_name
+      @filter_name = filter_name
+      # @jekyll_class_name = camel_case filter_name
+      say "Creating a new Jekyll filter method scaffold #{@filter_name}", :green
       directory 'jekyll_filter_scaffold', @dir
     end
 
     def create_jekyll_generator_scaffold(generator_name)
-      say "Creating a new Jekyll generator scaffold called #{generator_name}", :green
-      # TODO: use generator_name
+      @generator_name = generator_name
+      @jekyll_class_name = camel_case generator_name
+      say "Creating a new Jekyll generator class scaffold #{@jekyll_class_name}", :green
       directory 'jekyll_generator_scaffold', @dir
     end
 
@@ -84,8 +86,9 @@ module Creategem
     end
 
     def create_jekyll_tag_scaffold(tag_name)
-      say "Creating a new Jekyll tag scaffold called #{tag_name}", :green
-      # TODO: use tag_name
+      @tag_name = tag_name
+      @jekyll_class_name = camel_case tag_name
+      say "Creating Jekyll tag #{@tag_name} scaffold within #{@jekyll_class_name}", :green
       directory 'jekyll_tag_scaffold', @dir
     end
   end
