@@ -27,7 +27,7 @@ module <%= @jekyll_class_name %>
     # Method prescribed by the Jekyll support plugin.
     # @return [String]
     def render_impl(content)
-      @param1  = @helper.keys_values['param1'] # Obtain the value of parameter param1
+      @param1  = @helper.parameter_specified? 'param1' # Obtain the value of parameter param1
 
       @logger.debug do
         <<~HEREDOC
