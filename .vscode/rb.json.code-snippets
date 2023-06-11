@@ -15,6 +15,15 @@
 	// 	],
 	// 	"description": "Log output to console"
 	// }
+	//
+	"Jekyll enable attribution": {
+		"scope": "ruby",
+		"prefix": "enable_attribution",
+		"body": [
+			"@helper.gem_file __FILE__ # Enables attribution",
+		],
+		"description": "Insert anywhere within the render_impl method"
+	},
 	"Jekyll command-line parameter": {
 		"scope": "ruby",
 		"prefix": "command_line parameter",
