@@ -41,17 +41,17 @@ module Creategem
 
     def create_engine_scaffold(gem_name)
       say "Creating a new Rails engine scaffold for a new gem named #{gem_name} in #{@dir}", :green
-      directory 'engine_scaffold', @dir
+      directory 'rails/engine_scaffold', @dir
     end
 
     def create_mountable_scaffold(gem_name)
       say "Creating a mountable Rails engine scaffold for a new gem named #{gem_name} in #{@dir}", :green
-      directory 'mountable_scaffold', @dir
+      directory 'rails/mountable_scaffold', @dir
     end
 
     def create_plugin_scaffold(gem_name)
       say "Creating a new Rails plugin scaffold for gem named #{gem_name} in #{@dir}", :green
-      directory 'plugin_scaffold', @dir
+      directory 'rails/plugin_scaffold', @dir
       Dir.chdir @dir do
         run 'chmod +x test/dummy/bin/*'
       end
