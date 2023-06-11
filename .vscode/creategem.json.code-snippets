@@ -16,22 +16,6 @@
 	// 	"description": "Log output to console"
 	// }
 	//
-	"Jekyll enable attribution": {
-		"scope": "ruby",
-		"prefix": "enable_attribution",
-		"body": [
-			"@helper.gem_file __FILE__ # Enables attribution",
-		],
-		"description": "Insert anywhere within the render_impl method"
-	},
-	"Jekyll command-line parameter": {
-		"scope": "ruby",
-		"prefix": "command_line parameter",
-		"body": [
-			"@$1  = @helper.parameter_specified? '$1'",
-		],
-		"description": "Parse Jekyll command-line parameter"
-	},
 	"Thor class_name": {
 		"scope": "ruby",
 		"prefix": "class_name",
