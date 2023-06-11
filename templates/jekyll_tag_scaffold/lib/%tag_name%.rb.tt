@@ -18,6 +18,10 @@ module JekyllTagPlugin
 
   # This class implements the Jekyll <%= @tag_name %> functionality
   class <%= @jekyll_class_name %> < JekyllSupport::JekyllTag
+    # Put your plugin logic here.
+    # The following variables are predefined:
+    #   @argument_string, @config, @envs, @helper, @layout, @logger, @mode, @page, @paginator, @site, @tag_name and @theme
+    #
     # @param tag_name [String] is the name of the tag, which we already know.
     # @param argument_string [String] the arguments from the web page.
     # @param tokens [Liquid::ParseContext] tokenized command line

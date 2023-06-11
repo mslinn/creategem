@@ -24,7 +24,10 @@ module <%= @jekyll_class_name %>
   class <%= @jekyll_class_name %> < JekyllSupport::JekyllBlock
     include <%= @class_name %>
 
-    # Method prescribed by the Jekyll support plugin.
+    # Put your plugin logic here.
+    # The following variables are predefined:
+    #   @argument_string, @config, @envs, @helper, @layout, @logger, @mode, @page, @paginator, @site, @tag_name and @theme
+    #
     # @return [String]
     def render_impl(content)
       @param1  = @helper.parameter_specified? 'param1' # Obtain the value of parameter param1
