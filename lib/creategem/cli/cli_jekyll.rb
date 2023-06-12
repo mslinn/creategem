@@ -2,6 +2,9 @@ require_relative '../cli'
 
 module Creategem
   class Cli < Thor
+    include Thor::Actions
+    include Creategem::Git
+
     # These declarations make the class instance variable values available as an accessor,
     # which is necessary to name template files that are named '%variable_name%.extension'.
     # See https://www.rubydoc.info/gems/thor/Thor/Actions#directory-instance_method
@@ -26,10 +29,10 @@ module Creategem
     method_option :filter, type: :string, repeatable: true,
       desc: 'Specifies the name of a Jekyll/Liquid filter.'
 
-    method_option :generator, type: :string,
+    method_option :generator, type: :string, repeatable: true,
       desc: 'Specifies a Jekyll generator plugin.'
 
-    method_option :hooks, type: :boolean,
+    method_option :hooks, type: :string,
       desc: 'Specifies a Jekyll hooks plugin.'
 
     host_option
@@ -56,9 +59,9 @@ module Creategem
         when 'blockn' then    option[1].each { |name| create_jekyll_block_no_arg_scaffold name }
         when 'filter' then    option[1].each { |name| create_jekyll_filter_scaffold       name }
         when 'generator' then option[1].each { |name| create_jekyll_generator_scaffold    name }
-        when 'hooks' then     option[1].each { |name| create_jekyll_hooks_scaffold        name }
         when 'tag' then       option[1].each { |name| create_jekyll_tag_scaffold          name }
         when 'tagn' then      option[1].each { |name| create_jekyll_tag_no_arg_scaffold   name }
+        when 'hooks' then     create_jekyll_hooks_scaffold option[1]
         end
       end
 

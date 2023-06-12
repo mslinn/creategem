@@ -11,7 +11,7 @@
         "--block", "myblock",
         "--filter", "myfilter",
         "--generator", "mygenerator",
-        "--hooks",
+        // "--hooks", "myhooks",
         "--tag", "mytag1",
         "--tag", "mytag2",
       ],

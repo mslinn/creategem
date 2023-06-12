@@ -1,35 +1,11 @@
 require 'fileutils'
 require 'rugged'
-require 'thor'
 require_relative '../creategem'
-require_relative 'cli/cli_gem'
-require_relative 'cli/cli_jekyll'
-require_relative 'cli/cli_rails'
 
 # Creategem::Cli is a Thor class that is invoked when a user runs a creategem executable.
 # This file defines the common aspects of the Thor class.
 # The cli/ directory contains class extensions specific to each Thor subcommand.
 module Creategem
-  # @return Path to the generated gem
-  def self.dest_root(gem_name)
-    File.expand_path "generated/#{gem_name}"
-  end
-
-  def self.executable_option
-    method_option :executable, type: :boolean, default: false,
-      desc: 'Include an executable for the gem.'
-  end
-
-  def self.host_option
-    method_option :host, type: :string, default: 'github',
-      enum: %w[bitbucket github], desc: 'Repository host.'
-  end
-
-  def self.private_option
-    method_option :private, type: :boolean, default: false,
-    desc: 'Publish the gem on a private repository.'
-  end
-
   class Cli < Thor
     include Thor::Actions
     include Creategem::Git
@@ -37,6 +13,10 @@ module Creategem
     # Surround gem_name with percent symbols when using the property to name file within the template directory
     # For example: "generated/%gem_name%"
     attr_accessor :gem_name
+
+    require_relative 'cli/cli_gem'
+    require_relative 'cli/cli_jekyll'
+    require_relative 'cli/cli_rails'
 
     def self.exit_on_failure?
       true

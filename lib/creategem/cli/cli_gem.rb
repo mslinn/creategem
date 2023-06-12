@@ -1,8 +1,13 @@
+require 'thor'
+
 # Creategem::Cli is a Thor class that is invoked when a user runs a creategem executable
 require_relative '../cli'
 
 module Creategem
   class Cli < Thor
+    include Thor::Actions
+    include Creategem::Git
+
     desc 'gem NAME', 'Creates a new gem scaffold.'
 
     long_desc <<~END_DESC

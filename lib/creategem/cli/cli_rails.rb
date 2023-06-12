@@ -2,6 +2,9 @@ require_relative '../cli'
 
 module Creategem
   class Cli < Thor
+    include Thor::Actions
+    include Creategem::Git
+
     desc 'plugin NAME', 'Creates a new Rails plugin scaffold.'
 
     long_desc <<~END_DESC
