@@ -25,6 +25,11 @@ module Creategem
 
     def gem(gem_name)
       @dir = Creategem.dest_root gem_name
+
+      @host           = options['host']
+      @private        = options['private']
+      @test_framework = options['test_framework']
+
       create_gem_scaffold gem_name
       initialize_repository gem_name
     end

@@ -5,11 +5,6 @@ module Creategem
     include Thor::Actions
     include Creategem::Git
 
-    # These declarations make the class instance variable values available as an accessor,
-    # which is necessary to name template files that are named '%variable_name%.extension'.
-    # See https://www.rubydoc.info/gems/thor/Thor/Actions#directory-instance_method
-    attr_reader :block_name, :filter_name, :generator_name, :tag_name
-
     desc 'jekyll NAME', 'Creates a new Jekyll plugin scaffold.'
 
     long_desc <<~END_DESC
@@ -44,12 +39,18 @@ module Creategem
 
     method_option :tagn, name: :string, repeatable: true,
       desc: 'Specifies the name of a Jekyll no-arg tag plugin.'
+
+    test_option 'rspec'
     # rubocop:enable Layout/HashAlignment
 
     def jekyll(gem_name)
-      @gem_name = gem_name
       @dir = Creategem.dest_root gem_name
+      @gem_name = gem_name
       @jekyll = true
+
+      @host           = options['host']
+      @private        = options['private']
+      @test_framework = options['test_framework']
 
       create_gem_scaffold gem_name
       create_jekyll_scaffold

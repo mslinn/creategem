@@ -12,8 +12,8 @@ APP_RAKEFILE = File.expand_path('../test/dummy/Rakefile', __FILE__)
 load 'rails/tasks/engine.rake'
 
 load 'rails/tasks/statistics.rake'
-<% end %>
 
+<% end -%>
 task :patch do
   system 'gem bump --tag'
 end
@@ -26,24 +26,23 @@ task :major do
   system 'gem bump --version major --tag'
 end
 
-task :publish => [:build] do
+task publish: [:build] do
   $VERBOSE = nil
   load '<%= @gem_name %>/version.rb'
 <% if @repository.private? -%>
-  system 'gem inabox pkg/<%= @gem_name %>-#{<%= @class_name %>::VERSION}.gem'
+  system "gem inabox pkg/<%= @gem_name %>-#{<%= @class_name %>::VERSION}.gem"
 <% else -%>
-  system 'gem push pkg/<%= @gem_name %>-#{<%= @class_name %>::VERSION}.gem'
+  system "gem push pkg/<%= @gem_name %>-#{<%= @class_name %>::VERSION}.gem"
 <% end -%>
 end
 
 desc 'Bump patch version, create git tag, build the gem and release to geminabox (default)'
-task :release_patch => [:test, :patch, :publish]
+task release_patch: %i[test patch publish]
 
 desc 'Bump minor version, create git tag, build the gem and release to geminabox'
-task :release_minor => [:test, :minor, :publish]
+task release_minor: %i[test minor publish]
 
 desc 'Bump major version, create git tag, build the gem and release to geminabox'
-task :release_major => [:test, :major, :publish]
-
+task release_major: %i[test major publish]
 
 task default: :test

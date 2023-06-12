@@ -19,16 +19,23 @@ module Creategem
 
     host_option
 
+    test_option 'minitest'
+
     method_option :mountable, type: :boolean, default: false,
       desc: 'Create a gem containing a mountable Rails engine.'
 
     private_option
 
     def plugin(gem_name)
-      @plugin = true
+      @host           = options['host']
+      @mountable      = options['mountable']
+      @private        = options['private']
+      @test_framework = options['test_framework']
+
       @dir = Creategem.dest_root gem_name
-      @engine = options[:engine] || options[:mountable]
-      @mountable = options[:mountable]
+      @engine         = @host || @mountable
+      @plugin = true
+
       create_gem_scaffold gem_name
       create_plugin_scaffold gem_name
       create_engine_scaffold gem_name if @engine

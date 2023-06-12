@@ -13,6 +13,11 @@ module Creategem
   class Cli < Thor
     include Thor::Actions
 
+    # These declarations make the class instance variable values available as an accessor,
+    # which is necessary to name template files that are named '%variable_name%.extension'.
+    # See https://www.rubydoc.info/gems/thor/Thor/Actions#directory-instance_method
+    attr_reader :block_name, :filter_name, :generator_name, :tag_name, :test_framework
+
     class << self
       def executable_option
         method_option :executable, type: :boolean, default: false,
@@ -27,6 +32,12 @@ module Creategem
       def private_option
         method_option :private, type: :boolean, default: false,
         desc: 'Publish the gem on a private repository.'
+      end
+
+      def test_option(default_value)
+        method_option :test_framework, type: :string, default: default_value,
+        enum: %w[minitest rspec],
+        desc: "Use rspec or minitest for the test framework (default is #{default_value})."
       end
     end
   end

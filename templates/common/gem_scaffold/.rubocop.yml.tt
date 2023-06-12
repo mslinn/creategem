@@ -1,12 +1,16 @@
 require:
+  <%- if @jekyll -%>
   # - rubocop-jekyll
+  <%- end -%>
   - rubocop-md
   - rubocop-performance
-  <% if @plugin -%>
+  <%- if @test_framework == 'minitest' -%>
   - rubocop-minitest
-  <% end -%>
+  <%- end -%>
   - rubocop-rake
+  <%- if @test_framework == 'rspec' -%>
   - rubocop-rspec
+  <%- end -%>
 
 AllCops:
   Exclude:
@@ -35,7 +39,7 @@ Metrics/AbcSize:
 
 Metrics/BlockLength:
   Exclude:
-    - jekyll_pre.gemspec
+    - <%= @gem_name %>.gemspec
   Max: 30
 
 Metrics/CyclomaticComplexity:
@@ -62,6 +66,7 @@ Style/FrozenStringLiteralComment:
 
 Style/TrailingCommaInHashLiteral:
   EnforcedStyleForMultiline: comma
+<% if @test_framework == 'rspec' -%>
 
 RSpec/FilePath:
   IgnoreMethods: true
@@ -72,3 +77,4 @@ RSpec/ExampleLength:
 
 RSpec/MultipleExpectations:
   Max: 15
+<% end -%>
