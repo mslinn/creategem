@@ -15,7 +15,7 @@ with the following additional features:
 - Generates a README with badges.
 - Automatically creates local and remote git repositories (on GitHub or BitBucket) for your gem.
 - Remote repositories can be private or public.
-- Creates an executable based on [Thor](http://whatisthor.com) (can be omited with `--no-executable`).
+- Can create an executable based on [Thor](http://whatisthor.com).
 - Creates a test infrastructure based on `rspec` or `minitest` and `minitest-reporters`.
 - Ready to publicly release to `rubygems.org` or to a private Geminabox gem server.
 - Optionally create the gem as:
@@ -39,11 +39,11 @@ $ creategem help [COMMAND]
 
 **The `gem` subcommand** creates a scaffold for a gem within the `generated/` directory:
 ```shell
-$ creategem gem GEM_NAME [--private] [--no-executable] [--bitbucket]
+$ creategem gem GEM_NAME [--executable] [--host="bitbucket"] [--private]
 ```
 
 When invoked without any options,
-the default options assume that you want a gem with an executable,
+the default options assume that you do not want a gem with an executable,
 hosted on a public GitHub git repository, and released to `rubygems.org`.
 
 If your user name is not already stored in your git global config,
@@ -53,8 +53,8 @@ You will also be asked to enter your GitHub or BitBucket password when the remot
 When you use the `--private` option the remote repository is made private,
 and on release the gem will be pushed to a private Geminabox server.
 
-By default, the scaffold gem is created with an executable based on Thor,
-but you can omit the executable with the option `--no-executable`.
+By default, the scaffold gem is created without an executable,
+but you can add an executable based on Thor with the `--executable` option.
 
 After you create the gem, edit the `gemspec` and change the summary and the description.
 Then commit the changes to git and invoke `rake release`,
@@ -67,7 +67,7 @@ and your gem will be published.
 
 OPTIONS are:
 
-    --private, --type, --bitbucket
+    --block, --blockn, --executable, --host, --private, --tag, --tagn
 
 The `--type` option must be used, and requires one of the following values:
 `tag`, `block`, `generator`, or `hooks`.
@@ -90,6 +90,9 @@ my_tag2 generated: {% my_tag2 %}
 &lt;/pre>
 ```
 
+By default, the Jekyll gem is created without an executable,
+but you can add an executable based on Thor with the `--executable` option.
+
 
 **The `plugin` subcommand** extends the `gem` command and creates a new Rails plugin with the given NAME:
 ```shell
@@ -97,8 +100,9 @@ $ creategem plugin NAME [OPTIONS]
 ```
 
 OPTIONS are:
-
-    --private, --executable, --engine, --mountable, --bitbucket
+```
+--engine, --executable, --host, --mountable, --private
+```
 
 You can specify if the plugin should be an engine (`--engine`) or a mountable engine (`--mountable`).
 
@@ -161,7 +165,6 @@ These snippets are focused on writing Jekyll plugins.
 
 
 ## Development
-
 After checking out the repository, run `bin/setup` to install dependencies.
 Then, run `rake test` to run the tests.
 You can also run `bin/console` for an interactive prompt that will allow you to experiment.
@@ -175,11 +178,9 @@ To release a new version, run:
 ```shell
 $ bundle exec rake release
 ```
-The above will create a git tag for the version,
-push git commits and tags,
+The above will create a git tag for the version, push git commits and tags,
 and push the `.gem` file to https://rubygems.org.
 
 
 ## Contributing
-
 Bug reports and pull requests are welcome on GitHub at https://github.com/mslinn/creategem.

@@ -1,0 +1,15 @@
+module <%= @jekyll_class_name %>
+  class <%= @jekyll_class_name %> < JekyllTag
+    def initialize(tag_name, argument_string, parse_context)
+      class << self
+        include NoArgParsing
+      end
+
+      super
+      @logger.debug { "#{self.class}: respond_to?(:no_arg_parsing) #{respond_to?(:no_arg_parsing) ? 'yes' : 'no'}." }
+    rescue StandardError => e
+      @logger.error { "#{self.class} died with a #{e.full_message}" }
+      exit 2
+    end
+  end
+end

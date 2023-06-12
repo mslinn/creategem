@@ -9,21 +9,17 @@ module Creategem
       by default hosted by GitHub and published on RubyGems.
     END_DESC
 
-    method_option :private, type: :boolean, default: false, desc: <<~END_DESC
-      Publish the gem on a private repository.
-    END_DESC
-
     method_option :engine, type: :boolean, default: false,
       desc: 'Create a gem containing a Rails engine.'
+
+    executable_option
+
+    host_option
 
     method_option :mountable, type: :boolean, default: false,
       desc: 'Create a gem containing a mountable Rails engine.'
 
-    method_option :executable, type: :boolean, default: false,
-      desc: 'Include an executable for the gem.'
-
-    method_option :bitbucket, type: :boolean, default: false,
-      desc: 'Host the repository on BitBucket.'
+    private_option
 
     def plugin(gem_name)
       @plugin = true

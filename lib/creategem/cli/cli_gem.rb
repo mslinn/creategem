@@ -10,16 +10,13 @@ module Creategem
       by default hosted by GitHub and published on RubyGems.
     END_DESC
 
-    method_option :private, type: :boolean, default: false, desc: <<~END_DESC
-      Publish the gem in a private repository.
-    END_DESC
+    executable_option
 
-    method_option :executable, type: :boolean, default: false,
-      desc: 'Include an executable for the gem.'
+    method_option :host, type: :string, default: 'github',
+      enum: %w[bitbucket github], desc: 'Repository host.'
 
-    method_option :bitbucket, type: :boolean, default: false, desc: <<~END_DESC
-      Host the repository on BitBucket.
-    END_DESC
+    method_option :private, type: :boolean, default: false,
+    desc: 'Publish the gem in a private repository.'
 
     def gem(gem_name)
       @dir = Creategem.dest_root gem_name

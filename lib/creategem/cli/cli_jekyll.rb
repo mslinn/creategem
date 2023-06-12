@@ -15,11 +15,13 @@ module Creategem
     END_DESC
 
     # rubocop:disable Layout/HashAlignment
-    method_option :private, type: :boolean, default: false,
-      desc: 'Publish the gem on a private repository.'
-
     method_option :block, type: :string, repeatable: true,
       desc: 'Specifies the name of a Jekyll block tag plugin.'
+
+    method_option :blockn, type: :string, repeatable: true,
+      desc: 'Specifies the name of a Jekyll no-arg block tag plugin.'
+
+    executable_option
 
     method_option :filter, type: :string, repeatable: true,
       desc: 'Specifies the name of a Jekyll/Liquid filter.'
@@ -30,11 +32,15 @@ module Creategem
     method_option :hooks, type: :boolean,
       desc: 'Specifies a Jekyll hooks plugin.'
 
-    method_option :host, type: :string, default: 'github',
-      enum: %w[bitbucket github], desc: 'Repository host.'
+    host_option
+
+    private_option
 
     method_option :tag, name: :string, repeatable: true,
       desc: 'Specifies the name of a Jekyll tag plugin.'
+
+    method_option :tagn, name: :string, repeatable: true,
+      desc: 'Specifies the name of a Jekyll no-arg tag plugin.'
     # rubocop:enable Layout/HashAlignment
 
     def jekyll(gem_name)
@@ -46,11 +52,13 @@ module Creategem
       create_jekyll_scaffold
       options.each do |option|
         case option.first
-        when 'block' then     option[1].each { |name| create_jekyll_block_scaffold     name }
-        when 'filter' then    option[1].each { |name| create_jekyll_filter_scaffold    name }
-        when 'generator' then option[1].each { |name| create_jekyll_generator_scaffold name }
-        when 'hooks' then     option[1].each { |name| create_jekyll_hooks_scaffold     name }
-        when 'tag' then       option[1].each { |name| create_jekyll_tag_scaffold       name }
+        when 'block' then     option[1].each { |name| create_jekyll_block_scaffold        name }
+        when 'blockn' then    option[1].each { |name| create_jekyll_block_no_arg_scaffold name }
+        when 'filter' then    option[1].each { |name| create_jekyll_filter_scaffold       name }
+        when 'generator' then option[1].each { |name| create_jekyll_generator_scaffold    name }
+        when 'hooks' then     option[1].each { |name| create_jekyll_hooks_scaffold        name }
+        when 'tag' then       option[1].each { |name| create_jekyll_tag_scaffold          name }
+        when 'tagn' then      option[1].each { |name| create_jekyll_tag_no_arg_scaffold   name }
         end
       end
 
@@ -67,8 +75,15 @@ module Creategem
     def create_jekyll_block_scaffold(block_name)
       @block_name = block_name
       @jekyll_class_name = Creategem.camel_case block_name
-      say "Creating Jekyll tag block #{@block_name} scaffold within #{@jekyll_class_name}", :green
+      say "Creating Jekyll block tag #{@block_name} scaffold within #{@jekyll_class_name}", :green
       directory 'jekyll/block_scaffold', @dir
+    end
+
+    def create_jekyll_block_no_arg_scaffold(block_name)
+      @block_name = block_name
+      @jekyll_class_name = Creategem.camel_case block_name
+      say "Creating Jekyll block tag no_arg #{@block_name} scaffold within #{@jekyll_class_name}", :green
+      directory 'jekyll/block_no_arg_scaffold', @dir
     end
 
     def create_jekyll_filter_scaffold(filter_name)
@@ -90,6 +105,13 @@ module Creategem
       @jekyll_class_name = Creategem.camel_case plugin_name
       say 'Creating a new Jekyll hook scaffold', :green
       directory 'jekyll/hooks_scaffold', @dir
+    end
+
+    def create_jekyll_tag_no_arg_scaffold(tag_name)
+      @tag_name = tag_name
+      @jekyll_class_name = Creategem.camel_case @tag_name
+      say "Creating Jekyll tag no_arg #{@tag_name} scaffold within #{@jekyll_class_name}", :green
+      directory 'jekyll/tag_no_arg_scaffold', @dir
     end
 
     def create_jekyll_tag_scaffold(tag_name)
