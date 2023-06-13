@@ -10,6 +10,8 @@ module Creategem
     include Thor::Actions
     include Creategem::Git
 
+    class_option :quiet, type: :boolean
+
     # Surround gem_name with percent symbols when using the property to name file within the template directory
     # For example: "generated/%gem_name%"
     attr_accessor :gem_name
