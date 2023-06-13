@@ -69,10 +69,7 @@ OPTIONS are:
 
     --block, --blockn, --executable, --host, --private, --tag, --tagn
 
-The `--type` option must be used, and requires one of the following values:
-`tag`, `block`, `generator`, or `hooks`.
-
-All but the `hooks` option require the name of the subcommand/file to be generated.
+All options require the name of the subcommand/file to be generated.
 You can specify the same type several times, for example:
 
 ```shell
@@ -80,7 +77,7 @@ $ creategem jekyll test_tags --tag my_tag1 --tag my_tag2
 ```
 
 The above creates a Jekyll plugin called `test_tags`,
-which defines Jekyll tags called `my_tag`` and `my_tag2`.
+which defines Jekyll tags called `my_tag1` and `my_tag2`.
 You might use these tags in an HTML document like this:
 
 ```html
@@ -91,7 +88,7 @@ my_tag2 generated: {% my_tag2 %}
 ```
 
 By default, the Jekyll gem is created without an executable,
-but you can add an executable based on Thor with the `--executable` option.
+but you can add an executable based on Thor with the `&#8209;&#8209;executable` option.
 
 
 **The `plugin` subcommand** extends the `gem` command and creates a new Rails plugin with the given NAME:
@@ -100,11 +97,13 @@ $ creategem plugin NAME [OPTIONS]
 ```
 
 OPTIONS are:
-```
---engine, --executable, --host, --mountable, --private
+```</p>
+<p>
+
+&#8209;&#8209;engine, &#8209;&#8209;executable, &#8209;&#8209;host, &#8209;&#8209;mountable, &#8209;&#8209;private
 ```
 
-You can specify if the plugin should be an engine (`--engine`) or a mountable engine (`--mountable`).
+You can specify if the plugin should be an engine (`&#8209;&#8209;engine`) or a mountable engine (`&#8209;&#8209;mountable`).
 
 
 ## Did It Work?
