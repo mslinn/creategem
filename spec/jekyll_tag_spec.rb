@@ -8,16 +8,31 @@ class JekyllTagTest
         %w[option2 boolean],
         %w[option3 numeric]
       ]
-      actual = described_class.combinations(params)
+      expect(params.combination(0).to_a).to eq [[]]
+      expect(params.combination(1).to_a).to eq [
+        [%w[option1 string]],
+        [%w[option2 boolean]],
+        [%w[option3 numeric]]
+      ]
+      expect(params.combination(2).to_a).to eq [
+        [%w[option1 string],  %w[option2 boolean]],
+        [%w[option1 string],  %w[option3 numeric]],
+        [%w[option2 boolean], %w[option3 numeric]]
+      ]
+      expect(params.combination(3).to_a).to eq [
+        [%w[option1 string], %w[option2 boolean], %w[option3 numeric]]
+      ]
+
+      actual = described_class.combinations params
       expected = [
-        '',
-        'option1',
-        'option2',
-        'option3',
-        'option1 option2',
-        'option1 option3',
-        'option2 option3',
-        'option1 option2 option3'
+        [[]],
+        ["option1='somevalue'", 'option2', 'option3=1234'],
+        ["option1='somevalue'", 'option2'],
+        ["option1='somevalue'", 'option3=1234'],
+        ['option2', 'option3=1234'],
+        ["option1='somevalue'"],
+        ['option2'],
+        ['option3=1234'],
       ]
       expect(actual).to eq(expected)
     end

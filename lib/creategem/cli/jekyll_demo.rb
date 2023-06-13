@@ -3,9 +3,19 @@ module Creategem
     include Thor::Actions
 
     def self.combinations(params)
-      names = params.map(&:first)
-      (0..params.length).flat_map do |n|
-        names.combination(n).map { |x| x.join ' ' }
+      (0..params.length).map do |n|
+        params.combination(n).map do |param|
+          next [] if param.empty?
+
+          name = param.first.first
+          type = param.first[1]
+          case type
+          when 'boolean' then name
+          when 'string' then "#{name}='somevalue'"
+          when 'numeric' then "#{name}=1234"
+          else puts "#{name} has unknown type: #{type}"
+          end
+        end
       end
     end
 
