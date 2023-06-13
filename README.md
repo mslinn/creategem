@@ -88,7 +88,7 @@ my_tag2 generated: {% my_tag2 %}
 ```
 
 By default, the Jekyll gem is created without an executable,
-but you can add an executable based on Thor with the `-executable` option.
+but you can add an executable based on Thor with the `--executable` option.
 
 
 **The `plugin` subcommand** extends the `gem` command and creates a new Rails plugin with the given NAME:
@@ -100,10 +100,10 @@ OPTIONS are:
 ```</p>
 <p>
 
--engine, -executable, -host, -mountable, -private
+--engine, --executable, --host, --mountable, --private
 ```
 
-You can specify if the plugin should be an engine (`-engine`) or a mountable engine (`-mountable`).
+You can specify if the plugin should be an engine (`--engine`) or a mountable engine (`--mountable`).
 
 
 ## Did It Work?
