@@ -22,19 +22,12 @@ module Creategem
     end
 
     def self.add_demo_example(tag, params)
-      examples = combinations(params).map do |ps|
-        names = ps.map(&:first)
-        values = ps.map do |p|
-          case p[1]
-          when 'boolean' then p.first
-          when 'string' then "#{p.first}='somevalue' "
-          when 'numeric' then "#{p.first}='1234' "
-          end
-        end
+      examples = combinations(params).map do |option|
+        options = option.join ' '
         <<~END_EX
-          <!-- #region #{tag} #{values} -->
-          <h2 id="#{tag}">#{tag} #{names.join ' '}</h2>
-          {% #{tag} #{values.join ' '} %}
+          <!-- #region #{tag} #{options} -->
+          <h2 id="#{tag}">#{tag} #{options}</h2>
+          {% #{tag} #{options} %}
           <!-- endregion -->
         END_EX
       end

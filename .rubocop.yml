@@ -66,7 +66,7 @@ RSpec/FilePath:
   SpecSuffixOnly: true
 
 RSpec/ExampleLength:
-  Max: 50
+  Enabled: false
 
 RSpec/MultipleExpectations:
   Max: 15

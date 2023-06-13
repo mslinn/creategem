@@ -33,6 +33,57 @@ class JekyllTagTest
         ["option1='somevalue'", 'option2', 'option3=1234'],
       ]
       expect(actual).to eq(expected)
+
+      actual = described_class.add_demo_example 'my_tag', params
+      expected = <<~END_EX
+        <!-- #region my_tag  -->
+        <h2 id="my_tag">my_tag </h2>
+        {% my_tag  %}
+        <!-- endregion -->
+
+
+        <!-- #region my_tag option1='somevalue' -->
+        <h2 id="my_tag">my_tag option1='somevalue'</h2>
+        {% my_tag option1='somevalue' %}
+        <!-- endregion -->
+
+
+        <!-- #region my_tag option2 -->
+        <h2 id="my_tag">my_tag option2</h2>
+        {% my_tag option2 %}
+        <!-- endregion -->
+
+
+        <!-- #region my_tag option3=1234 -->
+        <h2 id="my_tag">my_tag option3=1234</h2>
+        {% my_tag option3=1234 %}
+        <!-- endregion -->
+
+
+        <!-- #region my_tag option1='somevalue' option2 -->
+        <h2 id="my_tag">my_tag option1='somevalue' option2</h2>
+        {% my_tag option1='somevalue' option2 %}
+        <!-- endregion -->
+
+
+        <!-- #region my_tag option1='somevalue' option3=1234 -->
+        <h2 id="my_tag">my_tag option1='somevalue' option3=1234</h2>
+        {% my_tag option1='somevalue' option3=1234 %}
+        <!-- endregion -->
+
+
+        <!-- #region my_tag option2 option3=1234 -->
+        <h2 id="my_tag">my_tag option2 option3=1234</h2>
+        {% my_tag option2 option3=1234 %}
+        <!-- endregion -->
+
+
+        <!-- #region my_tag option1='somevalue' option2 option3=1234 -->
+        <h2 id="my_tag">my_tag option1='somevalue' option2 option3=1234</h2>
+        {% my_tag option1='somevalue' option2 option3=1234 %}
+        <!-- endregion -->
+      END_EX
+      expect(actual).to eq(expected)
     end
   end
 end
