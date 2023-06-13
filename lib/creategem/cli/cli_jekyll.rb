@@ -86,10 +86,10 @@ module Creategem
     # list of pairs that describe each Jekyll/Liquid tag invocation option:
     # [[name1, type1], ... [nameN, typeN]]
     def ask_option_names_types(tag)
-      names = ask("Please list the names of the options for the #{tag} Jekyll/Liquid tag:").split ' ,\t'
+      names = ask("Please list the names of the options for the #{tag} Jekyll/Liquid tag:").split(/[ ,\t]/)
       types = names.reject(&:empty?).map do |name|
-        ask("What is the type of #{name}?",
-            default: 'string', limited_to: %w[boolean string numeric'])
+        ask("What is the type of #{name}? (tab autocompletes)",
+            default: 'string', limited_to: %w[boolean string numeric])
       end
       @jekyll_parameter_names_types = names.zip types
     end
@@ -102,7 +102,7 @@ module Creategem
     def create_jekyll_block_scaffold(block_name)
       @block_name = block_name
       @jekyll_class_name = Creategem.camel_case block_name
-      ask_option_names_types
+      ask_option_names_types block_name
       say "Creating Jekyll block tag #{@block_name} scaffold within #{@jekyll_class_name}", :green
       directory 'jekyll/block_scaffold', @dir
       ask_params
@@ -146,7 +146,7 @@ module Creategem
     def create_jekyll_tag_scaffold(tag_name)
       @tag_name = tag_name
       @jekyll_class_name = Creategem.camel_case @tag_name
-      ask_option_names_types
+      ask_option_names_types tag_name
       say "Creating Jekyll tag #{@tag_name} scaffold within #{@jekyll_class_name}", :green
       directory 'jekyll/tag_scaffold', @dir
     end
