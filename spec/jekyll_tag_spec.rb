@@ -25,14 +25,12 @@ class JekyllTagTest
 
       actual = described_class.combinations params
       expected = [
-        [[]],
-        ["option1='somevalue'", 'option2', 'option3=1234'],
+        [],
+        ["option1='somevalue'"], ['option2'], ['option3=1234'],
         ["option1='somevalue'", 'option2'],
         ["option1='somevalue'", 'option3=1234'],
         ['option2', 'option3=1234'],
-        ["option1='somevalue'"],
-        ['option2'],
-        ['option3=1234'],
+        ["option1='somevalue'", 'option2', 'option3=1234'],
       ]
       expect(actual).to eq(expected)
     end
