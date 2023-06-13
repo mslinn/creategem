@@ -1,4 +1,5 @@
 require_relative '../cli'
+require_relative 'jekyll_demo'
 
 module Creategem
   class Cli < Thor # rubocop:disable Metrics/ClassLength
