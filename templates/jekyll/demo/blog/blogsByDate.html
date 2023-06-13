@@ -1,0 +1,22 @@
+---
+description: Blog posts sorted by date
+layout: default
+reading_time: false
+subtitle: Blog Posts, Listed Newest to Oldest
+title-override: Blog Posts, Listed Newest to Oldest
+---
+<style>
+  li {
+    list-style-type: none;
+    margin-bottom: 6px;
+    text-indent: -6.3em;
+    margin-left: 6.3em;
+  }
+</style>
+<ul style="padding-left: 0">
+  {% for post in site.posts %}
+    <li>
+      <code>{{ post.date | date: "%Y-%m-%d" }}</code> &nbsp; <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+  {% endfor %}
+</ul>

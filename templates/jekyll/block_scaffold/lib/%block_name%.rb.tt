@@ -30,15 +30,7 @@ module <%= @jekyll_class_name %>
     #
     # @return [String]
     def render_impl(content)
-      @param1  = @helper.parameter_specified? 'param1' # Obtain the value of parameter param1
-
-      @logger.debug do
-        <<~HEREDOC
-          tag_name = '#{@helper.tag_name}'
-          @param1 = '#{@param1}'
-          content = '<code>#{content}</code>'
-        HEREDOC
-      end
+      <%= parse_jekyll_parameters %>
 
       # Compute the return value of this Jekyll tag
       <<~HEREDOC

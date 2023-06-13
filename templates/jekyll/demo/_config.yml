@@ -1,0 +1,55 @@
+author: Mike Slinn
+compress_html:
+  blanklines: false
+  clippings: all
+  comments: ["<!-- ", " -->"]
+  endings: all
+  ignore:
+    envs: [development]
+  profile: false
+  startings: [html, head, body]
+domain: bogus.jekylldemo.com
+email: bogus@jekylldemo.com
+exclude:  # Wildcards are not supported yet https://github.com/jekyll/jekyll-watch/pull/93
+  - .git
+  - .github
+  - .gitignore
+  - .jekyll-cache
+  - .jekyll-metadata
+  - .ruby-version
+  - .vscode
+  - BingSiteAuth.xml
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+href:
+  nomatch: fatal
+ignore_theme_config: true
+jekyll_bootstrap5_tabs:
+  - pretty: true
+liquid:
+  error_mode: strict
+  # strict_filters: true
+  # strict_variables: true
+plugin_loggers:
+  PluginMetaLogger: info
+  CleanHook: warn
+  DocumentHooks: warn
+  MyBlock: warn
+  PageHooks: warn
+  PostHooks: warn
+  SiteHooks: warn
+permalink: "/blog/:year/:month/:day/:title:output_ext"
+plugin-vars:
+  github: 'https://github.com'
+  django-github: 'https://github.com/django/django/blob/3.1.7'
+  django-oscar-github: 'https://github.com/django-oscar/django-oscar/blob/3.0.2'
+plugins: # Use file name of the plugin entry point, not the gem name
+  - jekyll_plugin_logger
+  - classifier-reborn
+  - html-proofer
+  - jekyll
+sass:
+  style: compressed
+title: Jekyll Plugin Template Demo
+url: https://bogus.jekylldemo.com

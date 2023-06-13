@@ -1,0 +1,36 @@
+---
+canonical_url: 'https://bogus.jekylldemo.com/blog/index.html'
+description: Blog posts by category
+layout: default
+reading_time: false
+subtitle: Blog Posts by Category
+title-override: "Blog Posts by Category"
+---
+<style>
+  li {
+    list-style-type: none;
+    margin-bottom: 6px;
+    text-indent: -6.3em;
+    margin-left: 6.3em;
+  }
+</style>
+{% assign sorted_categories = site.categories | sort_natural %}
+{% for category in sorted_categories %}
+  <h2 class='tag' id="{{ category[0] }}">{{ category[0] }}</h2>
+  <ul class="posts">
+    {% assign post_list = category[1] %}
+    {% for post in post_list %}
+      {% if post.title != null %}
+        {% if group == null or group == post.group %}
+        <li>
+            <span class="entry-date"><time datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">{{ post.date | date: "%Y-%m-%d" }}</time></span>
+            &nbsp;
+            <a href="post.url">{{ post.title }}</a>
+        </li>
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+    {% assign post_list = nil %}
+    {% assign group = nil %}
+  </ul>
+{% endfor %}

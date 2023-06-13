@@ -27,8 +27,7 @@ module JekyllTagPlugin
     # @param tokens [Liquid::ParseContext] tokenized command line
     # @return [void]
     def render_impl
-      param1 = @helper.parameter_specified? 'param1'
-      @logger.info { "#{PLUGIN_NAME} was passed param1='#{param1}'." }
+      <%= parse_jekyll_parameters %>
       <<~END_OUTPUT
         <p style="border: thin gray solid;">
           #{PLUGIN_NAME} was passed param1='#{param1}'.

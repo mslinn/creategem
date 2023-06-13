@@ -1,0 +1,9 @@
+{% assign include_variable = "variable set in _includes/block_tag_template_wrapper" %}
+{% block_tag_template param1='{{include_variable}}'
+                      param2='{{include.param2}}'
+                      param3='{{include.param3}}'
+                      param4='{{page.last_modified_at}}'
+                      param5='{{layout.compress}}'
+                      remainder of invocation string %}
+  Hello, world!
+{% endblock_tag_template %}

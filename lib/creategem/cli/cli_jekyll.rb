@@ -1,7 +1,7 @@
 require_relative '../cli'
 
 module Creategem
-  class Cli < Thor
+  class Cli < Thor # rubocop:disable Metrics/ClassLength
     include Thor::Actions
     include Creategem::Git
 
@@ -69,7 +69,27 @@ module Creategem
       initialize_repository gem_name
     end
 
+    # Invoked by directory action when processing Jekyll tags and block tags
+    def parse_jekyll_parameters
+      content = @jekyll_parameter_names_types.map do |name, _type|
+        "@#{name} = @helper.parameter_specified? '#{name}' # Obtain the value of parameter #{name}"
+      end
+      content.join "\n"
+    end
+
     private
+
+    # Sets @jekyll_parameter_names_types, which contains a
+    # list of pairs that describe each Jekyll/Liquid tag invocation option:
+    # [[name1, type1], ... [nameN, typeN]]
+    def ask_option_names_types(tag)
+      names = ask("Please list the names of the options for the #{tag} Jekyll/Liquid tag:").split ' ,\t'
+      types = names.reject(&:empty?).map do |name|
+        ask("What is the type of #{name}?",
+            default: 'string', limited_to: %w[boolean string numeric'])
+      end
+      @jekyll_parameter_names_types = names.zip types
+    end
 
     def create_jekyll_scaffold
       say "Creating a Jekyll scaffold for a new gem named #{@gem_name} in #{@dir}", :green
@@ -79,8 +99,10 @@ module Creategem
     def create_jekyll_block_scaffold(block_name)
       @block_name = block_name
       @jekyll_class_name = Creategem.camel_case block_name
+      ask_option_names_types
       say "Creating Jekyll block tag #{@block_name} scaffold within #{@jekyll_class_name}", :green
       directory 'jekyll/block_scaffold', @dir
+      ask_params
     end
 
     def create_jekyll_block_no_arg_scaffold(block_name)
@@ -121,6 +143,7 @@ module Creategem
     def create_jekyll_tag_scaffold(tag_name)
       @tag_name = tag_name
       @jekyll_class_name = Creategem.camel_case @tag_name
+      ask_option_names_types
       say "Creating Jekyll tag #{@tag_name} scaffold within #{@jekyll_class_name}", :green
       directory 'jekyll/tag_scaffold', @dir
     end
