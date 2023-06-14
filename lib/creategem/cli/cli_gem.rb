@@ -23,6 +23,8 @@ module Creategem
     method_option :private, type: :boolean, default: false,
     desc: 'Publish the gem in a private repository.'
 
+    quiet_option
+
     def gem(gem_name)
       @dir = Creategem.dest_root gem_name
 
@@ -51,9 +53,9 @@ module Creategem
         gem_server_url: gem_server_url(@private),
         private:        @private
       )
-      directory 'common/gem_scaffold',        @dir
-      directory 'common/executable_scaffold', @dir if @executable
-      template  'common/LICENCE.txt',         "#{@dir}/LICENCE.txt" if @repository.public?
+      directory 'common/gem_scaffold',        @dir, force: true
+      directory 'common/executable_scaffold', @dir, force: true if @executable
+      template  'common/LICENCE.txt',         "#{@dir}/LICENCE.txt", force: true if @repository.public?
     end
   end
 end

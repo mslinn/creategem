@@ -33,13 +33,19 @@ module Creategem
 
       def private_option
         method_option :private, type: :boolean, default: false,
-        desc: 'Publish the gem on a private repository.'
+          desc: 'Publish the gem on a private repository.'
+      end
+
+      def quiet_option
+        # options[:quiet] = true
+        method_option :quiet, type: :boolean, default: true,
+          desc: 'Suppress detailed messages.'
       end
 
       def test_option(default_value)
         method_option :test_framework, type: :string, default: default_value,
-        enum: %w[minitest rspec],
-        desc: "Use rspec or minitest for the test framework (default is #{default_value})."
+          enum: %w[minitest rspec],
+          desc: "Use rspec or minitest for the test framework (default is #{default_value})."
       end
     end
   end

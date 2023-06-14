@@ -41,6 +41,8 @@ module Creategem
     method_option :tagn, name: :string, repeatable: true,
       desc: 'Specifies the name of a Jekyll no-arg tag plugin.'
 
+    quiet_option
+
     test_option 'rspec'
     # rubocop:enable Layout/HashAlignment
 
@@ -96,7 +98,9 @@ module Creategem
 
     def create_jekyll_scaffold
       say "Creating a Jekyll scaffold for a new gem named #{@gem_name} in #{@dir}", :green
-      directory 'jekyll/common_scaffold', @dir
+      @mute = true
+      directory 'jekyll/common_scaffold', @dir, force: true
+      directory 'jekyll/demo', @dir, force: true
     end
 
     def create_jekyll_block_scaffold(block_name)
@@ -104,7 +108,8 @@ module Creategem
       @jekyll_class_name = Creategem.camel_case block_name
       ask_option_names_types block_name
       say "Creating Jekyll block tag #{@block_name} scaffold within #{@jekyll_class_name}", :green
-      directory 'jekyll/block_scaffold', @dir
+      @mute = true
+      directory 'jekyll/block_scaffold', @dir, force: true
       ask_params
     end
 
@@ -112,35 +117,40 @@ module Creategem
       @block_name = block_name
       @jekyll_class_name = Creategem.camel_case block_name
       say "Creating Jekyll block tag no_arg #{@block_name} scaffold within #{@jekyll_class_name}", :green
-      directory 'jekyll/block_no_arg_scaffold', @dir
+      @mute = true
+      directory 'jekyll/block_no_arg_scaffold', @dir, force: true
     end
 
     def create_jekyll_filter_scaffold(filter_name)
       @filter_name = filter_name
       # @jekyll_class_name = Creategem.camel_case filter_name
       say "Creating a new Jekyll filter method scaffold #{@filter_name}", :green
-      directory 'jekyll/filter_scaffold', @dir
+      @mute = true
+      directory 'jekyll/filter_scaffold', @dir, force: true
     end
 
     def create_jekyll_generator_scaffold(generator_name)
       @generator_name = generator_name
       @jekyll_class_name = Creategem.camel_case generator_name
       say "Creating a new Jekyll generator class scaffold #{@jekyll_class_name}", :green
-      directory 'jekyll/generator_scaffold', @dir
+      @mute = true
+      directory 'jekyll/generator_scaffold', @dir, force: true
     end
 
     def create_jekyll_hooks_scaffold(plugin_name)
       @plugin_name = plugin_name
       @jekyll_class_name = Creategem.camel_case plugin_name
       say 'Creating a new Jekyll hook scaffold', :green
-      directory 'jekyll/hooks_scaffold', @dir
+      @mute = true
+      directory 'jekyll/hooks_scaffold', @dir, force: true
     end
 
     def create_jekyll_tag_no_arg_scaffold(tag_name)
       @tag_name = tag_name
       @jekyll_class_name = Creategem.camel_case @tag_name
       say "Creating Jekyll tag no_arg #{@tag_name} scaffold within #{@jekyll_class_name}", :green
-      directory 'jekyll/tag_no_arg_scaffold', @dir
+      @mute = true
+      directory 'jekyll/tag_no_arg_scaffold', @dir, force: true
     end
 
     def create_jekyll_tag_scaffold(tag_name)
@@ -148,7 +158,8 @@ module Creategem
       @jekyll_class_name = Creategem.camel_case @tag_name
       ask_option_names_types tag_name
       say "Creating Jekyll tag #{@tag_name} scaffold within #{@jekyll_class_name}", :green
-      directory 'jekyll/tag_scaffold', @dir
+      @mute = true
+      directory 'jekyll/tag_scaffold', @dir, force: true
     end
   end
 end

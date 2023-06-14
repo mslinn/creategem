@@ -25,6 +25,7 @@ module Creategem
       desc: 'Create a gem containing a mountable Rails engine.'
 
     private_option
+    quiet_option
 
     def plugin(gem_name)
       @host           = options['host']
@@ -33,7 +34,7 @@ module Creategem
       @test_framework = options['test_framework']
 
       @dir = Creategem.dest_root gem_name
-      @engine         = @host || @mountable
+      @engine = @host || @mountable
       @plugin = true
 
       create_gem_scaffold gem_name
@@ -47,17 +48,17 @@ module Creategem
 
     def create_engine_scaffold(gem_name)
       say "Creating a new Rails engine scaffold for a new gem named #{gem_name} in #{@dir}", :green
-      directory 'rails/engine_scaffold', @dir
+      directory 'rails/engine_scaffold', @dir, force: true
     end
 
     def create_mountable_scaffold(gem_name)
       say "Creating a mountable Rails engine scaffold for a new gem named #{gem_name} in #{@dir}", :green
-      directory 'rails/mountable_scaffold', @dir
+      directory 'rails/mountable_scaffold', @dir, force: true
     end
 
     def create_plugin_scaffold(gem_name)
       say "Creating a new Rails plugin scaffold for gem named #{gem_name} in #{@dir}", :green
-      directory 'rails/plugin_scaffold', @dir
+      directory 'rails/plugin_scaffold', @dir, force: true
       Dir.chdir @dir do
         run 'chmod +x test/dummy/bin/*'
       end
