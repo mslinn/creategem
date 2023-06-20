@@ -1,0 +1,8 @@
+jekyll jekyll_test --tag mytag1 --tag mytag2
+opt1 opt2
+string
+boolean
+param1 param2
+string
+numeric
+no

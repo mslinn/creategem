@@ -8,12 +8,12 @@
       "args": [
         "jekyll",
         "jekyll_test",
-        "--block", "myblock",
-        "--filter", "myfilter",
-        "--generator", "mygenerator",
+        // "--block", "myblock",
+        // "--filter", "myfilter",
+        // "--generator", "mygenerator",
         // "--hooks", "myhooks",
-        "--tag", "mytag1",
-        "--tag", "mytag2",
+        // "--tag", "mytag1",
+        // "--tag", "mytag2",
       ],
       "cwd": "${workspaceRoot}",
       "name": "Run creategem block/filter/generator/hooks/tag",
@@ -59,6 +59,20 @@
       "showDebuggerOutput": false,
       "type": "Ruby",
       "useBundler": true,
+    }
+  ],
+  "inputs": [
+    {
+      "id": "tags",
+      "args": [
+        "opt1", "opt2",
+        "string",
+        "boolean",
+        "param1", "param2",
+        "string",
+        "numeric",
+        "no"
+      ]
     }
   ]
 }

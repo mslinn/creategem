@@ -10,13 +10,11 @@ group :jekyll_plugins do
   gem 'html-proofer'
   gem 'jekyll-assets'
   gem 'jekyll-environment-variables'
-  gem 'jekyll_href', path: "../"
-  gem "jekyll_plugin_logger"
+  gem '<%= @gem_name %>', path: "../"
   gem 'jekyll-tagging'
 end
 
 gem 'debase', "0.2.5.beta2", require: false
-# gem 'debase-ruby_core_source', '~> 0.10.15', require: false
 gem 'rubocop', require: false
 gem 'rubocop-rspec', require: false
 gem 'ruby-debug-ide', require: false

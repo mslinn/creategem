@@ -36,12 +36,6 @@ module Creategem
           desc: 'Publish the gem on a private repository.'
       end
 
-      def quiet_option
-        # options[:quiet] = true
-        method_option :quiet, type: :boolean, default: true,
-          desc: 'Suppress detailed messages.'
-      end
-
       def test_option(default_value)
         method_option :test_framework, type: :string, default: default_value,
           enum: %w[minitest rspec],

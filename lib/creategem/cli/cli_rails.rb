@@ -25,7 +25,6 @@ module Creategem
       desc: 'Create a gem containing a mountable Rails engine.'
 
     private_option
-    quiet_option
 
     def plugin(gem_name)
       @host           = options['host']

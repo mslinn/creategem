@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
   spec.executables           = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
 <% end -%>
   spec.description           = <<~END_DESC
-    TODO: write a longer description of the gem.
+    <%= @todo %>Write a longer description of the gem.
     Use as many lines as you like.
   END_DESC
   spec.email                 = ['<%= @repository.user_email %>']
@@ -41,7 +41,7 @@ Gem::Specification.new do |spec|
   END_MESSAGE
   spec.require_paths         = ['lib']
   spec.required_ruby_version = '>= 3.1.0'
-  spec.summary               = 'TODO: Write summary of what the gem is for'
+  spec.summary               = '<%= @todo %>Write summary of what the gem is for'
   spec.version               = <%= @class_name %>::VERSION
 
   spec.add_dependency 'geminabox', '>= 2.1.0'

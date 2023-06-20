@@ -33,8 +33,11 @@ Metrics/AbcSize:
 
 Metrics/BlockLength:
   Exclude:
-    - jekyll_pre.gemspec
+    - creategem.gemspec
   Max: 30
+
+Metrics/ClassLength:
+  Exclude: spec/*.rb
 
 Metrics/CyclomaticComplexity:
   Max: 20

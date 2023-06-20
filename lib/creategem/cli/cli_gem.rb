@@ -23,8 +23,6 @@ module Creategem
     method_option :private, type: :boolean, default: false,
     desc: 'Publish the gem in a private repository.'
 
-    quiet_option
-
     def gem(gem_name)
       @dir = Creategem.dest_root gem_name
 

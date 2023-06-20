@@ -41,8 +41,6 @@ module Creategem
     method_option :tagn, name: :string, repeatable: true,
       desc: 'Specifies the name of a Jekyll no-arg tag plugin.'
 
-    quiet_option
-
     test_option 'rspec'
     # rubocop:enable Layout/HashAlignment
 

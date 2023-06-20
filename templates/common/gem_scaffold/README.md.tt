@@ -10,7 +10,7 @@
 [coveralls]: https://coveralls.io/r/<%= @repository.user %>/<%= gem_name %>
 <% end -%>
 
-TODO: Description of <%= @class_name %>
+<%= @todo %>Description of <%= @class_name %>
 
 
 ## Installation
@@ -37,7 +37,7 @@ And then execute:
 
 ## Usage
 
-TODO: Describe how to use this gem
+<%= @todo %>Describe how to use this gem
 
 
 ## Development

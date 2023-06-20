@@ -10,9 +10,14 @@ module Creategem
     include Thor::Actions
     include Creategem::Git
 
-    class_option :quiet, type: :boolean
+    class_option :quiet, type: :boolean, default: true,
+      desc: 'Suppress detailed messages.', group: :runtime
 
-    # Surround gem_name with percent symbols when using the property to name file within the template directory
+    class_option :todos, type: :boolean, default: true,
+      desc: 'Generate TODO: messages in generated code.', group: :runtime
+
+    # Surround gem_name with percent symbols when using the property to name files
+    # within the template directory
     # For example: "generated/%gem_name%"
     attr_accessor :gem_name
 
@@ -27,6 +32,10 @@ module Creategem
     # @return Path to the Thor generator templates
     def self.source_root
       File.expand_path '../../templates', __dir__
+    end
+
+    def self.todo
+      'TODO: ' if @todos
     end
 
     private

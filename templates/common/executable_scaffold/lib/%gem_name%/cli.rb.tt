@@ -5,9 +5,9 @@ module <%= @class_name %>
   class Cli < Thor
     include Thor::Actions
 
-    desc "do_something NAME", "TODO: task description"
+    desc "do_something NAME", "<%= @todo %>task description"
     def do_something(name)
-      puts "TODO: do something with: #{name}"
+      puts "<%= @todo %>do something with: #{name}"
     end
   end
 end
