@@ -8,7 +8,7 @@ gem 'ptools'
 group :jekyll_plugins do
   gem 'classifier-reborn'
   gem 'html-proofer'
-  gem 'jekyll-assets'
+  gem 'jekyll-assets', git: 'https://github.com/envygeeks/jekyll-assets'
   gem 'jekyll-environment-variables'
   gem '<%= @gem_name %>', path: "../"
   gem 'jekyll-tagging'

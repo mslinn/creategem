@@ -41,7 +41,6 @@ layout: compress
         <ul>
           <li><a href="/index.html">Tests</a></li>
           <li><a href="/blog/blogsByDate.html">Blog</a></li>
-          <li>{% href summary_exclude url="https://feeds.soundcloud.com/users/soundcloud:users:7143896/sounds.rss" SoundCloud RSS Feed %}</li>
         </ul>
       </nav>
       <section id="main-content">

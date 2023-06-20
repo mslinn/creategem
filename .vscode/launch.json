@@ -12,8 +12,9 @@
         // "--filter", "myfilter",
         // "--generator", "mygenerator",
         // "--hooks", "myhooks",
-        // "--tag", "mytag1",
-        // "--tag", "mytag2",
+        "--tag", "mytag1",
+        "--tag", "mytag2",
+        "--todos", "false"
       ],
       "cwd": "${workspaceRoot}",
       "name": "Run creategem block/filter/generator/hooks/tag",

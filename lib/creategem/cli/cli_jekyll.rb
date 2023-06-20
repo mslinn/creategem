@@ -52,6 +52,7 @@ module Creategem
       @host           = options['host']
       @private        = options['private']
       @test_framework = options['test_framework']
+      @todos          = options['todos']
 
       create_gem_scaffold gem_name
       create_jekyll_scaffold
@@ -64,6 +65,8 @@ module Creategem
         when 'tag' then       option[1].each { |name| create_jekyll_tag_scaffold          name }
         when 'tagn' then      option[1].each { |name| create_jekyll_tag_no_arg_scaffold   name }
         when 'hooks' then     create_jekyll_hooks_scaffold option[1]
+        when 'host', 'executable', 'private', 'test_framework', 'todos', 'quiet' then next
+        else puts "Warning: Unrecognized option: #{option}"
         end
       end
 
