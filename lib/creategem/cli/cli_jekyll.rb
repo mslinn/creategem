@@ -47,6 +47,7 @@ module Creategem
     def jekyll(gem_name)
       @dir = Creategem.dest_root gem_name
       @gem_name = gem_name
+      @class_name = Creategem.camel_case @gem_name
       @jekyll   = true
       @rspec    = true
 

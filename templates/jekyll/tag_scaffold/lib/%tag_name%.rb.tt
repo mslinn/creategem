@@ -13,7 +13,7 @@ require 'jekyll_plugin_support'
 # To set the log level to :debug, write an entry into _config.yml, like this:
 # plugin_loggers:
 #   <%= @jekyll_class_name %>: debug
-module JekyllTagPlugin
+module <%= class_name %>
   PLUGIN_NAME = '<%= @tag_name %>'.freeze
 
   # This class implements the Jekyll <%= @tag_name %> functionality

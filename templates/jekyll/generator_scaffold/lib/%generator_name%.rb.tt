@@ -1,4 +1,4 @@
-module <%= @jekyll_class_name %>
+module <%= @class_name %>
   # Creates an index page for each catagory, plus a main index, all within a directory called _site/categories.
   class <%= @jekyll_class_name %> < Jekyll::Generator
     safe true

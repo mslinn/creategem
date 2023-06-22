@@ -2,10 +2,14 @@
 require 'jekyll'
 require 'jekyll_plugin_logger'
 
+# puts File.join(__dir__, '*.rb')
+
 <%- end -%>
 # Require all Ruby files in 'lib/', except this file
-Dir[File.join(__dir__, 'lib', '*.rb')].each do |file|
-  puts "requiring #{file}"
-  require file unless File.basename(file) == '<%= @gem_name %>.rb'
+Dir[File.join(__dir__, '*.rb')].each do |file|
+  unless file.end_with? '/jekyll_test.rb'
+    puts "requiring #{file}"
+    require file
+  end
 end
 require_relative '<%= @gem_name %>/version'

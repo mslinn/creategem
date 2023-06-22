@@ -1,4 +1,4 @@
-module <%= @jekyll_class_name %>
+module <%= @class_name %>
   class <%= @jekyll_class_name %> < JekyllTag
     def initialize(tag_name, argument_string, parse_context)
       class << self

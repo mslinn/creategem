@@ -1,7 +1,7 @@
 require 'jekyll_plugin_logger'
 
 # Sample Jekyll filter.
-module <%= @jekyll_class_name %>
+module <%= @class_name %>
   class << self
     attr_accessor :logger
   end

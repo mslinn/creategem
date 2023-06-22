@@ -23,7 +23,7 @@ require_relative 'dumpers'
 # for inclusion in core, it is best for this to be correct!
 # Default value is false.
 # The hooks for pages, posts and documents access safe via pages.site.safe, posts.site.safe and documents.site.safe, respectively.
-module <%= @jekyll_class_name %>
+module <%= @class_name %>
   PLUGIN_NAME = '<%= @plugin_name %>'.freeze
 
   ########## :site hooks
