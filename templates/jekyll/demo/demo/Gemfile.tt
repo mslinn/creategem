@@ -6,11 +6,11 @@ gem 'nokogumbo', '=2.0.3'
 gem 'ptools'
 
 group :jekyll_plugins do
+  gem '<%= @gem_name %>', path: '../'  # use unreleased gem dependencies defined in the parent project
   gem 'classifier-reborn'
   gem 'html-proofer'
   gem 'jekyll-assets', git: 'https://github.com/envygeeks/jekyll-assets'
   gem 'jekyll-environment-variables'
-  gem '<%= @gem_name %>', path: "../"
   gem 'jekyll-tagging'
 end
 

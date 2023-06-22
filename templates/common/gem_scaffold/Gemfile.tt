@@ -3,8 +3,6 @@ source 'https://rubygems.org'
 # The <%= @gem_name %> gem dependencies are defined in <%= @gem_name %>.gemspec
 gemspec
 
-# path '../'  # uncomment to use unreleased gem dependencies defined in this project
-
 <% if @jekyll -%>
 group :test, :development do
   gem 'bundler', '>= 2.4.6', require: false
