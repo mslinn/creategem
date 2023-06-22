@@ -5,7 +5,7 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Run selected file",
+      "name": "Run selected Ruby file",
       "program": "{file}",
       "request": "launch",
       "type": "ruby_lsp"

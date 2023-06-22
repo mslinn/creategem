@@ -1,17 +1,17 @@
 require_relative 'lib/<%= @gem_name %>/version'
 
 Gem::Specification.new do |spec|
-<% if @repository.github? -%>
+  <%- if @repository.github? -%>
   host = 'https://github.com/<%= @repository.user %>/<%= @gem_name %>'
-<% else -%>
+  <%- else -%>
   host = 'https://bitbucket.com/<%= @repository.user %>/<%= @gem_name %>'
-<% end -%>
+  <%- end -%>
 
   spec.authors               = ['<%= @repository.user_name %>']
-<% if @executable -%>
+  <%- if @executable -%>
   spec.bindir                = 'exe'
   spec.executables           = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
-<% end -%>
+  <%- end -%>
   spec.description           = <<~END_DESC
     <%= @todo %>Write a longer description of the gem.
     Use as many lines as you like.
@@ -21,17 +21,17 @@ Gem::Specification.new do |spec|
                                .split("\x0") \
                                .reject { |f| f.match(%r{^test/}) }
   spec.homepage              = '<%= @repository.url %>'
-<% if @repository.public? -%>
+  <%- if @repository.public? -%>
   spec.license               = 'MIT'
-<% end -%>
+  <%- end -%>
   spec.metadata = {
     'allowed_push_host' => '<%= @repository.gem_server_url %>',
-<% unless @repository.private? -%>
+  <%- unless @repository.private? -%>
     'bug_tracker_uri'   => "#{host}/issues",
     'changelog_uri'     => "#{host}/CHANGELOG.md",
     'homepage_uri'      => spec.homepage,
     'source_code_uri'   => host,
-<% end -%>
+  <%- end -%>
   }
   spec.name                 = '<%= @gem_name %>'
   spec.post_install_message = <<~END_MESSAGE
@@ -45,14 +45,14 @@ Gem::Specification.new do |spec|
   spec.version               = <%= @class_name %>::VERSION
 
   spec.add_dependency 'geminabox', '>= 2.2.1'
-<% if @jekyll -%>
+  <%- if @jekyll -%>
   spec.add_dependency 'jekyll', '>= 3.5.0'
   spec.add_dependency 'jekyll_plugin_support', '>= 0.7.0'
-<% end -%>
-<% if @plugin -%>
+  <%- end -%>
+  <%- if @plugin -%>
   spec.add_dependency 'rails', '~> 7.0.5'
-<% end -%>
-<% if @executable -%>
+  <%- end -%>
+  <%- if @executable -%>
   spec.add_dependency 'thor', '~> 1.2.2'
-<% end -%>
+  <%- end -%>
 end

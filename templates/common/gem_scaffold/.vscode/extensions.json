@@ -1,4 +1,3 @@
 {
-  "recommendations": ["devonray.snippet"]
+  "recommendations": ["devonray.snippet", "Shopify.ruby-lsp"]
 }
-
