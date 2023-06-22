@@ -19,7 +19,6 @@ group :test, :development do
   gem 'rake', require: false
   <%- if @rspec -%>
   gem 'rspec', require: false
-  gem 'rspec-core', require: false
   <%- end -%>
   gem 'rubocop', require: false
   gem 'rubocop-md', require: false

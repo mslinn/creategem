@@ -47,7 +47,8 @@ module Creategem
     def jekyll(gem_name)
       @dir = Creategem.dest_root gem_name
       @gem_name = gem_name
-      @jekyll = true
+      @jekyll   = true
+      @rspec    = true
 
       @host           = options['host']
       @private        = options['private']
