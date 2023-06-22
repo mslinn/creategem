@@ -5,7 +5,7 @@ Gem::Specification.new do |spec|
   spec.bindir        = 'exe'
   spec.email         = ['igor@masterybits.com', 'mslinn@mslinn.com']
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
-  spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^test/}) }
+  spec.files         = Dir['.rubocop.yml', 'LICENSE.*', 'Rakefile', '{lib,spec}/**/*', '*.gemspec', '*.md']
   spec.description   = <<~END_DESC
     Creategem creates a scaffold project for new gems. You can choose between Github and Bitbucket,
     Rubygems or Geminabox, with or without an executable, etc.

@@ -17,9 +17,7 @@ Gem::Specification.new do |spec|
     Use as many lines as you like.
   END_DESC
   spec.email                 = ['<%= @repository.user_email %>']
-  spec.files                 = `git ls-files -z` \
-                               .split("\x0") \
-                               .reject { |f| f.match(%r{^test/}) }
+  spec.files                 = Dir['.rubocop.yml', 'LICENSE.*', 'Rakefile', '{lib,spec}/**/*', '*.gemspec', '*.md']
   spec.homepage              = '<%= @repository.url %>'
   <%- if @repository.public? -%>
   spec.license               = 'MIT'
