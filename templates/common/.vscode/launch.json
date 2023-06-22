@@ -5,8 +5,8 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Run creategem block/filter/generator/hooks/tag",
-      "program": "bin/demo",
+      "name": "Run selected file",
+      "program": "{file}",
       "request": "launch",
       "type": "ruby_lsp"
     },
