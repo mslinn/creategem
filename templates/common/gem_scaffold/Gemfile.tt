@@ -3,42 +3,43 @@ source 'https://rubygems.org'
 # The <%= @gem_name %> gem dependencies are defined in <%= @gem_name %>.gemspec
 gemspec
 
-<% if @jekyll -%>
+<%- if @jekyll -%>
 group :test, :development do
   gem 'bundler', '>= 2.4.6', require: false
-<% if @repository.public? -%>
+  <%- if @repository.public? -%>
   gem 'coveralls', require: false
-<% end -%>
+  <%- end -%>
   gem 'debase', '0.2.5.beta2', require: false
   gem 'gem-release', '>= 2.2.2', require: false
-<% if @minitest -%>
+  <%- if @minitest -%>
   gem 'minitest', '>= 5.18.0', require: false
   gem 'minitest-reporters', '>= 1.6.0', require: false
   gem 'minitest-screenshot-reporter', '~> 0.0.6', require: false
-<% end -%>
+  <%- end -%>
   gem 'rake', require: false
-<% if @rspec -%>
+  <%- if @rspec -%>
   gem 'rspec', require: false
-<% end -%>
+  gem 'rspec-core', require: false
+  <%- end -%>
   gem 'rubocop', require: false
   gem 'rubocop-md', require: false
-<% if @minitest -%>
+  <%- if @minitest -%>
   gem 'rubocop-minitest', require: false
-<% end -%>
+  <%- end -%>
   gem 'rubocop-performance', require: false
   gem 'rubocop-rake', require: false
   gem 'rubocop-rspec', require: false
   gem 'ruby-debug-ide', require: false
 end
-<% end -%>
-<% if @plugin -%>
+<%- end -%>
+<%- if @plugin -%>
 group :test, :development do
   gem 'bundler', '>= 2.4.6', require: false
   gem 'capybara', '~> 3.39.1', require: false
   gem 'capybara_minitest_spec', '~> 1.0.7', require: false
-<% if @repository.public? -%>
+  <%- if @repository.public? -%>
   gem 'coveralls', require: false
-<% end -%>
+  <%- end -%>
   gem 'database_cleaner', '~> 2.0.2', require: false
   gem 'gem-release', '>= 2.2.2', require: false
   gem 'poltergeist', '~> 1.10.1', require: false
@@ -47,10 +48,10 @@ group :test, :development do
   gem 'rubocop-md', require: false
   gem 'rubocop-performance', require: false
   gem 'rubocop-rake', require: false
-<% if @rspec -%>
+  <%- if @rspec -%>
   gem 'rubocop-rspec', require: false
-<% end -%>
+  <%- end -%>
   gem 'selenium-webdriver', '~> 4.9.1', require: false
   gem 'sqlite3'
 end
-<% end -%>
+<%- end -%>
