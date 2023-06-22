@@ -6,6 +6,8 @@ module Creategem
     include Thor::Actions
     include Creategem::Git
 
+    attr_accessor :class_name
+
     desc 'jekyll NAME', 'Creates a new Jekyll plugin scaffold.'
 
     long_desc <<~END_DESC
@@ -45,8 +47,8 @@ module Creategem
     # rubocop:enable Layout/HashAlignment
 
     def jekyll(gem_name)
-      @dir = Creategem.dest_root gem_name
       @gem_name = gem_name
+      @dir = Creategem.dest_root @gem_name
       @class_name = Creategem.camel_case @gem_name
       @jekyll   = true
       @rspec    = true
@@ -56,7 +58,7 @@ module Creategem
       @test_framework = options['test_framework']
       @todos          = options['todos']
 
-      create_gem_scaffold gem_name
+      create_gem_scaffold @gem_name
       create_jekyll_scaffold
       options.each do |option|
         case option.first
@@ -72,7 +74,7 @@ module Creategem
         end
       end
 
-      initialize_repository gem_name
+      initialize_repository @gem_name
     end
 
     no_commands do
