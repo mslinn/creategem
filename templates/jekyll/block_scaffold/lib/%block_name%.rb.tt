@@ -1,5 +1,3 @@
-require 'jekyll_plugin_support'
-
 # This Jekyll block tag plugin is a minimal example.
 #
 # See https://www.mslinn.com/jekyll/10200-jekyll-plugin-background.html

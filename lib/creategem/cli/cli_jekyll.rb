@@ -83,7 +83,7 @@ module Creategem
         content = @jekyll_parameter_names_types.map do |name, _type|
           "@#{name} = @helper.parameter_specified? '#{name}' # Obtain the value of parameter #{name}"
         end
-        content.join "\n"
+        content.join "\n      "
       end
     end
 
