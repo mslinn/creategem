@@ -89,7 +89,7 @@ module Creategem
       # Invoked by directory action when processing Jekyll tags and block tags
       def dump_jekyll_parameters
         content = @jekyll_parameter_names_types.map do |name, _type|
-          "\#{PLUGIN_NAME} was passed @#{name}='\#@{#{name}}'."
+          "\#{PLUGIN_NAME} was passed @#{name}='\#{@#{name}}'."
         end
         content.join "\n          "
       end
