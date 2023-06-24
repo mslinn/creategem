@@ -177,7 +177,7 @@ module Creategem
       # [["opt1", "string"], ["opt2", "boolean"]]
       say "Creating Jekyll tag #{@tag_name} scaffold within #{@jekyll_class_name}", :green
       @mute = true
-      puts set_color("@jekyll_parameter_names_types=#{@jekyll_parameter_names_types}", :yellow)
+      # puts set_color("@jekyll_parameter_names_types=#{@jekyll_parameter_names_types}", :yellow)
       directory 'jekyll/tag_scaffold', @dir, force: true
       append_to_file "#{Creategem.dest_root gem_name}/demo/index.html", Cli.add_demo_example(tag_name, @jekyll_parameter_names_types)
     end

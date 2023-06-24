@@ -1,0 +1,5 @@
+---
+description: <%= gem_name %> demonstration.
+layout: default
+title: Exercising Parameter Combinations
+---

@@ -44,5 +44,5 @@ plugins: # Use file name of the plugin entry point, not the gem name
   - <%= @gem_name %>
 sass:
   style: compressed
-title: Jekyll Plugin Template Demo
+title: <%= gem_name %> Demonstration
 url: https://bogus.jekylldemo.com
