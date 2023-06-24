@@ -31,9 +31,11 @@ module <%= @class_name %>
 
       # Compute the return value of this Jekyll tag
       <<~HEREDOC
-        <p style='color: green; background-color: yellow; padding: 1em; border: solid thin grey;'>
-          #{content} #{@param1}
-        </p>
+        <pre class="example">
+          content = '#{content}'
+          <%= dump_jekyll_parameters %>
+          Remaining markup: '#{@helper.remaining_markup}'.
+        </pre>
       HEREDOC
     rescue StandardError => e
       @logger.error { "#{self.class} died with a #{e.full_message}" }

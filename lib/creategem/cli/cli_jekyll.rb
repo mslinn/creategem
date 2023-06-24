@@ -85,6 +85,14 @@ module Creategem
         end
         content.join "\n      "
       end
+
+      # Invoked by directory action when processing Jekyll tags and block tags
+      def dump_jekyll_parameters
+        content = @jekyll_parameter_names_types.map do |name, _type|
+          "\#{PLUGIN_NAME} was passed @#{name}='\#@{#{name}}'."
+        end
+        content.join "\n          "
+      end
     end
 
     private
@@ -165,10 +173,11 @@ module Creategem
     def create_jekyll_tag_scaffold(tag_name)
       @tag_name = tag_name
       @jekyll_class_name = Creategem.camel_case @tag_name
-      ask_option_names_types tag_name # Defines @jekyll_parameter_names_types
+      ask_option_names_types tag_name # Defines @jekyll_parameter_names_types, which is a nested array of name/value pairs:
+      # [["opt1", "string"], ["opt2", "boolean"]]
       say "Creating Jekyll tag #{@tag_name} scaffold within #{@jekyll_class_name}", :green
       @mute = true
-      say_error "@jekyll_parameter_names_types=#{@jekyll_parameter_names_types}", :yellow
+      puts set_color("@jekyll_parameter_names_types=#{@jekyll_parameter_names_types}", :yellow)
       directory 'jekyll/tag_scaffold', @dir, force: true
       append_to_file "#{Creategem.dest_root gem_name}/demo/index.html", Cli.add_demo_example(tag_name, @jekyll_parameter_names_types)
     end

@@ -30,8 +30,7 @@ module <%= class_name %>
       <%= parse_jekyll_parameters %>
       <<~END_OUTPUT
         <pre class="example">
-          @jekyll_parameter_names_types=#{@jekyll_parameter_names_types}
-          #{PLUGIN_NAME} was passed param1='{param1}'.
+          <%= dump_jekyll_parameters %>
           Remaining markup: '#{@helper.remaining_markup}'.
         </pre>
       END_OUTPUT
