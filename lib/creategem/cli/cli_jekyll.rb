@@ -99,6 +99,7 @@ module Creategem
             default: 'string', limited_to: %w[boolean string numeric])
       end
       @jekyll_parameter_names_types = names.zip types
+      @jekyll_parameter_names_types
     end
 
     def create_jekyll_scaffold
@@ -164,9 +165,10 @@ module Creategem
     def create_jekyll_tag_scaffold(tag_name)
       @tag_name = tag_name
       @jekyll_class_name = Creategem.camel_case @tag_name
-      ask_option_names_types tag_name
+      ask_option_names_types tag_name # Defines @jekyll_parameter_names_types
       say "Creating Jekyll tag #{@tag_name} scaffold within #{@jekyll_class_name}", :green
       @mute = true
+      say_error "@jekyll_parameter_names_types=#{@jekyll_parameter_names_types}", :yellow
       directory 'jekyll/tag_scaffold', @dir, force: true
       append_to_file "#{Creategem.dest_root gem_name}/demo/index.html", Cli.add_demo_example(tag_name, @jekyll_parameter_names_types)
     end

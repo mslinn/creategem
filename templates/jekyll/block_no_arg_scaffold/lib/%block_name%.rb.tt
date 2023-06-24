@@ -1,8 +1,10 @@
 module <%= @class_name %>
-  PLUGIN_NAME = '<%= @block_name %>'.freeze
+  PLUGIN_NAME = '<%= @block_name %>'.freeze unless defined? PLUGIN_NAME
 
   # This class implements the Jekyll block tag functionality
   class <%= @jekyll_class_name %> < JekyllBlock
+    VERSION = <%= @class_name %>::VERSION
+
     def initialize(tag_name, argument_string, parse_context)
       class << self
         include NoArgParsing

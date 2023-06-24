@@ -12,10 +12,12 @@
 # plugin_loggers:
 #   <%= @jekyll_class_name %>: debug
 module <%= class_name %>
-  PLUGIN_NAME = '<%= @tag_name %>'.freeze
 
   # This class implements the Jekyll <%= @tag_name %> functionality
   class <%= @jekyll_class_name %> < JekyllSupport::JekyllTag
+    PLUGIN_NAME = '<%= @tag_name %>'.freeze
+    VERSION = <%= @class_name %>::VERSION
+
     # Put your plugin logic here.
     # The following variables are predefined:
     #   @argument_string, @config, @envs, @helper, @layout, @logger, @mode, @page, @paginator, @site, @tag_name and @theme
@@ -27,10 +29,11 @@ module <%= class_name %>
     def render_impl
       <%= parse_jekyll_parameters %>
       <<~END_OUTPUT
-        <p style="border: thin gray solid;">
-          #{PLUGIN_NAME} was passed param1='#{param1}'.
+        <pre class="example">
+          @jekyll_parameter_names_types=#{@jekyll_parameter_names_types}
+          #{PLUGIN_NAME} was passed param1='{param1}'.
           Remaining markup: '#{@helper.remaining_markup}'.
-        </p>
+        </pre>
       END_OUTPUT
     end
 

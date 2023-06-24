@@ -16,11 +16,10 @@
 #   MyBlockTag: debug
 
 module <%= @class_name %>
-  PLUGIN_NAME = '<%= @block_name %>'.freeze
-
   # This class implements the Jekyll block tag functionality
   class <%= @jekyll_class_name %> < JekyllSupport::JekyllBlock
-    include <%= @class_name %>
+    PLUGIN_NAME = '<%= @tag_name %>'.freeze
+    VERSION = <%= @class_name %>::VERSION
 
     # Put your plugin logic here.
     # The following variables are predefined:

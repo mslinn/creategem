@@ -127,6 +127,12 @@ pre {
   color: red;
 }
 
+.example {
+  background-color: light-green;
+  border: thin lightgray solid;
+  padding: 5px;
+}
+
 .inner {
   margin: 0 auto;
   position: relative;
