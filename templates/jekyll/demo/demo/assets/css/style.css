@@ -27,6 +27,10 @@ code, .code {
   font-size: smaller;
 }
 
+h1.code, h2.code, h3.code {
+  font-size: revert;
+}
+
 h1, .h1 {
   display: block;
   font-size: 2em;
@@ -38,7 +42,7 @@ h1, .h1 {
   margin-inline-end: 0px;
 }
 
-h1, h2, header, nav#sidebar, .error {
+h1, h2, h3, header, nav#sidebar, .error {
   font-family: "Helvetica Neue", Helvetica, Arial, serif;
 }
 

@@ -22,14 +22,22 @@ module Creategem
     end
 
     def self.add_demo_example(tag, params)
+      last_tag = ''
       examples = combinations(params).map do |option|
         options = option.join ' '
-        <<~END_EX
-          <!-- #region #{tag} #{options} -->
-          <h2 id="#{tag}">#{tag} #{options}</h2>
+        label = options.empty? ? ' (invoked without parameters)' : options
+        example = <<~END_EX
+          <!-- #region #{tag} #{label} -->
+          <h3 id="#{tag}" class="code">#{tag} #{label}</h3>
           {% #{tag} #{options} %}
           <!-- endregion -->
         END_EX
+        if tag != last_tag
+          last_tag = tag
+          "<h2 id=\"tag_#{tag}\" class='code'>#{tag}</h2>\n" + example
+        else
+          example
+        end
       end
       examples.join("\n\n")
     end
