@@ -1,6 +1,6 @@
 # <%= @class_name %>
 
-<% if @repository.public? -%>
+<%- if @repository.public? -%>
 [![Gem Version](http://img.shields.io/gem/v/<%= gem_name %>.svg)][gem]
 [![Dependency Status](http://img.shields.io/gemnasium/<%= @repository.user %>/<%= gem_name %>.svg)][gemnasium]
 [![Coverage Status](http://img.shields.io/coveralls/<%= @repository.user %>/<%= gem_name %>.svg)][coveralls]
@@ -8,27 +8,27 @@
 [gem]: https://rubygems.org/gems/<%= gem_name %>
 [gemnasium]: https://gemnasium.com/<%= @repository.user %>/<%= gem_name %>
 [coveralls]: https://coveralls.io/r/<%= @repository.user %>/<%= gem_name %>
-<% end -%>
+<%- end -%>
 
 <%= @todo %>Description of <%= @class_name %>
 
 
 ## Installation
 
-<% if @jekyll -%>
+<%- if @jekyll -%>
 Add this line to your Jekyll website's Gemfile, within the jekyll_plugins group:
 
 group :jekyll_plugins do
   gem '<%= @gem_name %>'
 end
-<% end -%>
-<% unless @jekyll -%>
+<%- end -%>
+<%- unless @jekyll -%>
 Add this line to your application's Gemfile:
 
 ```ruby
 gem '<%= @gem_name %>'
 ```
-<% end -%>
+<%- end -%>
 
 And then execute:
 
@@ -58,8 +58,8 @@ and push the `.gem` file to <%= @repository.gem_server_url -%>.
 Bug reports and pull requests are welcome on <%= @repository.host %> at <%= @repository.url %>.
 
 
-<% if @repository.public? -%>
+<%- if @repository.public? -%>
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-<% end -%>
+<%- end -%>

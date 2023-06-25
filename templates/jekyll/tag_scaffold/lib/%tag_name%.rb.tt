@@ -12,7 +12,6 @@
 # plugin_loggers:
 #   <%= @jekyll_class_name %>: debug
 module <%= class_name %>
-
   # This class implements the Jekyll <%= @tag_name %> functionality
   class <%= @jekyll_class_name %> < JekyllSupport::JekyllTag
     PLUGIN_NAME = '<%= @tag_name %>'.freeze

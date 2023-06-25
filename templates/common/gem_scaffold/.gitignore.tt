@@ -9,18 +9,18 @@
 /doc/
 /pkg/
 /tmp/
-<% if @plugin -%>
+<%- if @plugin -%>
 test/dummy/db/*.sqlite3
 test/dummy/db/*.sqlite3-journal
 test/dummy/log/*.log
 test/dummy/tmp/
 test/dummy/.sass-cache
-<% end -%>
-<% if @jekyll -%>
+<%- end -%>
+<%- if @jekyll -%>
 spec/status_persistence.txt
 .jekyll-cache/
 .jekyll-metadata
 _site/
 demo/_site/
 demo/.jekyll-cache/
-<% end -%>
+<%- end -%>
