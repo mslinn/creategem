@@ -1,25 +1,41 @@
-#!/bin/bash
+#!/usr/bin/env ruby
 
-rm -rf generated/jekyll_test
+require 'fileutils'
+require 'open3'
 
-if [ -z "$1" ]; then
-  cat << EOF | exe/creategem jekyll jekyll_test --block my_block1 --block my_block2
-opt1 opt2
-string
-boolean
-param1 param2
-string
-numeric
-no
-EOF
+def run(command, input)
+  Open3.popen3(command) do |stdin, stdout, stderr, thread|
+    Thread.new do
+      input.split("\n").each { |line| stdin.puts line }
+    end
+
+    stdout.each_line { |line| puts line }
+
+    Thread.new do
+      until (line = stderr.gets).nil?
+        yield nil, line, thread
+      end
+    end
+
+    thread.join
+  end
+end
+
+project = 'jekyll_test'
+FileUtils.rm_rf "generated/#{project}"
+
+tag_input = <<~END_INPUT
+  opt1 opt2
+  string
+  boolean
+  param1 param2
+  string
+  numeric
+  no
+END_INPUT
+
+if ARGV.empty?
+  run 'exe/creategem jekyll jekyll_test --block my_block1 --block my_block2', tag_input
 else
-  cat << EOF | exe/creategem jekyll jekyll_test --tag my_tag1 --tag my_tag2
-opt1 opt2
-string
-boolean
-param1 param2
-string
-numeric
-no
-EOF
-fi
+  run 'exe/creategem jekyll jekyll_test --tag my_tag1 --tag my_tag2', tag_input
+end
