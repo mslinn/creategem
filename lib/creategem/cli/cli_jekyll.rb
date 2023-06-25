@@ -120,11 +120,11 @@ module Creategem
     def create_jekyll_block_scaffold(block_name)
       @block_name = block_name
       @jekyll_class_name = Creategem.camel_case block_name
-      ask_option_names_types block_name
+      ask_option_names_types block_name # Defines @jekyll_parameter_names_types, which is a nested array of name/value pairs:
+      # [["opt1", "string"], ["opt2", "boolean"]]
       say "Creating Jekyll block tag #{@block_name} scaffold within #{@jekyll_class_name}", :green
       @mute = true
       directory 'jekyll/block_scaffold', @dir, force: true, mode: :preserve
-      ask_params
       append_to_file "#{Creategem.dest_root gem_name}/demo/index.html", Cli.add_demo_example(block_name, @jekyll_parameter_names_types)
     end
 

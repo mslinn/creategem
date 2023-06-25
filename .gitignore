@@ -11,3 +11,5 @@
 /binstub/
 /generated/
 /spec/status_persistence.txt
+templates/jekyll/common_scaffold/%gem_name%.code-workspace.tt
+

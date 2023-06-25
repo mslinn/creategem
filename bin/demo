@@ -2,7 +2,8 @@
 
 rm -rf generated/jekyll_test
 
-cat << EOF | exe/creategem jekyll jekyll_test --tag my_tag1 --tag my_tag2
+if [ -z "$1" ]; then
+  cat << EOF | exe/creategem jekyll jekyll_test --block my_block1 --block my_block2
 opt1 opt2
 string
 boolean
@@ -11,3 +12,14 @@ string
 numeric
 no
 EOF
+else
+  cat << EOF | exe/creategem jekyll jekyll_test --tag my_tag1 --tag my_tag2
+opt1 opt2
+string
+boolean
+param1 param2
+string
+numeric
+no
+EOF
+fi
