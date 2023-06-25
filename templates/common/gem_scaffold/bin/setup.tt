@@ -13,9 +13,9 @@ cd "$DIR/.." || exit
 rm -f Gemfile.lock
 bundle
 
-bundle binstubs debase         --force --path exe
+bundle binstubs debase         --force --path binstub
 <%- if @jekyll -%>
-bundle binstubs jekyll         --force --path exe
+bundle binstubs jekyll         --force --path binstub
 <%- end -%>
 bundle binstubs rspec-core     --force --path binstub
 bundle binstubs rubocop        --force --path binstub

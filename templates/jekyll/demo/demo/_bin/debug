@@ -53,20 +53,19 @@ run="serve \
     --drafts \
     --unpublished"
 
-GIT_ROOT="$( git rev-parse --show-toplevel )"
-cd "${GIT_ROOT}/demo" || exit
+../bin/setup
 
-bundle install
-bundle update
-
-bundle exec jekyll clean # Ensure all hooks get called
+rm -f Gemfile.lock
+bundle
+bundle exec ../binstub/jekyll clean # Ensure all hooks get called
 
 if [ "$RUN_FREE" ]; then
-  bundle exec ../exe/jekyll $run
+  bundle exec ../binstub/jekyll $run
 else
-  bundle exec rdebug-ide \
+  bundle exec ../binstub/rdebug-ide \
     --host 0.0.0.0 \
     --port 1234 \
     --dispatcher-port 26162 \
-    -- ../exe/jekyll $run
+    -- \
+    ../binstub/jekyll $run
 fi

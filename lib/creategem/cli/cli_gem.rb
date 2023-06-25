@@ -51,8 +51,8 @@ module Creategem
         gem_server_url: gem_server_url(@private),
         private:        @private
       )
-      directory 'common/gem_scaffold',        @dir, force: true
-      directory 'common/executable_scaffold', @dir, force: true if @executable
+      directory 'common/gem_scaffold',        @dir, force: true, mode: :preserve
+      directory 'common/executable_scaffold', @dir, force: true, mode: :preserve if @executable
       template  'common/LICENCE.txt',         "#{@dir}/LICENCE.txt", force: true if @repository.public?
     end
   end
