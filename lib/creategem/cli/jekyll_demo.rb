@@ -21,15 +21,23 @@ module Creategem
       end
     end
 
-    def self.add_demo_example(tag, params)
+    def self.add_demo_example(tag, params, tag_type = :tag)
       last_tag = ''
       examples = combinations(params).map do |option|
         options = option.join ' '
         label = options.empty? ? ' (invoked without parameters)' : options
+        close_tag = case tag_type
+                    when :tag then ''
+                    when :block then <<~END_BLOCK
+                      \nThis is line 1 of the block content.<br>
+                      This is line 2.
+                      {% end#{tag} %}
+                    END_BLOCK
+                    end
         example = <<~END_EX
           <!-- #region #{tag} #{label} -->
           <h3 id="#{tag}" class="code">#{tag} #{label}</h3>
-          {% #{tag} #{options} %}
+          {% #{tag} #{options} %}#{close_tag}
           <!-- endregion -->
         END_EX
         if tag == last_tag

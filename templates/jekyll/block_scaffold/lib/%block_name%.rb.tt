@@ -18,12 +18,12 @@
 module <%= @class_name %>
   # This class implements the Jekyll block tag functionality
   class <%= @jekyll_class_name %> < JekyllSupport::JekyllBlock
-    PLUGIN_NAME = '<%= @tag_name %>'.freeze
+    PLUGIN_NAME = '<%= @block_name %>'.freeze
     VERSION = <%= @class_name %>::VERSION
 
     # Put your plugin logic here.
     # The following variables are predefined:
-    #   @argument_string, @config, @envs, @helper, @layout, @logger, @mode, @page, @paginator, @site, @tag_name and @theme
+    #   @argument_string, @block_name, @config, @envs, @helper, @layout, @logger, @mode, @page, @paginator, @site and @theme
     #
     # @return [String]
     def render_impl(content)

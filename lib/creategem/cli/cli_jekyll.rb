@@ -125,7 +125,7 @@ module Creategem
       say "Creating Jekyll block tag #{@block_name} scaffold within #{@jekyll_class_name}", :green
       @mute = true
       directory 'jekyll/block_scaffold', @dir, force: true, mode: :preserve
-      append_to_file "#{Creategem.dest_root gem_name}/demo/index.html", Cli.add_demo_example(block_name, @jekyll_parameter_names_types)
+      append_to_file "#{Creategem.dest_root gem_name}/demo/index.html", Cli.add_demo_example(block_name, @jekyll_parameter_names_types, :block)
     end
 
     def create_jekyll_block_no_arg_scaffold(block_name)
@@ -134,7 +134,7 @@ module Creategem
       say "Creating Jekyll block tag no_arg #{@block_name} scaffold within #{@jekyll_class_name}", :green
       @mute = true
       directory 'jekyll/block_no_arg_scaffold', @dir, force: true, mode: :preserve
-      append_to_file "#{Creategem.dest_root gem_name}/demo/index.html", Cli.add_demo_example(block_name, @jekyll_parameter_names_types)
+      append_to_file "#{Creategem.dest_root gem_name}/demo/index.html", Cli.add_demo_example(block_name, @jekyll_parameter_names_types, :block)
     end
 
     def create_jekyll_filter_scaffold(filter_name)
@@ -167,7 +167,7 @@ module Creategem
       say "Creating Jekyll tag no_arg #{@tag_name} scaffold within #{@jekyll_class_name}", :green
       @mute = true
       directory 'jekyll/tag_no_arg_scaffold', @dir, force: true, mode: :preserve
-      append_to_file "#{Creategem.dest_root gem_name}/demo/index.html", Cli.add_demo_example(tag_name, @jekyll_parameter_names_types)
+      append_to_file "#{Creategem.dest_root gem_name}/demo/index.html", Cli.add_demo_example(tag_name, @jekyll_parameter_names_types, :tag)
     end
 
     def create_jekyll_tag_scaffold(tag_name)
@@ -179,7 +179,7 @@ module Creategem
       @mute = true
       # puts set_color("@jekyll_parameter_names_types=#{@jekyll_parameter_names_types}", :yellow)
       directory 'jekyll/tag_scaffold', @dir, force: true, mode: :preserve
-      append_to_file "#{Creategem.dest_root gem_name}/demo/index.html", Cli.add_demo_example(tag_name, @jekyll_parameter_names_types)
+      append_to_file "#{Creategem.dest_root gem_name}/demo/index.html", Cli.add_demo_example(tag_name, @jekyll_parameter_names_types, :tag)
     end
   end
 end

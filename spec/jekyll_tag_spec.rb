@@ -34,7 +34,7 @@ class JekyllTagTest
       ]
       expect(actual).to eq(expected)
 
-      actual = described_class.add_demo_example 'my_tag', params
+      actual = described_class.add_demo_example 'my_tag', params, :tag
       expected = <<~END_EX
         <!-- #region my_tag  -->
         <h2 id="my_tag">my_tag </h2>
