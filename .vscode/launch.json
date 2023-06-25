@@ -5,8 +5,14 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Run creategem block/filter/generator/hooks/tag",
-      "program": "bin/demo",
+      "name": "Run bin/demo",
+      "program": "${workspaceFolder}/bin/demo",
+      "request": "launch",
+      "type": "ruby_lsp"
+    },
+    {
+      "name": "Run bin/build_run_demo",
+      "program": "${workspaceFolder}/bin/build_run_demo",
       "request": "launch",
       "type": "ruby_lsp"
     },
@@ -17,13 +23,13 @@
     },
     {
       "name": "RSpec - active spec file only",
-      "program": "binstub/rspec -I ${workspaceRoot} ${file}",
+      "program": "${workspaceFolder}/binstub/rspec -I ${workspaceFolder} ${file}",
       "request": "launch",
       "type": "ruby_lsp",
     },
     {
       "name": "RSpec - all",
-      "program": "${workspaceRoot}/binstub/rspec -I ${workspaceRoot}",
+      "program": "${workspaceFolder}/binstub/rspec -I ${workspaceFolder}",
       "request": "launch",
       "type": "ruby_lsp",
     }

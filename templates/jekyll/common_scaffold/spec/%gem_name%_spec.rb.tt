@@ -8,6 +8,6 @@ RSpec.describe <%= @class_name %>::<%= @class_name %> do
   let(:parse_context) { TestParseContext.new }
 
   it 'has a test' do
-    expect(true).to   be_true
+    expect(true).to be_true
   end
 end

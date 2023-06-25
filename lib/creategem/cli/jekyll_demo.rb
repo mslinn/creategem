@@ -32,11 +32,11 @@ module Creategem
           {% #{tag} #{options} %}
           <!-- endregion -->
         END_EX
-        if tag != last_tag
+        if tag == last_tag
+          example
+        else
           last_tag = tag
           "<h2 id=\"tag_#{tag}\" class='code'>#{tag}</h2>\n" + example
-        else
-          example
         end
       end
       examples.join("\n\n")

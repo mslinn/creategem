@@ -1,5 +1,7 @@
 #!/bin/bash
 
+rm -rf generated/jekyll_test
+
 cat << EOF | exe/creategem jekyll jekyll_test --tag my_tag1 --tag my_tag2
 opt1 opt2
 string

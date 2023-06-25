@@ -10,8 +10,11 @@ AllCops:
     - binstub/**/*
     - exe/**/*
     - generated/**/binstub/*
+    - generated/**/exe/**/*
     - vendor/**/*
     - Gemfile*
+    - Rakefile
+    - README.md
   NewCops: enable
   TargetRubyVersion: 3.1.3
 
@@ -29,7 +32,7 @@ Layout/LineLength:
   Max: 150
 
 Metrics/AbcSize:
-  Max: 40
+  Max: 45
 
 Metrics/BlockLength:
   Exclude:
@@ -37,7 +40,8 @@ Metrics/BlockLength:
   Max: 30
 
 Metrics/ClassLength:
-  Exclude: spec/*.rb
+  Exclude:
+    - spec/*.rb
 
 Metrics/CyclomaticComplexity:
   Max: 20
@@ -62,6 +66,9 @@ Style/FrozenStringLiteralComment:
   Enabled: false
 
 Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInArrayLiteral:
   EnforcedStyleForMultiline: comma
 
 RSpec/FilePath:

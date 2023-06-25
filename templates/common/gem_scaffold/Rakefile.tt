@@ -14,14 +14,17 @@ load 'rails/tasks/engine.rake'
 load 'rails/tasks/statistics.rake'
 
 <%- end -%>
+desc 'Bump patch version'
 task :patch do
   system 'gem bump --tag'
 end
 
+desc 'Bump minor version'
 task :minor do
   system 'gem bump --version minor --tag'
 end
 
+desc 'Bump major version'
 task :major do
   system 'gem bump --version major --tag'
 end

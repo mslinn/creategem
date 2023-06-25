@@ -6,7 +6,7 @@ module Creategem
     Host = Struct.new(:domain, :camel_case, :id, keyword_init: true)
     HOSTS = [
       Host.new(domain: 'github.com',    camel_case: 'GitHub',    id: :github),
-      Host.new(domain: 'bitbucket.org', camel_case: 'BitBucket', id: :bitbucket)
+      Host.new(domain: 'bitbucket.org', camel_case: 'BitBucket', id: :bitbucket),
     ].freeze
 
     def initialize(options)
