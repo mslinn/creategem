@@ -21,21 +21,6 @@ module Creategem
     attr_reader :block_name, :filter_name, :generator_name, :tag_name, :test_framework
 
     class << self
-      def executable_option
-        method_option :executable, type: :boolean, default: false,
-          desc: 'Include an executable for the gem.'
-      end
-
-      def host_option
-        method_option :host, type: :string, default: 'github',
-          enum: %w[bitbucket github], desc: 'Repository host.'
-      end
-
-      def private_option
-        method_option :private, type: :boolean, default: false,
-          desc: 'Publish the gem on a private repository.'
-      end
-
       def test_option(default_value)
         method_option :test_framework, type: :string, default: default_value,
           enum: %w[minitest rspec],

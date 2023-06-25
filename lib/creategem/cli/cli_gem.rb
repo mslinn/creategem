@@ -15,8 +15,6 @@ module Creategem
       by default hosted by GitHub and published on RubyGems.
     END_DESC
 
-    executable_option
-
     method_option :host, type: :string, default: 'github',
       enum: %w[bitbucket github], desc: 'Repository host.'
 

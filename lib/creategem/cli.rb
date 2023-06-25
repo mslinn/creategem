@@ -10,6 +10,15 @@ module Creategem
     include Thor::Actions
     include Creategem::Git
 
+    class_option :executable, type: :boolean, default: false,
+      desc: 'Include an executable for the gem.'
+
+    class_option :host, type: :string, default: 'github',
+      enum: %w[bitbucket github], desc: 'Repository host.'
+
+    class_option :private, type: :boolean, default: false,
+      desc: 'Publish the gem on a private repository.'
+
     class_option :quiet, type: :boolean, default: true,
       desc: 'Suppress detailed messages.', group: :runtime
 

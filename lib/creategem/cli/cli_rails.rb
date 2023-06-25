@@ -15,16 +15,10 @@ module Creategem
     method_option :engine, type: :boolean, default: false,
       desc: 'Create a gem containing a Rails engine.'
 
-    executable_option
-
-    host_option
-
     test_option 'minitest'
 
     method_option :mountable, type: :boolean, default: false,
       desc: 'Create a gem containing a mountable Rails engine.'
-
-    private_option
 
     def rails(gem_name)
       @host           = options['host']

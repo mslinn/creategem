@@ -22,8 +22,6 @@ module Creategem
     method_option :blockn, type: :string, repeatable: true,
       desc: 'Specifies the name of a Jekyll no-arg block tag plugin.'
 
-    executable_option
-
     method_option :filter, type: :string, repeatable: true,
       desc: 'Specifies the name of a Jekyll/Liquid filter.'
 
@@ -32,10 +30,6 @@ module Creategem
 
     method_option :hooks, type: :string,
       desc: 'Specifies a Jekyll hooks plugin.'
-
-    host_option
-
-    private_option
 
     method_option :tag, name: :string, repeatable: true,
       desc: 'Specifies the name of a Jekyll tag plugin.'
