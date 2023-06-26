@@ -10,7 +10,7 @@ with the following features:
 - Generates a README with badges.
 - Automatically creates local and remote git repositories (on GitHub, BitBucket or Geminabox) for your new gem.
 - Remote repositories can be private or public.
-- Can create an executable based on [Thor](https://github.com/rails/thor).
+- Can include a [Thor-based executable](https://github.com/rails/thor).
 - Creates a test infrastructure based on `rspec` or `minitest` and `minitest-reporters`.
 - Ready to publicly release to `rubygems.org` or to a private Geminabox gem server.
 - Optionally create the gem as:
