@@ -1,5 +1,7 @@
 # `Creategem` [![Gem Version](https://badge.fury.io/rb/createtem.svg)](https://badge.fury.io/rb/creategem)
 
+** WORK IN PROGRESS **
+
 `Creategem` creates a scaffold project for a new gem in a new git repository.
 After you add your special code to the gem scaffold,
 the project is ready to be released to a public or private gem server.
