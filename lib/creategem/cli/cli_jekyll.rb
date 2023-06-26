@@ -17,25 +17,25 @@ module Creategem
 
     # rubocop:disable Layout/HashAlignment
     method_option :block, type: :string, repeatable: true,
-      desc: 'Specifies the name of a Jekyll block tag plugin.'
+      desc: 'Specifies the name of a Jekyll block tag.'
 
     method_option :blockn, type: :string, repeatable: true,
-      desc: 'Specifies the name of a Jekyll no-arg block tag plugin.'
+      desc: 'Specifies the name of a Jekyll no-arg block tag.'
 
     method_option :filter, type: :string, repeatable: true,
-      desc: 'Specifies the name of a Jekyll/Liquid filter.'
+      desc: 'Specifies the name of a Jekyll/Liquid filter module.'
 
     method_option :generator, type: :string, repeatable: true,
-      desc: 'Specifies a Jekyll generator plugin.'
+      desc: 'Specifies a Jekyll generator.'
 
     method_option :hooks, type: :string,
-      desc: 'Specifies a Jekyll hooks plugin.'
+      desc: 'Specifies Jekyll hooks.'
 
     method_option :tag, name: :string, repeatable: true,
-      desc: 'Specifies the name of a Jekyll tag plugin.'
+      desc: 'Specifies the name of a Jekyll tag.'
 
     method_option :tagn, name: :string, repeatable: true,
-      desc: 'Specifies the name of a Jekyll no-arg tag plugin.'
+      desc: 'Specifies the name of a Jekyll no-arg tag.'
 
     test_option 'rspec'
     # rubocop:enable Layout/HashAlignment
