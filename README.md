@@ -1,24 +1,21 @@
 # `Creategem` [![Gem Version](https://badge.fury.io/rb/createtem.svg)](https://badge.fury.io/rb/creategem)
 
-`Creategem` creates a scaffold project for a new gem together with remote repository (GitHub or Bitbucket)
-that is ready to be released to a public or private gem server.
+`Creategem` creates a scaffold project for a new gem in a new git repository.
+After you add your special code to the gem scaffold,
+the project is ready to be released to a public or private gem server.
 
-This project was inspired by the [Bundler](http://bundler.io)&rsquo;s `bundle gem` subcommand,
-and by [Deveoping a RubyGem using Bundler](https://github.com/radar/guides/blob/master/gem-development.md).
-
-Similar to what Bundler's `bundle gem` command does,
-this gem generates a scaffold with all files you need to start,
-with the following additional features:
+This gem generates a scaffold with all files you need to start,
+with the following features:
 
 - Generates a README with badges.
-- Automatically creates local and remote git repositories (on GitHub or BitBucket) for your gem.
+- Automatically creates local and remote git repositories (on GitHub, BitBucket or Geminabox) for your new gem.
 - Remote repositories can be private or public.
-- Can create an executable based on [Thor](http://whatisthor.com).
+- Can create an executable based on [Thor](https://github.com/rails/thor).
 - Creates a test infrastructure based on `rspec` or `minitest` and `minitest-reporters`.
 - Ready to publicly release to `rubygems.org` or to a private Geminabox gem server.
 - Optionally create the gem as:
   - A Rails plugin, possibly with a mountable engine.
-  - A Jekyll plugin (tag, block tag, generator, or hooks).
+  - A Jekyll plugin (tag, block tag, filter, generator, or hooks).
 
 
 ## Installation
@@ -26,49 +23,107 @@ with the following additional features:
 $ gem install creategem
 ```
 
-## Syntax
-`Creategem` has 4 subcommands `gem`, `help`, `jekyll` and `plugin`:
-
-**The `help` subcommand** lists the available subcommands,
-or provides detail for the specified subcommand.
+To update the program:
 ```shell
-$ creategem help [COMMAND]
+$ gem update creategem
 ```
 
-**The `gem` subcommand** creates a scaffold for a gem within the `generated/` directory:
+
+## Subcommands and Options
+
+`Creategem` has 4 subcommands `gem`, `jekyll`, `help` and `rails`:
+
+### `help` Subcommand
+The following lists the available subcommands:
+
 ```shell
-$ creategem gem GEM_NAME [--executable] [--host="bitbucket"] [--private]
+$ creategem help
 ```
 
-When invoked without any options,
-the default options assume that you do not want a gem with an executable,
-hosted on a public GitHub git repository, and released to `rubygems.org`.
+The following provides detailed help for the specified subcommand:
+
+```shell
+$ creategem help [SUBCOMMAND]
+```
+
+
+### Common Options
+
+The `gem`, `jekyll` and `rails` subcommands have common options.
+
+The default option values assume that:
+
+ - You do not want an executable for your gem scaffold
+ - The gem project will be hosted on a public GitHub git repository
+ - The gem will be released to `rubygems.org`
+
+Common options for the `gem`, `jekyll` and `rails` subcommands are:
+
+<dl>
+  <dt><code>--executable</code></dt>
+    <dd>add an executable based on Thor.</dd>
+
+  <dt><code>--host`</code></dt>
+    <dd>
+      specifies the git host; possible values are <code>bitbucket</code>, <code>github</code> and <code>geminabox</code>.
+    </dd>
+
+  <dt><code>--private</code></dt>
+    <dd>the remote repository is made private,
+        and on release the gem will be pushed to a private Geminabox server.
+    </dd>
+</dl>
+
+### Common Behavior
+
+The `gem`, `jekyll` and `rails` subcommands have common behavior.
+
+Gem scaffolds are created within the `generated/` directory.
 
 If your user name is not already stored in your git global config,
 you will be asked for your GitHub or BitBucket user name.
 You will also be asked to enter your GitHub or BitBucket password when the remote repository is created for you.
-
-When you use the `--private` option the remote repository is made private,
-and on release the gem will be pushed to a private Geminabox server.
-
-By default, the scaffold gem is created without an executable,
-but you can add an executable based on Thor with the `--executable` option.
 
 After you create the gem, edit the `gemspec` and change the summary and the description.
 Then commit the changes to git and invoke `rake release`,
 and your gem will be published.
 
 
-**The `jekyll` subcommand** extends the `gem` command and creates a new Jekyll plugin with the given NAME:
+### `gem` Subcommand
 
-    $ creategem jekyll NAME [OPTIONS]
+```shell
+$ creategem gem NAME [COMMON_OPTIONS] [--test-framework=minitest|rspec]
+```
 
-OPTIONS are:
+`NAME` is the name of the gem to be generated.
 
-    --block, --blockn, --executable, --host, --private, --tag, --tagn
+The default test framework for the `gem` subcommand is `rspec`,
+but you can specify `minitest` instead like this:
 
-All options require the name of the subcommand/file to be generated.
-You can specify the same type several times, for example:
+```shell
+$ creategem gem my_gem --test-framework=minitest
+```
+
+### `jekyll` Subcommand
+The `jekyll` subcommand extends the `gem` command and creates a new Jekyll plugin with the given NAME:
+
+```shell
+$ creategem jekyll NAME [OPTIONS]
+```
+
+`NAME` is the name of the Jekyll plugin gem to be generated.
+
+In addition to the common options, the `jekyll`-specific `OPTIONS` are:
+
+`--block`, `--blockn`, `--filter`, `--hooks`, `--tag`, and `--tagn`.
+
+Each of these options causes `creategem` to prompt the user for additional input.
+
+The test framework for `jekyll` plugins is `rspec`.
+
+All of the above options can be specified more than once,
+except the `--hooks` option.
+For example:
 
 ```shell
 $ creategem jekyll test_tags --tag my_tag1 --tag my_tag2
@@ -79,40 +134,57 @@ which defines Jekyll tags called `my_tag1` and `my_tag2`.
 You might use these tags in an HTML document like this:
 
 ```html
-&lt;pre>
-my_tag1 generated: {% my_tag1 %}
-my_tag2 generated: {% my_tag2 %}
-&lt;/pre>
+<pre>
+my_tag1 usage: {% my_tag1 %}
+my_tag2 usage: {% my_tag2 %}
+</pre>
 ```
 
-By default, the Jekyll gem is created without an executable,
-but you can add an executable based on Thor with the `--executable` option.
+For more information, type
 
-
-**The `plugin` subcommand** extends the `gem` command and creates a new Rails plugin with the given NAME:
 ```shell
-$ creategem plugin NAME [OPTIONS]
+$ creategem help jekyll
 ```
 
-OPTIONS are:
-```</p>
-<p>
 
---engine, --executable, --host, --mountable, --private
+### `rails` Subcommand
+The `rails` subcommand extends the `gem` command and creates a new Rails plugin with the given NAME:
+
+```shell
+$ creategem rails NAME [OPTIONS]
 ```
+
+`NAME` is the name of the Ruby on Rails plugin gem to be generated.
+
+In addition to the common options, `rails` `OPTIONS` are
+`--engine` and `--mountable`.
 
 You can specify if the plugin should be an engine (`--engine`) or a mountable engine (`--mountable`).
 
+Each of these options causes `creategem` to prompt the user for additional input.
+
+The test framework for `rails` gems is `minitest`.
+
+For more information, type
+
+```shell
+$ creategem help rails
+```
+
 
 ## Did It Work?
-The following command shows all files that have been committed to the newly created git repository:
+The following shows all files that were committed to the newly created git repository,
+after `creategem jekyll` finished making two tag blocks:
 
 ```shell
 $ git ls-tree --name-only --full-tree -r HEAD
 .envrc
 .gitignore
+.rspec
+.rubocop.yml
 .simplecov
 .travis.yml
+.vscode/extensions.json
 .vscode/launch.json
 .vscode/settings.json
 CHANGELOG.md
@@ -120,14 +192,38 @@ Gemfile
 LICENCE.txt
 README.md
 Rakefile
+bin/attach
 bin/console
 bin/rake
 bin/setup
-lib/x.rb
-lib/x/version.rb
+demo/Gemfile
+demo/_bin/debug
+demo/_config.yml
+demo/_drafts/2022/2022-05-01-test2.html
+demo/_includes/block_tag_template_wrapper
+demo/_layouts/default.html
+demo/_posts/2022/2022-01-02-redact-test.html
+demo/assets/css/style.css
+demo/assets/images/404-error.png
+demo/assets/images/404-error.webp
+demo/assets/images/favicon.png
+demo/assets/images/jekyll.png
+demo/assets/images/jekyll.webp
+demo/assets/js/clipboard.min.js
+demo/assets/js/jquery-3.4.1.min.js
+demo/blog/blogsByDate.html
+demo/blog/index.html
+demo/index.html
+jekyll_test.code-workspace
+jekyll_test.gemspec
+lib/jekyll_test.rb
+lib/jekyll_test/version.rb
+lib/my_block1.rb
+lib/my_block2.rb
+spec/jekyll_test_spec.rb
+spec/spec_helper.rb
+test/jekyll_test_test.rb
 test/test_helper.rb
-test/x_test.rb
-x.gemspec
 ```
 
 
@@ -181,3 +277,9 @@ and push the `.gem` file to https://rubygems.org.
 
 ## Contributing
 Bug reports and pull requests are welcome on GitHub at https://github.com/mslinn/creategem.
+
+
+## See Also
+ - [`gem-release`](https://rubygems.org/gems/gem-release)
+ - [`bundle gem`](https://bundler.io/v2.4/man/bundle-gem.1.html)
+ - [Deveoping a RubyGem using Bundler](https://bundler.io/guides/creating_gem.html)
