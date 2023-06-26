@@ -31,7 +31,7 @@ $ gem update creategem
 
 ## Subcommands and Options
 
-`Creategem` has 4 subcommands `gem`, `jekyll`, `help` and `rails`:
+`Creategem` has 4 subcommands `plain`, `jekyll`, `help` and `rails`:
 
 ### `help` Subcommand
 The following lists the available subcommands:
@@ -49,7 +49,7 @@ $ creategem help [SUBCOMMAND]
 
 ### Common Options
 
-The `gem`, `jekyll` and `rails` subcommands have common options.
+The `plain`, `jekyll` and `rails` subcommands have common options.
 
 The default option values assume that:
 
@@ -57,13 +57,13 @@ The default option values assume that:
  - The gem project will be hosted on a public GitHub git repository
  - The gem will be released to `rubygems.org`
 
-Common options for the `gem`, `jekyll` and `rails` subcommands are:
+Common options for the `plain`, `jekyll` and `rails` subcommands are:
 
 <dl>
   <dt><code>--executable</code></dt>
     <dd>add an executable based on Thor.</dd>
 
-  <dt><code>--host`</code></dt>
+  <dt><code>--host</code></dt>
     <dd>
       specifies the git host; possible values are <code>bitbucket</code>, <code>github</code> and <code>geminabox</code>.
     </dd>
@@ -72,11 +72,18 @@ Common options for the `gem`, `jekyll` and `rails` subcommands are:
     <dd>the remote repository is made private,
         and on release the gem will be pushed to a private Geminabox server.
     </dd>
+
+  <dt><code>--quiet</code></dt>
+    <dd>reduces verbosity.</dd>
+
+  <dt><code>--no-todos</code></dt>
+    <dd>do not generate `TODO:` strings in generated code.</dd>
 </dl>
+
 
 ### Common Behavior
 
-The `gem`, `jekyll` and `rails` subcommands have common behavior.
+The `plain`, `jekyll` and `rails` subcommands have common behavior.
 
 Gem scaffolds are created within the `generated/` directory.
 
@@ -89,23 +96,23 @@ Then commit the changes to git and invoke `rake release`,
 and your gem will be published.
 
 
-### `gem` Subcommand
+### `plain` Subcommand
 
 ```shell
-$ creategem gem NAME [COMMON_OPTIONS] [--test-framework=minitest|rspec]
+$ creategem plain NAME [COMMON_OPTIONS] [--test-framework=minitest|rspec]
 ```
 
 `NAME` is the name of the gem to be generated.
 
-The default test framework for the `gem` subcommand is `rspec`,
+The default test framework for the `plain` subcommand is `rspec`,
 but you can specify `minitest` instead like this:
 
 ```shell
-$ creategem gem my_gem --test-framework=minitest
+$ creategem plain my_gem --test-framework=minitest
 ```
 
 ### `jekyll` Subcommand
-The `jekyll` subcommand extends the `gem` command and creates a new Jekyll plugin with the given NAME:
+The `jekyll` subcommand extends the `plain` subcommand and creates a new Jekyll plugin with the given NAME:
 
 ```shell
 $ creategem jekyll NAME [OPTIONS]
@@ -148,7 +155,7 @@ $ creategem help jekyll
 
 
 ### `rails` Subcommand
-The `rails` subcommand extends the `gem` command and creates a new Rails plugin with the given NAME:
+The `rails` subcommand extends the `plain` subcommand and creates a new Rails plugin with the given NAME:
 
 ```shell
 $ creategem rails NAME [OPTIONS]

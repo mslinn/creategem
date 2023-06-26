@@ -8,10 +8,10 @@ module Creategem
     include Thor::Actions
     include Creategem::Git
 
-    desc 'gem NAME', 'Creates a new gem scaffold.'
+    desc 'plain NAME', 'Creates a new plain gem scaffold.'
 
     long_desc <<~END_DESC
-      Creates a new gem scaffold with the given NAME,
+      Creates a new plain gem scaffold with the given NAME,
       by default hosted by GitHub and published on RubyGems.
     END_DESC
 
@@ -21,23 +21,23 @@ module Creategem
     method_option :private, type: :boolean, default: false,
     desc: 'Publish the gem in a private repository.'
 
-    def gem(gem_name)
+    def plain(gem_name)
       @dir = Creategem.dest_root gem_name
 
       @host           = options['host']
       @private        = options['private']
       @test_framework = options['test_framework']
 
-      create_gem_scaffold gem_name
+      create_plain_scaffold gem_name
       initialize_repository gem_name
     end
 
     private
 
     # Defines globals for templates
-    def create_gem_scaffold(gem_name)
+    def create_plain_scaffold(gem_name)
       @gem_name = gem_name
-      say "Creating a scaffold for a new gem named #{@gem_name} in #{@dir}.", :green
+      say "Creating a scaffold for a new plain Ruby gem named #{@gem_name} in #{@dir}.", :green
       @class_name = Creategem.camel_case @gem_name
       @executable = options[:executable]
       @host = options[:bitbucket] ? :bitbucket : :github
