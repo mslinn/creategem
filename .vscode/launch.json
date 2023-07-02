@@ -6,7 +6,7 @@
   "configurations": [
     {
       "name": "Run bin/demo",
-      "program": "${workspaceFolder}/bin/demo",
+      "program": "${workspaceFolder}/bin/demo jekyll",
       "request": "launch",
       "type": "ruby_lsp"
     },
