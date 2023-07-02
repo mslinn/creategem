@@ -13,11 +13,16 @@ module <%= @class_name %>
   # @param input_string [String].
   # @return [String] input string and the evaluation result.
   # @example Use like this:
-  #   {{ '11 + 21/3' | my_filter }} => "<pre>11 + 21/3 = 18</pre>"
-  def my_filter(input_string)
+  <%- if filter_params.length > 1 -%>
+    @trailing_params = ': ' + filter_params[1..].map { |x| "#{x}_value" }.join ', '
+  <%- else -%>
+    @trailing_params = ''
+  <%- end -%>
+  #   {{ 'TODO: show typical input' | <%= @filter_name %><%= @trailing_params %> }} => "TODO: show output"
+  def <%= filter_name %>(<%= filter_params.join ', ' %>)
     input_string.strip!
     MyJekyllFilter.logger.debug { "input_string=#{input_string}" }
-    "<pre>#{input_string} = #{eval input_string}</pre>" # rubocop:disable Security/Eval
+    "<pre>TODO: generate filter output for input_string = #{input_string}</pre>"
   end
 
   PluginMetaLogger.instance.logger.info { 'Loaded <%= @jekyll_class_name %> plugin.' }

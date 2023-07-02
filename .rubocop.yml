@@ -31,6 +31,9 @@ Layout/HashAlignment:
 Layout/LineLength:
   Max: 150
 
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented_relative_to_receiver
+
 Metrics/AbcSize:
   Max: 45
 

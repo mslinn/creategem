@@ -6,7 +6,7 @@ module Creategem
     include Thor::Actions
     include Creategem::Git
 
-    attr_accessor :class_name
+    attr_accessor :class_name, :filter_params
 
     desc 'jekyll NAME', 'Creates a new Jekyll plugin scaffold.'
 
@@ -134,6 +134,14 @@ module Creategem
     def create_jekyll_filter_scaffold(filter_name)
       @filter_name = filter_name
       # @jekyll_class_name = Creategem.camel_case filter_name
+      loop do
+        @filter_params = ask("What are the names of the inputs for filter #{filter_name}:", default: 'input')
+                           .split(/[ ,\t]/)
+                           .reject(&:empty?)
+        break unless @filter_params.empty?
+
+        say 'Jekyll filters require at least one input', :green
+      end
       say "Creating a new Jekyll filter method scaffold #{@filter_name}", :green
       @mute = true
       directory 'jekyll/filter_scaffold', @dir, force: true, mode: :preserve
