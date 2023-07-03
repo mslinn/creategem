@@ -71,6 +71,9 @@ Style/Documentation:
 Style/FrozenStringLiteralComment:
   Enabled: false
 
+Style/StringConcatenation:
+  Mode: conservative
+
 Style/TrailingCommaInHashLiteral:
   EnforcedStyleForMultiline: comma
 

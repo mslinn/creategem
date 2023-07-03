@@ -13,19 +13,18 @@ module <%= @class_name %>
   # @param input_string [String].
   # @return [String] input string and the evaluation result.
   # @example Use like this:
-  <%- if filter_params.length > 1 -%>
-    @trailing_params = ': ' + filter_params[1..].map { |x| "#{x}_value" }.join ', '
-  <%- else -%>
-    @trailing_params = ''
-  <%- end -%>
   #   {{ 'TODO: show typical input' | <%= @filter_name %><%= @trailing_params %> }} => "TODO: show output"
-  def <%= filter_name %>(<%= filter_params.join ', ' %>)
+  def <%= filter_name %>(input_string<%= @trailing_args %>)
     input_string.strip!
     MyJekyllFilter.logger.debug { "input_string=#{input_string}" }
-    "<pre>TODO: generate filter output for input_string = #{input_string}</pre>"
+    <%= @trailing_dump1 %>
+    <<~END_OUTPUT
+      <h2>TODO: generate filter output for <%= @filter_name %></h2>
+      <pre>input_string = #{input_string}<%= @trailing_dump2 %></pre>
+    END_OUTPUT
   end
 
   PluginMetaLogger.instance.logger.info { 'Loaded <%= @jekyll_class_name %> plugin.' }
 end
 
-Liquid::Template.register_filter(<%= @jekyll_class_name %>)
+Liquid::Template.register_filter(<%= @class_name %>)

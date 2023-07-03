@@ -49,5 +49,12 @@ module Creategem
       end
       examples.join("\n\n")
     end
+
+    def self.add_filter_example(filter_name, trailing_params)
+      <<~END_EX
+        <h2 id="filter_#{filter_name}" class='code'>#{filter_name}</h2>
+        {{ "TODO: Provide filter input here" | #{filter_name}#{trailing_params} }}
+      END_EX
+    end
   end
 end

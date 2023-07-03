@@ -54,7 +54,7 @@ module CreategemDemo
         @jekyll_name = @shell.ask "#{@jekyll_type.capitalize} name:", :green
         break unless @jekyll_name.empty?
       end
-      @jekyll_parameter_names = @shell.ask('Jekyll parameter names.', :green).split ', '
+      @jekyll_parameter_names = @shell.ask('Jekyll parameter names.', :green).split(/[, ]/)
       @jekyll_parameter_types = @jekyll_parameter_names.map do |name|
         @shell.ask "#{name} type", :green, default: 'string', limited_to: %w[string numeric]
       end

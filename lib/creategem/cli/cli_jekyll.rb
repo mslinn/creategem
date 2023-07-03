@@ -6,7 +6,7 @@ module Creategem
     include Thor::Actions
     include Creategem::Git
 
-    attr_accessor :class_name, :filter_params
+    attr_accessor :class_name, :filter_params, :trailing_args, :trailing_dump, :trailing_params
 
     desc 'jekyll NAME', 'Creates a new Jekyll plugin scaffold.'
 
@@ -15,7 +15,6 @@ module Creategem
       by default hosted by GitHub and published on RubyGems.
     END_DESC
 
-    # rubocop:disable Layout/HashAlignment
     method_option :block, type: :string, repeatable: true,
       desc: 'Specifies the name of a Jekyll block tag.'
 
@@ -38,7 +37,6 @@ module Creategem
       desc: 'Specifies the name of a Jekyll no-arg tag.'
 
     test_option 'rspec'
-    # rubocop:enable Layout/HashAlignment
 
     def jekyll(gem_name)
       @gem_name = gem_name
@@ -97,8 +95,7 @@ module Creategem
     def ask_option_names_types(tag)
       names = ask("Please list the names of the options for the #{tag} Jekyll/Liquid tag:").split(/[ ,\t]/)
       types = names.reject(&:empty?).map do |name|
-        ask("What is the type of #{name}? (tab autocompletes)",
-            default: 'string', limited_to: %w[boolean string numeric])
+        ask "What is the type of #{name}? (tab autocompletes)", default: 'string', limited_to: %w[boolean string numeric]
       end
       @jekyll_parameter_names_types = names.zip types
       @jekyll_parameter_names_types
@@ -131,20 +128,26 @@ module Creategem
       append_to_file "#{Creategem.dest_root gem_name}/demo/index.html", Cli.add_demo_example(block_name, @jekyll_parameter_names_types, :block)
     end
 
-    def create_jekyll_filter_scaffold(filter_name)
+    def create_jekyll_filter_scaffold(filter_name) # rubocop:disable Style/StringConcatenation
       @filter_name = filter_name
-      # @jekyll_class_name = Creategem.camel_case filter_name
-      loop do
-        @filter_params = ask("What are the names of the inputs for filter #{filter_name}:", default: 'input')
-                           .split(/[ ,\t]/)
-                           .reject(&:empty?)
-        break unless @filter_params.empty?
-
-        say 'Jekyll filters require at least one input', :green
+      @jekyll_class_name = Creategem.camel_case filter_name
+      @filter_params = ask('Jekyll filters have at least one input. ' \
+                           "What are the names of additional inputs for #{filter_name}, if any?")
+                         .split(/[ ,\t]/)
+                         .reject(&:empty?)
+      unless @filter_params.empty?
+        @trailing_args   = ', ' + @filter_params.join(', ')
+        @trailing_params = ': ' + @filter_params.join(', ')
+        @trailing_dump1 = @filter_params.map { |arg| "#{@class_name}.logger.debug { \"#{arg} = \#{#{arg}}\" }" }.join "\n    "
+        lspace = "\n        "
+        @trailing_dump2 = lspace + @filter_params.map { |arg| "#{arg} = \#{#{arg}}" }.join(lspace) unless @filter_params.empty?
       end
       say "Creating a new Jekyll filter method scaffold #{@filter_name}", :green
       @mute = true
       directory 'jekyll/filter_scaffold', @dir, force: true, mode: :preserve
+
+      tp = ': ' + @filter_params.map { |x| "'#{x}'" }.join(', ')
+      append_to_file "#{Creategem.dest_root gem_name}/demo/index.html", Cli.add_filter_example(filter_name, tp)
     end
 
     def create_jekyll_generator_scaffold(generator_name)
