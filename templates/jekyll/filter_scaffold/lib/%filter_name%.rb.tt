@@ -16,7 +16,7 @@ module <%= @class_name %>
   #   {{ 'TODO: show typical input' | <%= @filter_name %><%= @trailing_params %> }} => "TODO: show output"
   def <%= filter_name %>(input_string<%= @trailing_args %>)
     input_string.strip!
-    MyJekyllFilter.logger.debug { "input_string=#{input_string}" }
+    <%= @class_name %>.logger.debug { "input_string=#{input_string}" }
     <%= @trailing_dump1 %>
     <<~END_OUTPUT
       <h2>TODO: generate filter output for <%= @filter_name %></h2>

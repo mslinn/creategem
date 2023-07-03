@@ -128,7 +128,8 @@ module Creategem
       append_to_file "#{Creategem.dest_root gem_name}/demo/index.html", Cli.add_demo_example(block_name, @jekyll_parameter_names_types, :block)
     end
 
-    def create_jekyll_filter_scaffold(filter_name) # rubocop:disable Style/StringConcatenation
+    def create_jekyll_filter_scaffold(filter_name)
+      # rubocop:disable Style/StringConcatenation
       @filter_name = filter_name
       @jekyll_class_name = Creategem.camel_case filter_name
       @filter_params = ask('Jekyll filters have at least one input. ' \
@@ -139,15 +140,16 @@ module Creategem
         @trailing_args   = ', ' + @filter_params.join(', ')
         @trailing_params = ': ' + @filter_params.join(', ')
         @trailing_dump1 = @filter_params.map { |arg| "#{@class_name}.logger.debug { \"#{arg} = \#{#{arg}}\" }" }.join "\n    "
-        lspace = "\n        "
+        lspace = "\n      "
         @trailing_dump2 = lspace + @filter_params.map { |arg| "#{arg} = \#{#{arg}}" }.join(lspace) unless @filter_params.empty?
       end
       say "Creating a new Jekyll filter method scaffold #{@filter_name}", :green
       @mute = true
       directory 'jekyll/filter_scaffold', @dir, force: true, mode: :preserve
 
-      tp = ': ' + @filter_params.map { |x| "'#{x}'" }.join(', ')
+      tp = ': ' + @filter_params.map { |x| "'#{x}_value'" }.join(', ')
       append_to_file "#{Creategem.dest_root gem_name}/demo/index.html", Cli.add_filter_example(filter_name, tp)
+      # rubocop:enable Style/StringConcatenation
     end
 
     def create_jekyll_generator_scaffold(generator_name)
