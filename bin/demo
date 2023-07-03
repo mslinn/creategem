@@ -24,19 +24,21 @@ module CreategemDemo
   end
 
   class Demo
-    include Thor::Actions
+    def initialize
+      # FileUtils.rm_rf 'demo'
 
-    gem_type = ask 'Type of gem to test.', default: 'jekyll',
-      limited_to: %w[jekyll plain rails]
+      @shell = Thor::Shell::Basic.new
 
-    gem_name = ask 'Name of the gem.', default: 'test'
+      @gem_type = @shell.ask 'Type of gem to test.', default: 'jekyll',
+        limited_to: %w[jekyll plain rails]
 
-    jekyll_type = ask 'Type of Jekyll plugin.', limited_to: %w[block tag filter]
+      @gem_name = @shell.ask 'Name of the gem.', default: 'test'
 
-    jekyll_parameters = ask 'Jekyll parameter names.'
+      @jekyll_type = @shell.ask 'Type of Jekyll plugin.', limited_to: %w[block tag filter]
 
-    def gem_type(value)
-      case value
+      @jekyll_parameters = @shell.ask 'Jekyll parameter names.'
+
+      case @gem_type
       when 'plain'
         abort 'TODO: write plain gem demo'
 
@@ -75,6 +77,5 @@ module CreategemDemo
     end
   end
 
-  # FileUtils.rm_rf 'demo'
-  Demo.start(ARGV)
+  Demo.new
 end
