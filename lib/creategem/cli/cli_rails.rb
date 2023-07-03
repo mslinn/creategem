@@ -30,7 +30,7 @@ module Creategem
       @engine = @host || @mountable
       @rails = true
 
-      create_gem_scaffold gem_name
+      create_plain_scaffold gem_name
       create_rails_scaffold gem_name
       create_engine_scaffold gem_name if @engine
       create_mountable_scaffold gem_name if @mountable

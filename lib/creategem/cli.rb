@@ -52,7 +52,7 @@ module Creategem
     def count_todos(filename)
       filename_fq = "#{Creategem.dest_root gem_name}/#{filename}"
       content = File.read filename_fq
-      content.scan(/TODO/).length
+      content.scan('TODO').length
     end
 
     def initialize_repository(gem_name)
@@ -66,7 +66,7 @@ module Creategem
         # run 'bundle', abort_on_failure: false
         say 'Creating remote repository', :green
         create_remote_git_repository @repository \
-          if yes? "Do you want to create a repository on #{@repository.host.camel_case} named #{gem_name}? (y/n)"
+          if yes? "Do you want to create a repository on #{@repository.host.camel_case} named #{gem_name}? (y/N)"
       end
       say "The #{gem_name} gem was successfully created.", :green
       report_todos gem_name

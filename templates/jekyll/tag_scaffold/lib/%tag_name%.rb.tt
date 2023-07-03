@@ -1,3 +1,6 @@
+require 'jekyll_plugin_support'
+require_relative '<%= @gem_name %>/version.rb'
+
 # This Jekyll tag plugin is a minimal example.
 #
 # See https://www.mslinn.com/jekyll/10200-jekyll-plugin-background.html

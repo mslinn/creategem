@@ -52,7 +52,7 @@ module Creategem
       @test_framework = options['test_framework']
       @todos          = options['todos']
 
-      create_gem_scaffold @gem_name
+      create_plain_scaffold @gem_name
       create_jekyll_scaffold
       options.each do |option|
         case option.first
