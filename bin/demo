@@ -6,6 +6,8 @@ require 'thor'
 
 module CreategemDemo
   def self.run(command, input)
+    shell = Thor::Shell::Color.new
+    shell.say command, :green
     Open3.popen3(command) do |stdin, stdout, stderr, thread|
       Thread.new do
         input.split("\n").each { |line| stdin.puts line }
@@ -27,53 +29,41 @@ module CreategemDemo
     def initialize
       # FileUtils.rm_rf 'demo'
 
-      @shell = Thor::Shell::Basic.new
+      @shell = Thor::Shell::Color.new
 
-      @gem_type = @shell.ask 'Type of gem to test.', default: 'jekyll',
+      @gem_name = @shell.ask 'Name of the gem.', :green, default: 'test'
+
+      @gem_type = @shell.ask 'Type of gem to test.', :green, default: 'jekyll',
         limited_to: %w[jekyll plain rails]
-
-      @gem_name = @shell.ask 'Name of the gem.', default: 'test'
-
-      @jekyll_type = @shell.ask 'Type of Jekyll plugin.', limited_to: %w[block tag filter]
-
-      @jekyll_parameters = @shell.ask 'Jekyll parameter names.'
 
       case @gem_type
       when 'plain'
         abort 'TODO: write plain gem demo'
 
       when 'jekyll'
-        puts 'TODO: Emit code for jekyll'
+        jekyll_info
 
       when 'rails'
         abort 'TODO: Write rails demo'
       end
     end
 
-    def test_block
-      block_input = <<~END_INPUT
-        opt1 opt2
-        string
-        boolean
-        param1 param2
-        string
-        numeric
+    def jekyll_info
+      @jekyll_type = @shell.ask 'Type of Jekyll plugin.', :green, default: 'tag', limited_to: %w[block tag filter]
+      loop do
+        @jekyll_name = @shell.ask "#{@jekyll_type.capitalize} name:", :green
+        break unless @jekyll_name.empty?
+      end
+      @jekyll_parameter_names = @shell.ask('Jekyll parameter names.', :green).split ', '
+      @jekyll_parameter_types = @jekyll_parameter_names.map do |name|
+        @shell.ask "#{name} type", :green, default: 'string', limited_to: %w[string numeric]
+      end
+      input = <<~END_INFO
+        #{@jekyll_parameter_names.join ' '}
+        #{@jekyll_parameter_types.join "\n"}
         no
-      END_INPUT
-      run 'exe/creategem jekyll jekyll_test --block my_block1 --block my_block2', block_input
-    end
-
-    def test_tag
-      tag_input = <<~END_INPUT
-        opt1 opt2
-        string
-        boolean
-        param1 param2
-        string
-        numeric
-        no
-      END_INPUT
-      run 'exe/creategem jekyll jekyll_test --tag my_tag1 --tag my_tag2', tag_input
+      END_INFO
+      CreategemDemo.run "exe/creategem #{@gem_type} #{@gem_name} --#{@jekyll_type} #{@jekyll_name}", input
     end
   end
 
