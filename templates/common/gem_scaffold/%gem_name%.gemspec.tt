@@ -42,7 +42,9 @@ Gem::Specification.new do |spec|
   spec.summary               = '<%= @todo %>Write summary of what the gem is for'
   spec.version               = <%= @class_name %>::VERSION
 
+  <%- if @geminabox -%>
   spec.add_dependency 'geminabox', '>= 2.2.1'
+  <%- end -%>
   <%- if @jekyll -%>
   spec.add_dependency 'jekyll', '>= 3.5.0'
   spec.add_dependency 'jekyll_plugin_support', '>= 0.7.0'

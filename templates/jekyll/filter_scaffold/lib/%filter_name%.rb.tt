@@ -27,4 +27,4 @@ module <%= @class_name %>
   PluginMetaLogger.instance.logger.info { 'Loaded <%= @jekyll_class_name %> plugin.' }
 end
 
-Liquid::Template.register_filter(<%= @class_name %>)
+Liquid::Template.register_filter <%= @class_name %>

@@ -147,7 +147,7 @@ module Creategem
       @mute = true
       directory 'jekyll/filter_scaffold', @dir, force: true, mode: :preserve
 
-      tp = ': ' + @filter_params.map { |x| "'#{x}_value'" }.join(', ')
+      tp = ': ' + @filter_params.map { |x| "'#{x}_value'" }.join(', ') unless @filter_params.empty?
       append_to_file "#{Creategem.dest_root gem_name}/demo/index.html", Cli.add_filter_example(filter_name, tp)
       # rubocop:enable Style/StringConcatenation
     end
