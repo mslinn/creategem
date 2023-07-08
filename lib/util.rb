@@ -1,4 +1,4 @@
-module Creategem
+module Nugem
   def self.camel_case(str)
     Thor::Util.camel_case str.tr('-', '_')
   end

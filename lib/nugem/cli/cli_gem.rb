@@ -1,12 +1,12 @@
 require 'thor'
 
-# Creategem::Cli is a Thor class that is invoked when a user runs a creategem executable
+# Nugem::Cli is a Thor class that is invoked when a user runs a nugem executable
 require_relative '../cli'
 
-module Creategem
+module Nugem
   class Cli < Thor
     include Thor::Actions
-    include Creategem::Git
+    include Nugem::Git
 
     desc 'plain NAME', 'Creates a new plain gem scaffold.'
 
@@ -22,7 +22,7 @@ module Creategem
     desc: 'Publish the gem in a private repository.'
 
     def plain(gem_name)
-      @dir = Creategem.dest_root gem_name
+      @dir = Nugem.dest_root gem_name
 
       @host           = options['host']
       @private        = options['private']
@@ -38,11 +38,11 @@ module Creategem
     def create_plain_scaffold(gem_name)
       @gem_name = gem_name
       say "Creating a scaffold for a new plain Ruby gem named #{@gem_name} in #{@dir}.", :green
-      @class_name = Creategem.camel_case @gem_name
+      @class_name = Nugem.camel_case @gem_name
       @executable = options[:executable]
       @host = options[:bitbucket] ? :bitbucket : :github
       @private = options[:private]
-      @repository = Creategem::Repository.new(
+      @repository = Nugem::Repository.new(
         host:           @host,
         user:           git_repository_user_name(@host),
         name:           @gem_name,

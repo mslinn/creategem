@@ -1,9 +1,9 @@
 require_relative '../cli'
 
-module Creategem
+module Nugem
   class Cli < Thor
     include Thor::Actions
-    include Creategem::Git
+    include Nugem::Git
 
     desc 'rails NAME', 'Creates a new Rails rails scaffold.'
 
@@ -26,7 +26,7 @@ module Creategem
       @private        = options['private']
       @test_framework = options['test_framework']
 
-      @dir = Creategem.dest_root gem_name
+      @dir = Nugem.dest_root gem_name
       @engine = @host || @mountable
       @rails = true
 

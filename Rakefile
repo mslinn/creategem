@@ -24,8 +24,8 @@ end
 
 task publish: [:build] do
   $VERBOSE = nil
-  load 'creategem/version.rb'
-  system "gem push pkg/creategem-#{Creategem::VERSION}.gem"
+  load 'nugem/version.rb'
+  system "gem push pkg/nugem-#{Nugem::VERSION}.gem"
 end
 
 desc 'Bump patch version, create git tag, build the gem and release to geminabox (default)'

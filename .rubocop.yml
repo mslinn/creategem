@@ -42,7 +42,7 @@ Metrics/AbcSize:
 
 Metrics/BlockLength:
   Exclude:
-    - creategem.gemspec
+    - nugem.gemspec
   Max: 30
 
 Metrics/ClassLength:

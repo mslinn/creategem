@@ -1,14 +1,14 @@
 require 'fileutils'
 require 'rugged'
-require_relative '../creategem'
+require_relative '../nugem'
 
-# Creategem::Cli is a Thor class that is invoked when a user runs a creategem executable.
+# Nugem::Cli is a Thor class that is invoked when a user runs a nugem executable.
 # This file defines the common aspects of the Thor class.
 # The cli/ directory contains class extensions specific to each Thor subcommand.
-module Creategem
+module Nugem
   class Cli < Thor
     include Thor::Actions
-    include Creategem::Git
+    include Nugem::Git
 
     class_option :executable, type: :boolean, default: false,
       desc: 'Include an executable for the gem.'
@@ -50,13 +50,13 @@ module Creategem
     private
 
     def count_todos(filename)
-      filename_fq = "#{Creategem.dest_root gem_name}/#{filename}"
+      filename_fq = "#{Nugem.dest_root gem_name}/#{filename}"
       content = File.read filename_fq
       content.scan('TODO').length
     end
 
     def initialize_repository(gem_name)
-      Dir.chdir Creategem.dest_root(gem_name) do
+      Dir.chdir Nugem.dest_root(gem_name) do
         # say "Working in #{Dir.pwd}", :green
         run 'chmod +x bin/*'
         run 'chmod +x exe/*' if @executable

@@ -1,8 +1,8 @@
-# `Creategem` [![Gem Version](https://badge.fury.io/rb/createtem.svg)](https://badge.fury.io/rb/creategem)
+# `Nugem` [![Gem Version](https://badge.fury.io/rb/createtem.svg)](https://badge.fury.io/rb/nugem)
 
-** WORK IN PROGRESS **
+**WORK IN PROGRESS**
 
-`Creategem` creates a scaffold project for a new gem in a new git repository.
+`Nugem` creates a scaffold project for a new gem in a new git repository.
 After you add your special code to the gem scaffold,
 the project is ready to be released to a public or private gem server.
 
@@ -21,31 +21,34 @@ with the following features:
 
 
 ## Installation
+
 ```shell
-$ gem install creategem
+$ gem install nugem
 ```
 
 To update the program:
+
 ```shell
-$ gem update creategem
+$ gem update nugem
 ```
 
 
 ## Subcommands and Options
 
-`Creategem` has 4 subcommands `plain`, `jekyll`, `help` and `rails`:
+`Nugem` has 4 subcommands `plain`, `jekyll`, `help` and `rails`:
 
 ### `help` Subcommand
+
 The following lists the available subcommands:
 
 ```shell
-$ creategem help
+$ nugem help
 ```
 
 The following provides detailed help for the specified subcommand:
 
 ```shell
-$ creategem help [SUBCOMMAND]
+$ nugem help [SUBCOMMAND]
 ```
 
 
@@ -101,7 +104,7 @@ and your gem will be published.
 ### `plain` Subcommand
 
 ```shell
-$ creategem plain NAME [COMMON_OPTIONS] [--test-framework=minitest|rspec]
+$ nugem plain NAME [COMMON_OPTIONS] [--test-framework=minitest|rspec]
 ```
 
 `NAME` is the name of the gem to be generated.
@@ -110,14 +113,16 @@ The default test framework for the `plain` subcommand is `rspec`,
 but you can specify `minitest` instead like this:
 
 ```shell
-$ creategem plain my_gem --test-framework=minitest
+$ nugem plain my_gem --test-framework=minitest
 ```
 
+
 ### `jekyll` Subcommand
+
 The `jekyll` subcommand extends the `plain` subcommand and creates a new Jekyll plugin with the given NAME:
 
 ```shell
-$ creategem jekyll NAME [OPTIONS]
+$ nugem jekyll NAME [OPTIONS]
 ```
 
 `NAME` is the name of the Jekyll plugin gem to be generated.
@@ -126,7 +131,7 @@ In addition to the common options, the `jekyll`-specific `OPTIONS` are:
 
 `--block`, `--blockn`, `--filter`, `--hooks`, `--tag`, and `--tagn`.
 
-Each of these options causes `creategem` to prompt the user for additional input.
+Each of these options causes `nugem` to prompt the user for additional input.
 
 The test framework for `jekyll` plugins is `rspec`.
 
@@ -135,7 +140,7 @@ except the `--hooks` option.
 For example:
 
 ```shell
-$ creategem jekyll test_tags --tag my_tag1 --tag my_tag2
+$ nugem jekyll test_tags --tag my_tag1 --tag my_tag2
 ```
 
 The above creates a Jekyll plugin called `test_tags`,
@@ -152,15 +157,16 @@ my_tag2 usage: {% my_tag2 %}
 For more information, type
 
 ```shell
-$ creategem help jekyll
+$ nugem help jekyll
 ```
 
 
 ### `rails` Subcommand
+
 The `rails` subcommand extends the `plain` subcommand and creates a new Rails plugin with the given NAME:
 
 ```shell
-$ creategem rails NAME [OPTIONS]
+$ nugem rails NAME [OPTIONS]
 ```
 
 `NAME` is the name of the Ruby on Rails plugin gem to be generated.
@@ -170,20 +176,21 @@ In addition to the common options, `rails` `OPTIONS` are
 
 You can specify if the plugin should be an engine (`--engine`) or a mountable engine (`--mountable`).
 
-Each of these options causes `creategem` to prompt the user for additional input.
+Each of these options causes `nugem` to prompt the user for additional input.
 
 The test framework for `rails` gems is `minitest`.
 
 For more information, type
 
 ```shell
-$ creategem help rails
+$ nugem help rails
 ```
 
 
 ## Did It Work?
+
 The following shows all files that were committed to the newly created git repository,
-after `creategem jekyll` finished making two tag blocks:
+after `nugem jekyll` finished making two tag blocks:
 
 ```shell
 $ git ls-tree --name-only --full-tree -r HEAD
@@ -237,7 +244,9 @@ test/test_helper.rb
 
 
 ## Visual Studio Code Support
-### Creategem Project
+
+### Nugem Project
+
 #### Plugins
 If you have not installed the
 [Snippets](https://marketplace.visualstudio.com/items?itemName=devonray.snippet) extension,
@@ -246,9 +255,9 @@ You can also review the list of suggested extensions of with the <kbd>Ctrl</kbd>
 `Extensions: Show Recommended Extensions` command.
 
 #### Snippets
-The predefined snippets for `creategem` are defined in
-[`.vscode/creategem.json.code-snippets`](.vscode/creategem.json.code-snippets).
-These snippets are focused on maintaining `creategem` itself.
+The predefined snippets for `nugem` are defined in
+[`.vscode/nugem.json.code-snippets`](.vscode/nugem.json.code-snippets).
+These snippets are focused on maintaining `nugem` itself.
 
 #### File Associations
 `.vscode/settings.json` defines file associations for various flavors of Thor templates in the `"files.associations"` section.
@@ -256,12 +265,13 @@ You can disable them by commenting some or all of those definitions.
 
 
 ### Generated Projects
+
 #### Plugins
-Similarly, for each gem project generated by `creategem`, Visual Studio Code will suggest
+Similarly, for each gem project generated by `nugem`, Visual Studio Code will suggest
 the user install missing extensions the first time those projects are opened.
 
 #### Snippets
-The predefined snippets for gem projects generated by `creategem` are defined in
+The predefined snippets for gem projects generated by `nugem` are defined in
 their `.vscode/gem.json.code-snippets` file.
 These snippets are focused on writing Jekyll plugins.
 
@@ -285,7 +295,7 @@ and push the `.gem` file to https://rubygems.org.
 
 
 ## Contributing
-Bug reports and pull requests are welcome on GitHub at https://github.com/mslinn/creategem.
+Bug reports and pull requests are welcome on GitHub at https://github.com/mslinn/nugem.
 
 
 ## See Also

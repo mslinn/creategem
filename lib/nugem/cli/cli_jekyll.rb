@@ -1,10 +1,10 @@
 require_relative '../cli'
 require_relative 'jekyll_demo'
 
-module Creategem
+module Nugem
   class Cli < Thor # rubocop:disable Metrics/ClassLength
     include Thor::Actions
-    include Creategem::Git
+    include Nugem::Git
 
     attr_accessor :class_name, :filter_params, :trailing_args, :trailing_dump, :trailing_params
 
@@ -40,8 +40,8 @@ module Creategem
 
     def jekyll(gem_name)
       @gem_name = gem_name
-      @dir = Creategem.dest_root @gem_name
-      @class_name = Creategem.camel_case @gem_name
+      @dir = Nugem.dest_root @gem_name
+      @class_name = Nugem.camel_case @gem_name
       @jekyll   = true
       @rspec    = true
 
@@ -110,28 +110,28 @@ module Creategem
 
     def create_jekyll_block_scaffold(block_name)
       @block_name = block_name
-      @jekyll_class_name = Creategem.camel_case block_name
+      @jekyll_class_name = Nugem.camel_case block_name
       ask_option_names_types block_name # Defines @jekyll_parameter_names_types, which is a nested array of name/value pairs:
       # [["opt1", "string"], ["opt2", "boolean"]]
       say "Creating Jekyll block tag #{@block_name} scaffold within #{@jekyll_class_name}", :green
       @mute = true
       directory 'jekyll/block_scaffold', @dir, force: true, mode: :preserve
-      append_to_file "#{Creategem.dest_root gem_name}/demo/index.html", Cli.add_demo_example(block_name, @jekyll_parameter_names_types, :block)
+      append_to_file "#{Nugem.dest_root gem_name}/demo/index.html", Cli.add_demo_example(block_name, @jekyll_parameter_names_types, :block)
     end
 
     def create_jekyll_block_no_arg_scaffold(block_name)
       @block_name = block_name
-      @jekyll_class_name = Creategem.camel_case block_name
+      @jekyll_class_name = Nugem.camel_case block_name
       say "Creating Jekyll block tag no_arg #{@block_name} scaffold within #{@jekyll_class_name}", :green
       @mute = true
       directory 'jekyll/block_no_arg_scaffold', @dir, force: true, mode: :preserve
-      append_to_file "#{Creategem.dest_root gem_name}/demo/index.html", Cli.add_demo_example(block_name, @jekyll_parameter_names_types, :block)
+      append_to_file "#{Nugem.dest_root gem_name}/demo/index.html", Cli.add_demo_example(block_name, @jekyll_parameter_names_types, :block)
     end
 
     def create_jekyll_filter_scaffold(filter_name)
       # rubocop:disable Style/StringConcatenation
       @filter_name = filter_name
-      @jekyll_class_name = Creategem.camel_case filter_name
+      @jekyll_class_name = Nugem.camel_case filter_name
       @filter_params = ask('Jekyll filters have at least one input. ' \
                            "What are the names of additional inputs for #{filter_name}, if any?")
                          .split(/[ ,\t]/)
@@ -148,13 +148,13 @@ module Creategem
       directory 'jekyll/filter_scaffold', @dir, force: true, mode: :preserve
 
       tp = ': ' + @filter_params.map { |x| "'#{x}_value'" }.join(', ') unless @filter_params.empty?
-      append_to_file "#{Creategem.dest_root gem_name}/demo/index.html", Cli.add_filter_example(filter_name, tp)
+      append_to_file "#{Nugem.dest_root gem_name}/demo/index.html", Cli.add_filter_example(filter_name, tp)
       # rubocop:enable Style/StringConcatenation
     end
 
     def create_jekyll_generator_scaffold(generator_name)
       @generator_name = generator_name
-      @jekyll_class_name = Creategem.camel_case generator_name
+      @jekyll_class_name = Nugem.camel_case generator_name
       say "Creating a new Jekyll generator class scaffold #{@jekyll_class_name}", :green
       @mute = true
       directory 'jekyll/generator_scaffold', @dir, force: true, mode: :preserve
@@ -162,7 +162,7 @@ module Creategem
 
     def create_jekyll_hooks_scaffold(plugin_name)
       @plugin_name = plugin_name
-      @jekyll_class_name = Creategem.camel_case plugin_name
+      @jekyll_class_name = Nugem.camel_case plugin_name
       say 'Creating a new Jekyll hook scaffold', :green
       @mute = true
       directory 'jekyll/hooks_scaffold', @dir, force: true, mode: :preserve
@@ -170,23 +170,23 @@ module Creategem
 
     def create_jekyll_tag_no_arg_scaffold(tag_name)
       @tag_name = tag_name
-      @jekyll_class_name = Creategem.camel_case @tag_name
+      @jekyll_class_name = Nugem.camel_case @tag_name
       say "Creating Jekyll tag no_arg #{@tag_name} scaffold within #{@jekyll_class_name}", :green
       @mute = true
       directory 'jekyll/tag_no_arg_scaffold', @dir, force: true, mode: :preserve
-      append_to_file "#{Creategem.dest_root gem_name}/demo/index.html", Cli.add_demo_example(tag_name, @jekyll_parameter_names_types, :tag)
+      append_to_file "#{Nugem.dest_root gem_name}/demo/index.html", Cli.add_demo_example(tag_name, @jekyll_parameter_names_types, :tag)
     end
 
     def create_jekyll_tag_scaffold(tag_name)
       @tag_name = tag_name
-      @jekyll_class_name = Creategem.camel_case @tag_name
+      @jekyll_class_name = Nugem.camel_case @tag_name
       ask_option_names_types tag_name # Defines @jekyll_parameter_names_types, which is a nested array of name/value pairs:
       # [["opt1", "string"], ["opt2", "boolean"]]
       say "Creating Jekyll tag #{@tag_name} scaffold within #{@jekyll_class_name}", :green
       @mute = true
       # puts set_color("@jekyll_parameter_names_types=#{@jekyll_parameter_names_types}", :yellow)
       directory 'jekyll/tag_scaffold', @dir, force: true, mode: :preserve
-      append_to_file "#{Creategem.dest_root gem_name}/demo/index.html", Cli.add_demo_example(tag_name, @jekyll_parameter_names_types, :tag)
+      append_to_file "#{Nugem.dest_root gem_name}/demo/index.html", Cli.add_demo_example(tag_name, @jekyll_parameter_names_types, :tag)
     end
   end
 end

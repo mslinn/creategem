@@ -1,10 +1,10 @@
 require 'thor'
-require_relative 'creategem/git'
-require_relative 'creategem/repository'
-require_relative 'creategem/version'
+require_relative 'nugem/git'
+require_relative 'nugem/repository'
+require_relative 'nugem/version'
 require_relative 'util'
 
-module Creategem
+module Nugem
   # @return Path to the generated gem
   def self.dest_root(gem_name)
     File.expand_path "generated/#{gem_name}"
@@ -13,7 +13,7 @@ module Creategem
   class Cli < Thor
     include Thor::Actions
 
-    package_name 'Creategem'
+    package_name 'Nugem'
 
     # These declarations make the class instance variable values available as an accessor,
     # which is necessary to name template files that are named '%variable_name%.extension'.

@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+
+if File.exist? 'lib/nugem/cli.rb'
+  require_relative '../lib/nugem/cli'
+else
+  require 'nugem/cli'
+end
+
+Nugem::Cli.start

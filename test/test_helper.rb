@@ -1,4 +1,4 @@
-require_relative '../lib/creategem'
+require_relative '../lib/nugem'
 
 require 'coveralls'
 Coveralls.wear!

@@ -4,7 +4,7 @@ require 'fileutils'
 require 'open3'
 require 'thor'
 
-module CreategemDemo
+module NugemDemo
   def self.run(command, input)
     shell = Thor::Shell::Color.new
     shell.say command, :yellow
@@ -63,7 +63,7 @@ module CreategemDemo
         #{@jekyll_parameter_types.join "\n"}
         no
       END_INFO
-      CreategemDemo.run "exe/creategem #{@gem_type} #{@gem_name} --#{@jekyll_type} #{@jekyll_name}", input
+      NugemDemo.run "exe/nugem #{@gem_type} #{@gem_name} --#{@jekyll_type} #{@jekyll_name}", input
     end
   end
 

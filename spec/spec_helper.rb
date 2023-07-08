@@ -1,4 +1,4 @@
-require_relative '../lib/creategem'
+require_relative '../lib/nugem'
 
 RSpec.configure do |config|
   config.filter_run :focus

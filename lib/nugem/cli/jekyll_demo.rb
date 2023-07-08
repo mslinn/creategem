@@ -1,4 +1,4 @@
-module Creategem
+module Nugem
   class Cli < Thor
     include Thor::Actions
 

@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-# Runtime gem dependencies are specified in creategem.gemspec
+# Runtime gem dependencies are specified in nugem.gemspec
 gemspec
 
 group :development do

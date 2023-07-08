@@ -1,7 +1,7 @@
 require 'thor'
 require 'yaml'
 
-module Creategem
+module Nugem
   module Git
     include Thor::Actions
 
@@ -15,7 +15,7 @@ module Creategem
     end
 
     def github_config
-      gh_hosts_file = Creategem.expand_env('$HOME/.config/gh/hosts.yml')
+      gh_hosts_file = Nugem.expand_env('$HOME/.config/gh/hosts.yml')
       return nil unless File.exist? gh_hosts_file
 
       YAML.safe_load(File.read(gh_hosts_file))
@@ -51,7 +51,7 @@ module Creategem
 
     def git_repository_user_name(host)
       global_config = Rugged::Config.global
-      git_config_key = "creategem.#{host}user"
+      git_config_key = "nugem.#{host}user"
       user = global_config[git_config_key]
 
       gh_config = github_config
@@ -65,7 +65,7 @@ module Creategem
     def gem_server_url(private_)
       if private_
         global_config = Rugged::Config.global
-        git_config_key = 'creategem.gemserver'
+        git_config_key = 'nugem.gemserver'
         url = global_config[git_config_key]
 
         if url.to_s.empty?

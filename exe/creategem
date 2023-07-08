@@ -1,9 +1,0 @@
-#!/usr/bin/env ruby
-
-if File.exist? 'lib/creategem/cli.rb'
-  require_relative '../lib/creategem/cli'
-else
-  require 'creategem/cli'
-end
-
-Creategem::Cli.start

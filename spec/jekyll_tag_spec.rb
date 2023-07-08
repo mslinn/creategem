@@ -1,7 +1,7 @@
-require_relative '../lib/creategem/cli/cli_jekyll'
+require_relative '../lib/nugem/cli/cli_jekyll'
 
 class JekyllTagTest
-  RSpec.describe ::Creategem::Cli do
+  RSpec.describe ::Nugem::Cli do
     it 'tests tag option combinations' do
       params = [
         %w[option1 string],

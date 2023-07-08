@@ -1,5 +1,5 @@
-# Creategem::Repository contains informations about the git repository and the git user
-module Creategem
+# Nugem::Repository contains informations about the git repository and the git user
+module Nugem
   class Repository
     attr_reader :gem_server_url, :global_config, :host, :name, :private, :user, :user_name, :user_email
 
