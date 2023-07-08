@@ -1,13 +1,9 @@
 # <%= @class_name %>
 
 <%- if @repository.public? -%>
-[![Gem Version](http://img.shields.io/gem/v/<%= gem_name %>.svg)][gem]
-[![Dependency Status](http://img.shields.io/gemnasium/<%= @repository.user %>/<%= gem_name %>.svg)][gemnasium]
-[![Coverage Status](http://img.shields.io/coveralls/<%= @repository.user %>/<%= gem_name %>.svg)][coveralls]
-
-[gem]: https://rubygems.org/gems/<%= gem_name %>
-[gemnasium]: https://gemnasium.com/<%= @repository.user %>/<%= gem_name %>
-[coveralls]: https://coveralls.io/r/<%= @repository.user %>/<%= gem_name %>
+# `<%= gem_name.capitalize %>` [![Gem Version](https://badge.fury.io/rb/<%= gem_name %>.svg)](https://badge.fury.io/rb/<%= gem_name %>)
+<%- else -%>
+# `<%= gem_name.capitalize %>`
 <%- end -%>
 
 <%= @todo %>Description of <%= @class_name %>
@@ -31,8 +27,9 @@ gem '<%= @gem_name %>'
 <%- end -%>
 
 And then execute:
-
-    $ bundle
+```shell
+$ bundle
+```
 
 
 ## Usage

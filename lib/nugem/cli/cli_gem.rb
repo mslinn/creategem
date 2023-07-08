@@ -49,7 +49,11 @@ module Nugem
         gem_server_url: gem_server_url(@private),
         private:        @private
       )
-      directory 'common/gem_scaffold',        @dir, force: true, mode: :preserve
+      exclude_pattern = case @test_framework
+                        when 'minitest' then /spec.*/
+                        when 'rspec'    then /test.*/
+                        end
+      directory 'common/gem_scaffold',        @dir, force: true, mode: :preserve, exclude_pattern: exclude_pattern
       directory 'common/executable_scaffold', @dir, force: true, mode: :preserve if @executable
       template  'common/LICENCE.txt',         "#{@dir}/LICENCE.txt", force: true if @repository.public?
     end
