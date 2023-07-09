@@ -26,6 +26,12 @@ with the following features:
 $ gem install nugem
 ```
 
+If you are using [rbenv](https://github.com/rbenv/rbenv) to manage Ruby instances, type:
+
+```shell
+$ rbenv rehash
+```
+
 To update the program:
 
 ```shell

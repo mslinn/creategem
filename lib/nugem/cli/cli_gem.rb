@@ -19,7 +19,7 @@ module Nugem
       enum: %w[bitbucket github], desc: 'Repository host.'
 
     method_option :private, type: :boolean, default: false,
-    desc: 'Publish the gem in a private repository.'
+      desc: 'Publish the gem in a private repository.'
 
     def plain(gem_name)
       @dir = Nugem.dest_root gem_name
@@ -53,7 +53,7 @@ module Nugem
                         when 'minitest' then /spec.*/
                         when 'rspec'    then /test.*/
                         end
-      directory 'common/gem_scaffold',        @dir, force: true, mode: :preserve, exclude_pattern: exclude_pattern
+      directory('common/gem_scaffold',        @dir, force: true, mode: :preserve, exclude_pattern:)
       directory 'common/executable_scaffold', @dir, force: true, mode: :preserve if @executable
       template  'common/LICENCE.txt',         "#{@dir}/LICENCE.txt", force: true if @repository.public?
     end
