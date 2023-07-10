@@ -30,7 +30,7 @@ class SiteMock
   attr_reader :config
 
   def initialize
-    @config = YAML.safe_load(File.read('../demo/_config.yml'))
+    @config = YAML.safe_load_file(File.read('../demo/_config.yml'))
     @config['env'] = { 'JEKYLL_ENV' => 'development' }
   end
 

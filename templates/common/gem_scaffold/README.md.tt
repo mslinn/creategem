@@ -12,11 +12,13 @@
 ## Installation
 
 <%- if @jekyll -%>
-Add this line to your Jekyll website's Gemfile, within the jekyll_plugins group:
+Add the following to your Jekyll website's `Gemfile`:
 
+```ruby
 group :jekyll_plugins do
   gem '<%= @gem_name %>'
 end
+```
 <%- end -%>
 <%- unless @jekyll -%>
 Add this line to your application's Gemfile:
@@ -27,6 +29,7 @@ gem '<%= @gem_name %>'
 <%- end -%>
 
 And then execute:
+
 ```shell
 $ bundle
 ```
@@ -40,23 +43,23 @@ $ bundle
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies.
-Then, run `rake test` to run the tests.
+Then, run `bundle exec rake test` to run the tests.
 You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
 To install this gem onto your local machine, run `bundle exec rake install`.
 
 To release a new version, run `bundle exec rake release`,
 which will create a git tag for the version, push git commits and tags,
-and push the `.gem` file to <%= @repository.gem_server_url -%>.
+and push the gem to <%= @repository.gem_server_url -%>.
 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on <%= @repository.host %> at <%= @repository.url %>.
+Bug reports and pull requests are welcome on at <%= @repository.url %>.
 
 
 <%- if @repository.public? -%>
 ## License
 
-The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
+The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
 <%- end -%>

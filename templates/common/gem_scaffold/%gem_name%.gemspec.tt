@@ -49,7 +49,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'jekyll', '>= 3.5.0'
   spec.add_dependency 'jekyll_plugin_support', '>= 0.7.0'
   <%- end -%>
-  <%- if @plugin -%>
+  <%- if @rails -%>
   spec.add_dependency 'rails', '~> 7.0.5'
   <%- end -%>
   <%- if @executable -%>
