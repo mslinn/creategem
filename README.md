@@ -76,7 +76,8 @@ Common options for the `plain`, `jekyll` and `rails` subcommands are:
 
   <dt><code>--host</code></dt>
     <dd>
-      specifies the git host; possible values are <code>bitbucket</code>, <code>github</code> and <code>geminabox</code>.
+      specifies the git host; possible values are <code>bitbucket</code>,
+      <code>github</code> and <code>geminabox</code>.
     </dd>
 
   <dt><code>--private</code></dt>

@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.8.2
+
+* Added `.markdownlint.json` to generated projects and this project.
+
 ## 0.8.1
 
 * Corrected broken gemspec.
