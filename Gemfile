@@ -17,10 +17,11 @@ end
 group :test, :development do
   gem 'bundler', require: false
   gem 'coveralls', require: false
-  gem 'debase', '0.2.5.beta2', require: false
+  gem 'debug', '>= 1.0.0', require: false
   gem 'geminabox', require: false
   gem 'minitest', require: false
   gem 'minitest-reporters', require: false
   gem 'rake', require: false
   gem 'rspec', require: false
+  gem 'ruby-debug-ide', require: false
 end
