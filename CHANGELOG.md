@@ -4,6 +4,7 @@
 
 * Added `.markdownlint.json` to generated projects and this project.
 
+
 ## 0.8.1
 
 * Corrected broken gemspec.
@@ -19,6 +20,7 @@
 * Using `require_relative` where appropriate.
 * Changed the default for including an executable to `false`.
 * Added the `--quiet` and `--todos` options, common to the `plain`, `jekyll` and `rails` subcommands.
+
 
 ## 0.7.4
 

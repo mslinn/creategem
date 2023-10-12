@@ -23,5 +23,4 @@ group :test, :development do
   gem 'minitest-reporters', require: false
   gem 'rake', require: false
   gem 'rspec', require: false
-  gem 'ruby-debug-ide', require: false
 end

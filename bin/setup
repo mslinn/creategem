@@ -1,9 +1,22 @@
 #!/usr/bin/env bash
 
+if [[ $(which apt) ]]; then
+  if [[ ! -f /usr/lib/x86_64-linux-gnu/libyaml.so ]]; then sudo apt install libyaml-dev; fi
+fi
+
 rm -f Gemfile.lock
 
+if [[ -z "$( which bundle )" ]]; then gem install bundler; fi
+export BUNDLE_WITH="development"
 bundle
+if [ -d demo/ ]; then
+  cd demo || exit
+  bundle
+  cd ..
+fi
 
-bundle binstubs rspec-core     --force --path binstub
-bundle binstubs rubocop        --force --path binstub
-bundle binstubs ruby-debug-ide --force --path binstub
+# See https://www.honeybadger.io/blog/rbenv-rubygems-bundler-path/
+# See https://linuxtut.com/visual-studio-code-i-get-a-syntax-error-when-debugging-when-using-rbenv-6ee58/
+for X in jekyll rake rspec-core rubocop ruby-debug-ide; do
+  bundle binstubs "$X" --force --path exe
+done

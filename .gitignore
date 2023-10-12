@@ -5,6 +5,7 @@
 /coverage/
 /test/coverage/
 /doc/
+/exe/
 /pkg/
 /spec/reports/
 /tmp/
@@ -12,4 +13,3 @@
 /generated/
 /spec/status_persistence.txt
 templates/jekyll/common_scaffold/%gem_name%.code-workspace.tt
-
