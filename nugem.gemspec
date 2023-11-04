@@ -18,6 +18,7 @@ Gem::Specification.new do |spec|
   spec.summary       = 'Nugem creates a scaffold project for new gems.'
   spec.version       = Nugem::VERSION
 
+  spec.add_dependency 'jekyll'
   spec.add_dependency 'rugged'
   spec.add_dependency 'thor'
 end
