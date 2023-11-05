@@ -9,6 +9,8 @@ module Nugem
     end
   end
 
+  # The following methods are not required at present ... but they might be needed one day, so not deleting yet
+
   # @param file must be a fully qualified file name
   # @return Gem::Specification of gem that file points into, or nil if not called from a gem
   def self.current_spec(file)
