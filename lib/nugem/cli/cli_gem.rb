@@ -52,7 +52,8 @@ module Nugem
                         when 'minitest' then /spec.*/
                         when 'rspec'    then /test.*/
                         end
-      puts "Executing from #{Dir.pwd}"
+      # Does not copy dotfiles
+      Nugem.template_directory
       directory('common/gem_scaffold',        @dir, force: true, mode: :preserve, exclude_pattern:)
       directory 'common/executable_scaffold', @dir, force: true, mode: :preserve if @executable
       template  'common/LICENCE.txt',         "#{@dir}/LICENCE.txt", force: true if @repository.public?

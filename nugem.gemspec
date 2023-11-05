@@ -9,11 +9,20 @@ Gem::Specification.new do |spec|
   spec.bindir                = 'exe'
   spec.email                 = ['igor@masterybits.com', 'mslinn@mslinn.com']
   spec.executables           = %w[nugem]
-  spec.files                 = Dir['.rubocop.yml', 'Gemfile', 'LICENSE.*', 'Rakefile', '{lib,spec,templates}/**/*', '*.gemspec', '*.md']
+  spec.files                 = Dir[
+                                    '.rubocop.yml',
+                                    'Gemfile',
+                                    'LICENSE.*',
+                                    'Rakefile',
+                                    '{lib,spec,templates}/**/*',
+                                    'templates/**/.*',
+                                    '*.gemspec',
+                                    '*.md'
+                                  ]
   spec.homepage              = 'https://github.com/mslinn/nugem'
   spec.license               = 'MIT'
   spec.name                  = 'nugem'
-  spec.require_paths         << 'lib'
+  spec.require_paths         = ['lib']
   spec.required_ruby_version = '>= 3.1.0'
   spec.summary               = 'Nugem creates a scaffold project for new gems.'
   spec.version               = Nugem::VERSION
