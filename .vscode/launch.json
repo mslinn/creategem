@@ -17,9 +17,24 @@
       "type": "ruby_lsp"
     },
     {
-      "name": "Attach rdebug-ide",
+      "name": "Attach ruby_lsp",
       "request": "attach",
       "type": "ruby_lsp",
+    },
+    {
+      "args": [],
+      "debugPort": "0",
+      "name": "Debug current file with rdbg",
+      "script": "${file}",
+      "request": "launch",
+      "type": "rdbg",
+      "useBundler": true,
+    },
+    {
+      "debugPort": "0",
+      "name": "Attach rdbg",
+      "type": "rdbg",
+      "request": "attach",
     },
     {
       "name": "RSpec - active spec file only",

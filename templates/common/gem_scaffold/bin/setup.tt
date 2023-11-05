@@ -10,8 +10,13 @@ done
 DIR=$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )
 cd "$DIR/.." || exit
 
+if [[ $(which apt) ]]; then
+  if [[ ! -f /usr/lib/x86_64-linux-gnu/libyaml.so ]]; then sudo apt install libyaml-dev; fi
+fi
+
 rm -f Gemfile.lock
-bundle
+if [[ -z "$( which bundle )" ]]; then gem install bundler; fi
+BUNDLE_WITH="development" bundle
 
 bundle binstubs debase         --force --path binstub
 <%- if @jekyll -%>

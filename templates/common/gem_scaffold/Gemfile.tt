@@ -3,14 +3,11 @@ source 'https://rubygems.org'
 # The <%= @gem_name %> gem dependencies are defined in <%= @gem_name %>.gemspec
 gemspec
 
-<%- if @jekyll -%>
 group :test, :development do
-  gem 'bundler', '>= 2.4.6', require: false
   gem 'debug', '>= 1.0.0', require: false
   gem 'gem-release', '>= 2.2.2', require: false
+  <%- if @jekyll -%>
   gem 'rake', require: false
-  <%- if @rspec -%>
-  gem 'rspec', require: false
   <%- end -%>
   gem 'rubocop', require: false
   gem 'rubocop-md', require: false
@@ -19,20 +16,18 @@ group :test, :development do
   <%- end -%>
   gem 'rubocop-performance', require: false
   gem 'rubocop-rake', require: false
+  <%- if @rspec -%>
   gem 'rubocop-rspec', require: false
   gem 'ruby-debug-ide', require: false
-end
-<%- end -%>
-<%- if @rails -%>
-group :test, :development do
-  gem 'bundler', '>= 2.4.6', require: false
+  <%- end -%>
+  <%- if @rails -%>
   gem 'capybara', '~> 3.39.1', require: false
   gem 'capybara_minitest_spec', '~> 1.0.7', require: false
   <%- if @repository.public? -%>
   gem 'coveralls', require: false
   <%- end -%>
   gem 'database_cleaner', '~> 2.0.2', require: false
-  gem 'gem-release', '>= 2.2.2', require: false
+  gem 'erb_lint', require: false
   <%- if @minitest -%>
   gem 'minitest', '>= 5.18.0', require: false
   gem 'minitest-reporters', '>= 1.6.0', require: false
@@ -40,14 +35,11 @@ group :test, :development do
   <%- end -%>
   gem 'poltergeist', '~> 1.10.1', require: false
   gem 'quiet_assets'
-  gem 'rubocop', require: false
-  gem 'rubocop-md', require: false
-  gem 'rubocop-performance', require: false
-  gem 'rubocop-rake', require: false
-  <%- if @rspec -%>
-  gem 'rubocop-rspec', require: false
-  <%- end -%>
   gem 'selenium-webdriver', '~> 4.9.1', require: false
   gem 'sqlite3'
+  <%- end -%>
 end
-<%- end -%>
+
+group :test do
+  gem 'rspec-match_ignoring_whitespace'
+end

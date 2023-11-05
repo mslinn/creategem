@@ -31,4 +31,5 @@ bin/build
 set -e
 
 cd "$1" > /dev/null || exit 1
-_bin/debug
+shift
+_bin/debug "$@"

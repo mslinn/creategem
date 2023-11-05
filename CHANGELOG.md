@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.8.3
+
+* Added more files to generated projects
+* Improved generated scripts and settings.
+
 ## 0.8.2
 
 * Added `.markdownlint.json` to generated projects and this project.
