@@ -1,6 +1,8 @@
 require 'thor'
 require_relative 'util'
 
+Signal.trap('INT') { exit }
+
 module Nugem
   # @return Path to the generated gem
   def self.dest_root(gem_name)
