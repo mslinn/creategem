@@ -5,7 +5,7 @@
 function help {
   echo "
 $(basename $0) - Run the demo Jekyll website.
-By default the demo Jekyll website runs without restriction under ruby-debug-ide and debase,
+By default the demo Jekyll website runs without restriction under `debug`,
 and listens on 0.0.0.0:1234.
 Options:
   -h  Show this error message

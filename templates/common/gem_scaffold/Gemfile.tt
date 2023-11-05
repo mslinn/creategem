@@ -18,7 +18,6 @@ group :test, :development do
   gem 'rubocop-rake', require: false
   <%- if @rspec -%>
   gem 'rubocop-rspec', require: false
-  gem 'ruby-debug-ide', require: false
   <%- end -%>
   <%- if @rails -%>
   gem 'capybara', '~> 3.39.1', require: false
