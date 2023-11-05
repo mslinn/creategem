@@ -6,7 +6,7 @@
   "configurations": [
     {
       "name": "Run selected Ruby file",
-      "program": "ruby {file}",
+      "program": "ruby ${file}",
       "request": "launch",
       "type": "ruby_lsp"
     },
