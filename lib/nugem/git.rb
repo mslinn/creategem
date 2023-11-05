@@ -18,7 +18,7 @@ module Nugem
       gh_hosts_file = Nugem.expand_env('$HOME/.config/gh/hosts.yml')
       return nil unless File.exist? gh_hosts_file
 
-      YAML.safe_load(File.read(gh_hosts_file))
+      YAML.safe_load_file(gh_hosts_file)
     end
 
     def create_remote_git_repository(repository)

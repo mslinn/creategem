@@ -27,8 +27,7 @@ module Nugem
     method_option :generator, type: :string, repeatable: true,
       desc: 'Specifies a Jekyll generator.'
 
-    method_option :hooks, type: :string,
-      desc: 'Specifies Jekyll hooks.'
+    method_option :hooks, type: :string, desc: 'Specifies Jekyll hooks.'
 
     method_option :tag, name: :string, repeatable: true,
       desc: 'Specifies the name of a Jekyll tag.'

@@ -31,14 +31,15 @@ module NugemDemo
 
       @shell = Thor::Shell::Color.new
 
-      @gem_name = @shell.ask 'Name of the gem.', :green, default: 'test'
+      gem_type = ARGV[0] || 'jekyll'
+      @gem_type = @shell.ask 'Type of gem to test.', :green, default:    gem_type,
+                                                             limited_to: %w[jekyll plain rails]
 
-      @gem_type = @shell.ask 'Type of gem to test.', :green, default: 'jekyll',
-        limited_to: %w[jekyll plain rails]
+      @gem_name = ARGV[1] || @shell.ask('Name of the gem.', :green, default: 'test')
 
       case @gem_type
       when 'plain'
-        abort 'TODO: write plain gem demo'
+        plain_info
 
       when 'jekyll'
         jekyll_info
@@ -64,6 +65,10 @@ module NugemDemo
         no
       END_INFO
       NugemDemo.run "exe/nugem #{@gem_type} #{@gem_name} --#{@jekyll_type} #{@jekyll_name}", input
+    end
+
+    def plain_info
+      NugemDemo.run "exe/nugem #{@gem_type} #{@gem_name}"
     end
   end
 

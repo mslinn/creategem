@@ -22,6 +22,9 @@ module Nugem
       desc: 'Publish the gem in a private repository.'
 
     def plain(gem_name)
+      say "gem_name=#{gem_name}".yellow
+      super if gem_name.empty?
+
       @dir = Nugem.dest_root gem_name
 
       @host           = options['host']

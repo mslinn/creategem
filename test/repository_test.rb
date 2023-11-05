@@ -7,9 +7,12 @@ class RepositoryTest < Minitest::Test
                                  user:           'maxmustermann',
                                  name:           :testrepo,
                                  gem_server_url: 'https://gems.mustermann.com')
+
     assert_equal 'git@bitbucket.org:maxmustermann/testrepo.git', repo.origin
-    assert repo.private?
-    assert repo.bitbucket?
+
+    assert_predicate repo.private?
+
+    assert_predicate repo.bitbucket?
   end
 
   def test_github
@@ -17,8 +20,11 @@ class RepositoryTest < Minitest::Test
                                  user:           'maxmustermann',
                                  name:           :testrepo,
                                  gem_server_url: 'https://rubygems.org')
+
     assert_equal 'git@github.com:maxmustermann/testrepo.git', repo.origin
-    assert repo.public?
-    assert repo.github?
+
+    assert_predicate repo.public?
+
+    assert_predicate repo.github?
   end
 end

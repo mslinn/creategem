@@ -5,7 +5,7 @@ Gem::Specification.new do |spec|
   spec.bindir        = 'exe'
   spec.email         = ['igor@masterybits.com', 'mslinn@mslinn.com']
   spec.executables   = %w[nugem]
-  spec.files         = Dir['.rubocop.yml', 'LICENSE.*', 'Rakefile', '{lib,spec,templates}/**/*', '*.gemspec', '*.md']
+  spec.files         = Dir['.rubocop.yml', 'Gemfile', 'LICENSE.*', 'Rakefile', '{lib,spec,templates}/**/*', '*.gemspec', '*.md']
   spec.description   = <<~END_DESC
     Nugem creates a scaffold project for new gems. You can choose between Github and Bitbucket,
     Rubygems or Geminabox, with or without an executable, etc.

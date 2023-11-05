@@ -29,3 +29,8 @@ module Nugem
     end
   end
 end
+
+if __FILE__ == $PROGRAM_NAME
+  print "Lets go"
+  Nugem::Cli.start
+end

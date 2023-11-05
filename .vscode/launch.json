@@ -5,7 +5,19 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Run bin/demo",
+      "name": "Run exe/nugem plain test",
+      "program": "${workspaceFolder}/exe/nugem plain test",
+      "request": "launch",
+      "type": "ruby_lsp"
+    },
+    {
+      "name": "Run bin/demo plain test",
+      "program": "${workspaceFolder}/bin/demo plain test",
+      "request": "launch",
+      "type": "ruby_lsp"
+    },
+    {
+      "name": "Run bin/demo jekyll",
       "program": "${workspaceFolder}/bin/demo jekyll",
       "request": "launch",
       "type": "ruby_lsp"
