@@ -2,8 +2,10 @@
 
 ## 0.8.3
 
-* Added more files to generated projects
+* Added more files to generated projects.
 * Improved generated scripts and settings.
+* `plain` command has been tested.
+* `jekyll` and `rails` commands are not ready yet.
 
 ## 0.8.2
 
