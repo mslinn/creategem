@@ -19,10 +19,16 @@ end
 ```
 <%- end -%>
 <%- unless @jekyll -%>
-Add this line to your application's Gemfile:
+Either add this line to your application&rsquo;s `Gemfile`:
 
 ```ruby
 gem '<%= @gem_name %>'
+```
+
+... or add the following to your application&rsquo;s `.gemspec`:
+
+```ruby
+spec.add_dependency '<%= @gem_name %>'
 ```
 <%- end -%>
 
@@ -40,15 +46,48 @@ $ bundle
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies.
-Then, run `bundle exec rake test` to run the tests.
-You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+After checking out this git repository, install dependencies by typing:
 
-To install this gem onto your local machine, run `bundle exec rake install`.
+```shell
+$ bin/setup
+```
 
-To release a new version, run `bundle exec rake release`,
-which will create a git tag for the version, push git commits and tags,
-and push the gem to <%= @repository.gem_server_url -%>.
+You should do the above before running Visual Studio Code.
+
+
+### Run the Tests
+
+```shell
+$ bundle exec rake test
+```
+
+
+### Interactive Session
+
+The following will allow you to experiment:
+
+```shell
+$ bin/console
+```
+
+
+### Local Installation
+
+To install this gem onto your local machine, type:
+
+```shell
+$ bundle exec rake install
+```
+
+
+### To Release A New Version
+
+To create a git tag for the new version, push git commits and tags,
+and push the new version of the gem to <%= @repository.gem_server_url -%>, type:
+
+```shell
+$ bundle exec rake release
+```
 
 
 ## Contributing
