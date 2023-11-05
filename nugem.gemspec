@@ -16,6 +16,7 @@ Gem::Specification.new do |spec|
                                     'Rakefile',
                                     '{lib,spec,templates}/**/*',
                                     'templates/**/.*',
+                                    'templates/**/.*/*',
                                     '*.gemspec',
                                     '*.md'
                                   ]
