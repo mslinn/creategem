@@ -2,8 +2,6 @@ require 'fileutils'
 require 'rugged'
 require_relative 'git'
 require_relative 'cli/cli_gem'
-require_relative 'cli/cli_jekyll'
-require_relative 'cli/cli_rails'
 
 # Nugem::Cli is a Thor class that is invoked when a user runs a nugem executable.
 # This file defines the common aspects of the Thor class.
@@ -11,7 +9,15 @@ require_relative 'cli/cli_rails'
 module Nugem
   class Cli < Thor
     include Thor::Actions
-    include Nugem::Git
+
+    # These declarations make the class instance variable values available as an accessor,
+    # which is necessary to name template files that are named '%variable_name%.extension'.
+    # See https://www.rubydoc.info/gems/thor/Thor/Actions#directory-instance_method
+    attr_reader :block_name, :filter_name, :generator_name, :tag_name, :test_framework
+
+    package_name 'Nugem'
+
+    check_unknown_options!
 
     class_option :executable, type: :boolean, default: false,
       desc: 'Include an executable for the gem.'
@@ -33,10 +39,7 @@ module Nugem
     # For example: "generated/%gem_name%"
     attr_accessor :gem_name
 
-    require_relative 'cli/cli_gem'
-    require_relative 'cli/cli_jekyll'
-    require_relative 'cli/cli_rails'
-
+    # Return a non-zero status code on error. See https://github.com/rails/thor/issues/244
     def self.exit_on_failure?
       true
     end
@@ -46,48 +49,56 @@ module Nugem
       File.expand_path '../../templates', __dir__
     end
 
+    def self.test_option(default_value)
+      method_option :test_framework, type: :string, default: default_value,
+        enum: %w[minitest rspec],
+        desc: "Use rspec or minitest for the test framework (default is #{default_value})."
+    end
+
     def self.todo
       'TODO: ' if @todos
     end
 
-    private
+    require_relative 'cli/cli_jekyll'
+    require_relative 'cli/cli_rails'
 
-    def count_todos(filename)
-      filename_fq = "#{Nugem.dest_root gem_name}/#{filename}"
-      content = File.read filename_fq
-      content.scan('TODO').length
-    end
-
-    def initialize_repository(gem_name)
-      Dir.chdir Nugem.dest_root(gem_name) do
-        # say "Working in #{Dir.pwd}", :green
-        run 'chmod +x bin/*'
-        run 'chmod +x exe/*' if @executable
-        create_local_git_repository
-        FileUtils.rm_f 'Gemfile.lock'
-        # say "Running 'bundle install'", :green
-        # run 'bundle', abort_on_failure: false
-        say 'Creating remote repository', :green
-        create_remote_git_repository @repository \
-          if yes? "Do you want to create a repository on #{@repository.host.camel_case} named #{gem_name}? (y/N)"
-      end
-      say "The #{gem_name} gem was successfully created.", :green
-      report_todos gem_name
-    end
-
-    def report_todos(gem_name)
-      gemspec_todos = count_todos "#{gem_name}.gemspec"
-      readme_todos  = count_todos 'README.md'
-      if readme_todos.zero? && gemspec_todos.zero?
-        say "There are no TODOs. You can run 'bundle install' from within your new gem project now.", :blue
-        return
+    no_tasks do
+      def count_todos(filename)
+        filename_fq = "#{Nugem.dest_root gem_name}/#{filename}"
+        content = File.read filename_fq
+        content.scan('TODO').length
       end
 
-      msg = 'Please complete'
-      msg << " the #{gemspec_todos} TODOs in #{gem_name}.gemspec" if gemspec_todos.positive?
-      msg << ' and' if gemspec_todos.positive? && readme_todos.positive?
-      msg << " the #{readme_todos} TODOs in README.md." if readme_todos.positive?
-      say msg, :yellow
+      def initialize_repository(gem_name)
+        Dir.chdir Nugem.dest_root(gem_name) do
+          # puts set_color("Working in #{Dir.pwd}", :green)
+          run 'chmod +x bin/*'
+          run 'chmod +x exe/*' if @executable
+          create_local_git_repository
+          FileUtils.rm_f 'Gemfile.lock'
+          # puts set_color("Running 'bundle install'", :green)
+          # run 'bundle', abort_on_failure: false
+          create_remote_git_repository @repository \
+            if yes? set_color("Do you want to create a repository on #{@repository.host.camel_case} named #{gem_name}? (y/N)", :green)
+        end
+        puts set_color("The #{gem_name} gem was successfully created.", :green)
+        report_todos gem_name
+      end
+
+      def report_todos(gem_name)
+        gemspec_todos = count_todos "#{gem_name}.gemspec"
+        readme_todos  = count_todos 'README.md'
+        if readme_todos.zero? && gemspec_todos.zero?
+          puts set_color("There are no TODOs. You can run 'bundle install' from within your new gem project now.", :blue)
+          return
+        end
+
+        msg = 'Please complete'
+        msg << " the #{gemspec_todos} TODOs in #{gem_name}.gemspec" if gemspec_todos.positive?
+        msg << ' and' if gemspec_todos.positive? && readme_todos.positive?
+        msg << " the #{readme_todos} TODOs in README.md." if readme_todos.positive?
+        puts set_color(msg, :yellow)
+      end
     end
   end
 end

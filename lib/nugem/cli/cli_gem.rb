@@ -3,7 +3,6 @@ require 'thor'
 module Nugem
   class Cli < Thor
     include Thor::Actions
-    include Nugem::Git
 
     desc 'plain NAME', 'Creates a new plain gem scaffold.'
 
@@ -19,7 +18,7 @@ module Nugem
       desc: 'Publish the gem in a private repository.'
 
     def plain(gem_name)
-      say "gem_name=#{gem_name}", :yellow
+      # puts set_color("gem_name=#{gem_name}", :yellow)
       super if gem_name.empty?
 
       @dir = Nugem.dest_root gem_name
@@ -37,7 +36,7 @@ module Nugem
     # Defines globals for templates
     def create_plain_scaffold(gem_name)
       @gem_name = gem_name
-      say "Creating a scaffold for a new plain Ruby gem named #{@gem_name} in #{@dir}.", :green
+      puts set_color("Creating a scaffold for a new plain Ruby gem named #{@gem_name} in #{@dir}.", :green)
       @class_name = Nugem.camel_case @gem_name
       @executable = options[:executable]
       @host = options[:bitbucket] ? :bitbucket : :github

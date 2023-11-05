@@ -18,7 +18,6 @@ rm -f Gemfile.lock
 if [[ -z "$( which bundle )" ]]; then gem install bundler; fi
 BUNDLE_WITH="development" bundle
 
-bundle binstubs debase         --force --path binstub
 <%- if @jekyll -%>
 bundle binstubs jekyll         --force --path binstub
 <%- end -%>

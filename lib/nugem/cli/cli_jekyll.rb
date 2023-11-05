@@ -4,7 +4,6 @@ require_relative 'jekyll_demo'
 module Nugem
   class Cli < Thor # rubocop:disable Metrics/ClassLength
     include Thor::Actions
-    include Nugem::Git
 
     attr_accessor :class_name, :filter_params, :trailing_args, :trailing_dump, :trailing_params
 
@@ -92,16 +91,17 @@ module Nugem
     # list of pairs that describe each Jekyll/Liquid tag invocation option:
     # [[name1, type1], ... [nameN, typeN]]
     def ask_option_names_types(tag)
-      names = ask("Please list the names of the options for the #{tag} Jekyll/Liquid tag:").split(/[ ,\t]/)
+      names = ask(set_color("Please list the names of the options for the #{tag} Jekyll/Liquid tag:", :green)).split(/[ ,\t]/)
       types = names.reject(&:empty?).map do |name|
-        ask "What is the type of #{name}? (tab autocompletes)", default: 'string', limited_to: %w[boolean string numeric]
+        ask set_color("What is the type of #{name}? (tab autocompletes)", :green),
+            default: 'string', limited_to: %w[boolean string numeric]
       end
       @jekyll_parameter_names_types = names.zip types
       @jekyll_parameter_names_types
     end
 
     def create_jekyll_scaffold
-      say "Creating a Jekyll scaffold for a new gem named #{@gem_name} in #{@dir}", :green
+      puts set_color("Creating a Jekyll scaffold for a new gem named #{@gem_name} in #{@dir}", :green)
       @mute = true
       directory 'jekyll/common_scaffold', @dir, force: true, mode: :preserve
       directory 'jekyll/demo', @dir, force: true, mode: :preserve
@@ -112,7 +112,7 @@ module Nugem
       @jekyll_class_name = Nugem.camel_case block_name
       ask_option_names_types block_name # Defines @jekyll_parameter_names_types, which is a nested array of name/value pairs:
       # [["opt1", "string"], ["opt2", "boolean"]]
-      say "Creating Jekyll block tag #{@block_name} scaffold within #{@jekyll_class_name}", :green
+      puts set_color("Creating Jekyll block tag #{@block_name} scaffold within #{@jekyll_class_name}", :green)
       @mute = true
       directory 'jekyll/block_scaffold', @dir, force: true, mode: :preserve
       append_to_file "#{Nugem.dest_root gem_name}/demo/index.html", Cli.add_demo_example(block_name, @jekyll_parameter_names_types, :block)
@@ -121,7 +121,7 @@ module Nugem
     def create_jekyll_block_no_arg_scaffold(block_name)
       @block_name = block_name
       @jekyll_class_name = Nugem.camel_case block_name
-      say "Creating Jekyll block tag no_arg #{@block_name} scaffold within #{@jekyll_class_name}", :green
+      puts set_color("Creating Jekyll block tag no_arg #{@block_name} scaffold within #{@jekyll_class_name}", :green)
       @mute = true
       directory 'jekyll/block_no_arg_scaffold', @dir, force: true, mode: :preserve
       append_to_file "#{Nugem.dest_root gem_name}/demo/index.html", Cli.add_demo_example(block_name, @jekyll_parameter_names_types, :block)
@@ -131,8 +131,9 @@ module Nugem
       # rubocop:disable Style/StringConcatenation
       @filter_name = filter_name
       @jekyll_class_name = Nugem.camel_case filter_name
-      @filter_params = ask('Jekyll filters have at least one input. ' \
-                           "What are the names of additional inputs for #{filter_name}, if any?")
+      prompt = set_color('Jekyll filters have at least one input. ' \
+                         "What are the names of additional inputs for #{filter_name}, if any?", :green)
+      @filter_params = ask(prompt)
                          .split(/[ ,\t]/)
                          .reject(&:empty?)
       unless @filter_params.empty?
@@ -142,7 +143,7 @@ module Nugem
         lspace = "\n      "
         @trailing_dump2 = lspace + @filter_params.map { |arg| "#{arg} = \#{#{arg}}" }.join(lspace) unless @filter_params.empty?
       end
-      say "Creating a new Jekyll filter method scaffold #{@filter_name}", :green
+      puts set_color("Creating a new Jekyll filter method scaffold #{@filter_name}", :green)
       @mute = true
       directory 'jekyll/filter_scaffold', @dir, force: true, mode: :preserve
 
@@ -154,7 +155,7 @@ module Nugem
     def create_jekyll_generator_scaffold(generator_name)
       @generator_name = generator_name
       @jekyll_class_name = Nugem.camel_case generator_name
-      say "Creating a new Jekyll generator class scaffold #{@jekyll_class_name}", :green
+      puts set_color("Creating a new Jekyll generator class scaffold #{@jekyll_class_name}", :green)
       @mute = true
       directory 'jekyll/generator_scaffold', @dir, force: true, mode: :preserve
     end
@@ -162,7 +163,7 @@ module Nugem
     def create_jekyll_hooks_scaffold(plugin_name)
       @plugin_name = plugin_name
       @jekyll_class_name = Nugem.camel_case plugin_name
-      say 'Creating a new Jekyll hook scaffold', :green
+      puts set_color('Creating a new Jekyll hook scaffold', :green)
       @mute = true
       directory 'jekyll/hooks_scaffold', @dir, force: true, mode: :preserve
     end
@@ -170,7 +171,7 @@ module Nugem
     def create_jekyll_tag_no_arg_scaffold(tag_name)
       @tag_name = tag_name
       @jekyll_class_name = Nugem.camel_case @tag_name
-      say "Creating Jekyll tag no_arg #{@tag_name} scaffold within #{@jekyll_class_name}", :green
+      puts set_color("Creating Jekyll tag no_arg #{@tag_name} scaffold within #{@jekyll_class_name}", :green)
       @mute = true
       directory 'jekyll/tag_no_arg_scaffold', @dir, force: true, mode: :preserve
       append_to_file "#{Nugem.dest_root gem_name}/demo/index.html", Cli.add_demo_example(tag_name, @jekyll_parameter_names_types, :tag)
@@ -181,7 +182,7 @@ module Nugem
       @jekyll_class_name = Nugem.camel_case @tag_name
       ask_option_names_types tag_name # Defines @jekyll_parameter_names_types, which is a nested array of name/value pairs:
       # [["opt1", "string"], ["opt2", "boolean"]]
-      say "Creating Jekyll tag #{@tag_name} scaffold within #{@jekyll_class_name}", :green
+      puts set_color("Creating Jekyll tag #{@tag_name} scaffold within #{@jekyll_class_name}", :green)
       @mute = true
       # puts set_color("@jekyll_parameter_names_types=#{@jekyll_parameter_names_types}", :yellow)
       directory 'jekyll/tag_scaffold', @dir, force: true, mode: :preserve

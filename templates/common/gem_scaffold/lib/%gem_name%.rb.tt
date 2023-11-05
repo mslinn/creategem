@@ -10,3 +10,5 @@ require_relative '<%= @gem_name %>/version'
 Dir[File.join(__dir__, '*.rb')].each do |file|
   require file unless file.end_with?('/<%= @gem_name %>.rb')
 end
+
+# Write the code for your gem here
