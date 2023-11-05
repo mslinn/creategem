@@ -1,20 +1,29 @@
 # `Nugem` [![Gem Version](https://badge.fury.io/rb/nugem.svg)](https://badge.fury.io/rb/nugem)
 
-## WORK IN PROGRESS
-
 `Nugem` creates a scaffold project for a new gem in a new git repository.
 After you add your special code to the gem scaffold,
 the project is ready to be released to a public or private gem server.
 
-This gem generates a scaffold with all files you need to start,
-with the following features:
+This gem generates a new working Visual Studio Code project with the following features:
 
+- Compatible with `rbenv`.
+- `Gemfile` and `.gemspec` files set up.
 - Generates a README with badges.
-- Automatically creates local and remote git repositories (on GitHub, BitBucket or Geminabox) for your new gem.
-- Remote repositories can be private or public.
-- Can include a [Thor-based executable](https://github.com/rails/thor).
-- Creates a test infrastructure based on `rspec` or `minitest` and `minitest-reporters`.
-- Ready to publicly release to `rubygems.org` or to a private Geminabox gem server.
+- Visual Studio Code project is set up with current Ruby extensions.
+  - Rubocop configured.
+  - Shellcheck configured.
+  - Markdown lint configured.
+  - Launch configurations set up for testing.
+- Can automatically create a public or private git repository on GitHub for your new gem.
+- Creates a test infrastructure based on `rspec`.
+- Your gem can be publicly released to `rubygems.org`.
+
+The following features are still in development, so they probably do not work yet:
+
+- Automatically creates git repositories on BitBucket or Geminabox.
+- Creates a test infrastructure based on `minitest` and `minitest-reporters`.
+- Your gem can be privately released to a Geminabox gem server.
+- Your gem can include a [Thor-based executable](https://github.com/rails/thor).
 - Optionally create the gem as:
   - A Rails plugin, possibly with a mountable engine.
   - A Jekyll plugin (tag, block tag, filter, generator, or hooks).
@@ -41,7 +50,8 @@ $ gem update nugem
 
 ## Subcommands and Options
 
-`Nugem` has 4 subcommands `plain`, `jekyll`, `help` and `rails`:
+`Nugem` has 4 subcommands `plain`, `jekyll`, `help` and `rails`.
+Currently, only `plain` and `help` have been properly tested.
 
 ### `help` Subcommand
 
@@ -97,7 +107,7 @@ Common options for the `plain`, `jekyll` and `rails` subcommands are:
 
 The `plain`, `jekyll` and `rails` subcommands have common behavior.
 
-Gem scaffolds are created within the `generated/` directory.
+Gem scaffolds are created within the `generated/` directory of the current directory.
 
 If your user name is not already stored in your git global config,
 you will be asked for your GitHub or BitBucket user name.
