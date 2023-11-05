@@ -1,6 +1,9 @@
 require 'fileutils'
 require 'rugged'
-require_relative '../nugem'
+require_relative 'git'
+require_relative 'cli/cli_gem'
+require_relative 'cli/cli_jekyll'
+require_relative 'cli/cli_rails'
 
 # Nugem::Cli is a Thor class that is invoked when a user runs a nugem executable.
 # This file defines the common aspects of the Thor class.

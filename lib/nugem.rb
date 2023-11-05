@@ -1,7 +1,4 @@
 require 'thor'
-require_relative 'nugem/git'
-require_relative 'nugem/repository'
-require_relative 'nugem/version'
 require_relative 'util'
 
 module Nugem
@@ -20,17 +17,20 @@ module Nugem
     # See https://www.rubydoc.info/gems/thor/Thor/Actions#directory-instance_method
     attr_reader :block_name, :filter_name, :generator_name, :tag_name, :test_framework
 
-    class << self
-      def test_option(default_value)
-        method_option :test_framework, type: :string, default: default_value,
-          enum: %w[minitest rspec],
-          desc: "Use rspec or minitest for the test framework (default is #{default_value})."
-      end
+    def self.test_option(default_value)
+      method_option :test_framework, type: :string, default: default_value,
+        enum: %w[minitest rspec],
+        desc: "Use rspec or minitest for the test framework (default is #{default_value})."
+    end
+
+    # Return a non-zero status code on error. See https://github.com/rails/thor/issues/244
+    def self.exit_on_failure?
+      true
     end
   end
 end
 
-if __FILE__ == $PROGRAM_NAME
-  print "Lets go"
-  Nugem::Cli.start
-end
+require_relative 'nugem/git'
+require_relative 'nugem/cli'
+require_relative 'nugem/repository'
+require_relative 'nugem/version'

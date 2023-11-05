@@ -1,8 +1,5 @@
 require 'thor'
 
-# Nugem::Cli is a Thor class that is invoked when a user runs a nugem executable
-require_relative '../cli'
-
 module Nugem
   class Cli < Thor
     include Thor::Actions
@@ -22,7 +19,7 @@ module Nugem
       desc: 'Publish the gem in a private repository.'
 
     def plain(gem_name)
-      say "gem_name=#{gem_name}".yellow
+      say "gem_name=#{gem_name}", :yellow
       super if gem_name.empty?
 
       @dir = Nugem.dest_root gem_name
