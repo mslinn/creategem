@@ -19,7 +19,6 @@ AllCops:
     - vendor/**/*
     - Gemfile*
   NewCops: enable
-  TargetRubyVersion: 3.1.3
 
 Gemspec/DeprecatedAttributeAssignment:
   Enabled: false
