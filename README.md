@@ -17,6 +17,8 @@ This gem generates a new working Visual Studio Code project with the following f
 - Can automatically create a public or private git repository on GitHub for your new gem.
 - Creates a test infrastructure based on `rspec`.
 - Your gem can be publicly released to `rubygems.org`.
+- Optionally create the gem as:
+  - A Jekyll plugin (tag, block tag).
 
 The following features are still in development, so they probably do not work yet:
 
@@ -25,8 +27,8 @@ The following features are still in development, so they probably do not work ye
 - Your gem can be privately released to a Geminabox gem server.
 - Your gem can include a [Thor-based executable](https://github.com/rails/thor).
 - Optionally create the gem as:
+  - A Jekyll plugin (filter, generator, or hooks).
   - A Rails plugin, possibly with a mountable engine.
-  - A Jekyll plugin (tag, block tag, filter, generator, or hooks).
 
 
 ## Installation
