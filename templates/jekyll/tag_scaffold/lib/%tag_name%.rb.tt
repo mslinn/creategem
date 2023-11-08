@@ -1,8 +1,6 @@
 require 'jekyll_plugin_support'
 require_relative '<%= @gem_name %>/version.rb'
 
-# This Jekyll tag plugin is a minimal example.
-#
 # See https://www.mslinn.com/jekyll/10200-jekyll-plugin-background.html
 # See https://www.mslinn.com/jekyll/10400-jekyll-plugin-template-collection.html
 #
@@ -14,28 +12,54 @@ require_relative '<%= @gem_name %>/version.rb'
 # To set the log level to :debug, write an entry into _config.yml, like this:
 # plugin_loggers:
 #   <%= @jekyll_class_name %>: debug
+#
 module <%= class_name %>
   # This class implements the Jekyll <%= @tag_name %> functionality
   class <%= @jekyll_class_name %> < JekyllSupport::JekyllTag
     PLUGIN_NAME = '<%= @tag_name %>'.freeze
     VERSION = <%= @class_name %>::VERSION
 
-    # Put your plugin logic here.
-    # The following variables are predefined:
-    #   @argument_string, @config, @envs, @helper, @layout, @logger, @mode, @page, @paginator, @site, @tag_name and @theme
+    # See https://github.com/mslinn/jekyll_plugin_support#argument-parsing
     #
-    # @param tag_name [String] is the name of the tag, which we already know.
-    # @param argument_string [String] the arguments from the web page.
-    # @param tokens [Liquid::ParseContext] tokenized command line
-    # @return [void]
+    # The following variables are predefined:
+    #   @argument_string, @config, @envs, @helper, @layout, @logger, @mode, @page, @paginator, @site and @theme
+    #   @tag_name [String] is the name of the tag, which we already know.
+    #   @argument_string [String] the arguments from the web page.
+    #   @tokens [Liquid::ParseContext] tokenized command line
+    #
+    # @helper provides these read-only attributes:
+    #   argv, attribution, keys_values, liquid_context, logger, markup, no_arg_parsing, params, tag_name,
+    #   argv_original, excerpt_caller, keys_values_original, params_original
+    # @helper provides these class methods:
+    #   expand_env, register, remove_quotes
+    # @helper provides these instance methods:
+    #   attribution_string
+    #   default_attribution
+    #   delete_parameter
+    #   dereference_include_variable
+    #   dereference_variable
+    #   lookup_variable
+    #   parameter_specified?('option/keyword name') || 'default value' # parse option value/keyword
+    #   gem_file __FILE__ # Enables attribution
+    #   remaining_markup # unparsed markup passed to this plugin
+    #   reinitialize # Returns markup remaining after `parameter_specified?` has been invoked.
+    #   remaining_markup_original
+    #
+    # @return [string] markup to be rendered on web page
     def render_impl
       <%= parse_jekyll_parameters %>
+
+      # Put your plugin logic here and modify the following return value.
+
       <<~END_OUTPUT
         <pre class="example">
           <%= dump_jekyll_parameters %>
           Remaining markup: '#{@helper.remaining_markup}'.
         </pre>
       END_OUTPUT
+    rescue StandardError => e
+      @logger.error { "#{self.class} died with a #{e.full_message}" }
+      exit 3
     end
 
     JekyllPluginHelper.register(self, PLUGIN_NAME)

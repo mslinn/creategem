@@ -19,7 +19,10 @@ group :test, :development do
   <%- if @rspec -%>
   gem 'rubocop-rspec', require: false
   <%- end -%>
-  <%- if @rails -%>
+end
+<%- if @rails -%>
+
+group :test, :development do
   gem 'capybara', '~> 3.39.1', require: false
   gem 'capybara_minitest_spec', '~> 1.0.7', require: false
   <%- if @repository.public? -%>
@@ -36,8 +39,8 @@ group :test, :development do
   gem 'quiet_assets'
   gem 'selenium-webdriver', '~> 4.9.1', require: false
   gem 'sqlite3'
-  <%- end -%>
-end
+  end
+<%- end -%>
 
 group :test do
   gem 'rspec-match_ignoring_whitespace'

@@ -7,7 +7,7 @@ fi
 rm -f Gemfile.lock
 
 if [[ -z "$( which bundle )" ]]; then gem install bundler; fi
-export BUNDLE_WITH="development"
+export BUNDLE_WITH=development
 bundle
 if [ -d demo/ ]; then
   cd demo || exit
@@ -17,6 +17,6 @@ fi
 
 # See https://www.honeybadger.io/blog/rbenv-rubygems-bundler-path/
 # See https://linuxtut.com/visual-studio-code-i-get-a-syntax-error-when-debugging-when-using-rbenv-6ee58/
-for X in jekyll rake rspec-core rubocop; do
+for X in debug jekyll rake rspec-core rubocop; do
   bundle binstubs "$X" --force --path binstub
 done

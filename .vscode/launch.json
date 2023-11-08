@@ -44,9 +44,9 @@
     },
     {
       "debugPort": "0",
-      "name": "Attach rdbg",
-      "type": "rdbg",
+      "name": "Attach with rdbg",
       "request": "attach",
+      "type": "rdbg",
     },
     {
       "name": "RSpec - active spec file only",
