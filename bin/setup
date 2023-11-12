@@ -1,14 +1,25 @@
 #!/usr/bin/env bash
 
+# Change to parent directory of this script
+SOURCE=${BASH_SOURCE[0]}
+while [ -L "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
+  DIR=$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )
+  SOURCE=$(readlink "$SOURCE")
+  # if $SOURCE was a relative symlink, resolve it relative to the path where the symlink file was located
+  [[ $SOURCE != /* ]] && SOURCE=$DIR/$SOURCE
+done
+DIR=$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )
+cd "$DIR/.." || exit
+
 if [[ $(which apt) ]]; then
   if [[ ! -f /usr/lib/x86_64-linux-gnu/libyaml.so ]]; then sudo apt install libyaml-dev; fi
 fi
 
 rm -f Gemfile.lock
-
 if [[ -z "$( which bundle )" ]]; then gem install bundler; fi
 export BUNDLE_WITH=development
 bundle
+
 if [ -d demo/ ]; then
   cd demo || exit
   bundle
