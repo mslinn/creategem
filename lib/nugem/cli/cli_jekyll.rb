@@ -71,7 +71,7 @@ module Nugem
       # Invoked by directory action when processing Jekyll tags and block tags
       def parse_jekyll_parameters
         content = @jekyll_parameter_names_types.map do |name, _type|
-          "@#{name} = @helper.parameter_specified? '#{name}' # Obtain the value of parameter #{name}"
+          "@#{name} = @helper.parameter_specified?('#{name}') || nil # Obtain the value of parameter #{name}"
         end
         content.join "\n      "
       end

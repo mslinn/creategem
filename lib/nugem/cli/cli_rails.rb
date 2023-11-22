@@ -4,10 +4,10 @@ module Nugem
   class Cli < Thor
     include Thor::Actions
 
-    desc 'rails NAME', 'Creates a new Rails rails scaffold.'
+    desc 'rails NAME', 'Creates a new Rails scaffold.'
 
     long_desc <<~END_DESC
-      Creates a new Rails rails scaffold with the given NAME,
+      Creates a new Rails scaffold with the given NAME,
       by default hosted by GitHub and published on RubyGems.
     END_DESC
 
