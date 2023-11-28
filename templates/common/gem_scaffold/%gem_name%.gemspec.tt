@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
 
   spec.authors               = ['<%= @repository.user_name %>']
   <%- if @executable -%>
-  spec.bindir                = 'binstub'
+  spec.bindir                = 'exe'
   spec.executables           = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   <%- end -%>
   spec.description           = <<~END_DESC
