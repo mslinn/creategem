@@ -3,6 +3,7 @@
 ## 0.8.4
 
 * Added `-o` option for specifying output directory
+* Added aliases for class options
 
 
 ## 0.8.3
