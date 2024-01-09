@@ -25,7 +25,7 @@ module Nugem
       @private        = options['private']
       @test_framework = options['test_framework']
 
-      @dir = Nugem.dest_root gem_name
+      @dir = Nugem.dest_root @out_dir, gem_name
       @engine = @host || @mountable
       @rails = true
 

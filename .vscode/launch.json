@@ -5,8 +5,9 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "env": {"VO_DEBUGGING": "true"},
       "name": "Run exe/nugem plain test",
-      "program": "${workspaceFolder}/exe/nugem plain test",
+      "program": "${workspaceFolder}/exe/nugem plain -o /tmp test",
       "request": "launch",
       "type": "ruby_lsp"
     },

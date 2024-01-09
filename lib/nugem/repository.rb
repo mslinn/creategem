@@ -1,7 +1,7 @@
 # Nugem::Repository contains informations about the git repository and the git user
 module Nugem
   class Repository
-    attr_reader :gem_server_url, :global_config, :host, :name, :private, :user, :user_name, :user_email
+    attr_reader :gem_server_url, :global_config, :host, :name, :out_dir, :private, :user, :user_name, :user_email
 
     Host = Struct.new(:domain, :camel_case, :id, keyword_init: true)
     HOSTS = [

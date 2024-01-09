@@ -40,7 +40,8 @@ Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented_relative_to_receiver
 
 Metrics/AbcSize:
-  Max: 45
+  Enabled: false
+  Max: 50
 
 Metrics/BlockLength:
   Exclude:

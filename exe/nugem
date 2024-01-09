@@ -1,5 +1,9 @@
 #!/usr/bin/env ruby
 
-require 'nugem'
+if ENV['VO_DEBUGGING']
+  require_relative '../lib/nugem'
+else
+  require 'nugem'
+end
 
 Nugem::Cli.start

@@ -117,7 +117,7 @@ module Dumpers
   #     :unpublished
   #   attr_reader :cache_dir, :config, :dest, :filter_cache, :includes_load_paths,
   #     :liquid_renderer, :profiler, :regenerator, :source
-  def dump_site(logger, msg, site) # rubocop:disable Metrics/AbcSize
+  def dump_site(logger, msg, site)
     logger.info do
       <<~END_INFO
         #{msg} site

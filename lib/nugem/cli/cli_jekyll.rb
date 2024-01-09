@@ -37,28 +37,28 @@ module Nugem
     test_option 'rspec'
 
     def jekyll(gem_name)
-      @gem_name = gem_name
-      @dir = Nugem.dest_root @gem_name
-      @class_name = Nugem.camel_case @gem_name
-      @jekyll   = true
-      @rspec    = true
-
       @host           = options['host']
       @private        = options['private']
       @test_framework = options['test_framework']
       @todos          = options['todos']
 
+      @gem_name   = gem_name
+      @dir        = Nugem.dest_root @gem_name
+      @class_name = Nugem.camel_case @gem_name
+      @jekyll     = true
+      @rspec      = true
+
       create_plain_scaffold @gem_name
       create_jekyll_scaffold
       options.each do |option|
         case option.first
-        when 'block' then     option[1].each { |name| create_jekyll_block_scaffold        name }
-        when 'blockn' then    option[1].each { |name| create_jekyll_block_no_arg_scaffold name }
-        when 'filter' then    option[1].each { |name| create_jekyll_filter_scaffold       name }
+        when 'block'     then option[1].each { |name| create_jekyll_block_scaffold        name }
+        when 'blockn'    then option[1].each { |name| create_jekyll_block_no_arg_scaffold name }
+        when 'filter'    then option[1].each { |name| create_jekyll_filter_scaffold       name }
         when 'generator' then option[1].each { |name| create_jekyll_generator_scaffold    name }
-        when 'tag' then       option[1].each { |name| create_jekyll_tag_scaffold          name }
-        when 'tagn' then      option[1].each { |name| create_jekyll_tag_no_arg_scaffold   name }
-        when 'hooks' then     create_jekyll_hooks_scaffold option[1]
+        when 'tag'       then option[1].each { |name| create_jekyll_tag_scaffold          name }
+        when 'tagn'      then option[1].each { |name| create_jekyll_tag_no_arg_scaffold   name }
+        when 'hooks'     then create_jekyll_hooks_scaffold option[1]
         when 'host', 'executable', 'private', 'test_framework', 'todos', 'quiet' then next
         else puts "Warning: Unrecognized option: #{option}"
         end
@@ -115,7 +115,7 @@ module Nugem
       puts set_color("Creating Jekyll block tag #{@block_name} scaffold within #{@jekyll_class_name}", :green)
       @mute = true
       directory 'jekyll/block_scaffold', @dir, force: true, mode: :preserve
-      append_to_file "#{Nugem.dest_root gem_name}/demo/index.html", Cli.add_demo_example(block_name, @jekyll_parameter_names_types, :block)
+      append_to_file "#{Nugem.dest_root @out_dir, gem_name}/demo/index.html", Cli.add_demo_example(block_name, @jekyll_parameter_names_types, :block)
     end
 
     def create_jekyll_block_no_arg_scaffold(block_name)
@@ -124,7 +124,7 @@ module Nugem
       puts set_color("Creating Jekyll block tag no_arg #{@block_name} scaffold within #{@jekyll_class_name}", :green)
       @mute = true
       directory 'jekyll/block_no_arg_scaffold', @dir, force: true, mode: :preserve
-      append_to_file "#{Nugem.dest_root gem_name}/demo/index.html", Cli.add_demo_example(block_name, @jekyll_parameter_names_types, :block)
+      append_to_file "#{Nugem.dest_root @out_dir, gem_name}/demo/index.html", Cli.add_demo_example(block_name, @jekyll_parameter_names_types, :block)
     end
 
     def create_jekyll_filter_scaffold(filter_name)
@@ -148,7 +148,7 @@ module Nugem
       directory 'jekyll/filter_scaffold', @dir, force: true, mode: :preserve
 
       tp = ': ' + @filter_params.map { |x| "'#{x}_value'" }.join(', ') unless @filter_params.empty?
-      append_to_file "#{Nugem.dest_root gem_name}/demo/index.html", Cli.add_filter_example(filter_name, tp)
+      append_to_file "#{Nugem.dest_root @out_dir, gem_name}/demo/index.html", Cli.add_filter_example(filter_name, tp)
       # rubocop:enable Style/StringConcatenation
     end
 
@@ -174,7 +174,7 @@ module Nugem
       puts set_color("Creating Jekyll tag no_arg #{@tag_name} scaffold within #{@jekyll_class_name}", :green)
       @mute = true
       directory 'jekyll/tag_no_arg_scaffold', @dir, force: true, mode: :preserve
-      append_to_file "#{Nugem.dest_root gem_name}/demo/index.html", Cli.add_demo_example(tag_name, @jekyll_parameter_names_types, :tag)
+      append_to_file "#{Nugem.dest_root @out_dir, gem_name}/demo/index.html", Cli.add_demo_example(tag_name, @jekyll_parameter_names_types, :tag)
     end
 
     def create_jekyll_tag_scaffold(tag_name)
@@ -186,7 +186,7 @@ module Nugem
       @mute = true
       # puts set_color("@jekyll_parameter_names_types=#{@jekyll_parameter_names_types}", :yellow)
       directory 'jekyll/tag_scaffold', @dir, force: true, mode: :preserve
-      append_to_file "#{Nugem.dest_root gem_name}/demo/index.html", Cli.add_demo_example(tag_name, @jekyll_parameter_names_types, :tag)
+      append_to_file "#{Nugem.dest_root @out_dir, gem_name}/demo/index.html", Cli.add_demo_example(tag_name, @jekyll_parameter_names_types, :tag)
     end
   end
 end

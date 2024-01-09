@@ -19,20 +19,23 @@ module Nugem
 
     check_unknown_options!
 
+    class_option :out_dir, type: :string, default: 'generated',
+                 desc: 'Output directory for the gem.', aliases: :o
+
     class_option :executable, type: :boolean, default: false,
-      desc: 'Include an executable for the gem.'
+                 desc: 'Include an executable for the gem.', aliases: :e
 
     class_option :host, type: :string, default: 'github',
-      enum: %w[bitbucket github], desc: 'Repository host.'
+                 enum: %w[bitbucket github], desc: 'Repository host.', aliases: :h
 
     class_option :private, type: :boolean, default: false,
-      desc: 'Publish the gem on a private repository.'
+                 desc: 'Publish the gem on a private repository.'
 
     class_option :quiet, type: :boolean, default: true,
-      desc: 'Suppress detailed messages.', group: :runtime
+                 desc: 'Suppress detailed messages.', group: :runtime, aliases: :q
 
     class_option :todos, type: :boolean, default: true,
-      desc: 'Generate TODO: messages in generated code.', group: :runtime
+                 desc: 'Generate TODO: messages in generated code.', group: :runtime, aliases: :t
 
     # Surround gem_name with percent symbols when using the property to name files
     # within the template directory
@@ -64,13 +67,13 @@ module Nugem
 
     no_tasks do
       def count_todos(filename)
-        filename_fq = "#{Nugem.dest_root gem_name}/#{filename}"
+        filename_fq = "#{Nugem.dest_root @out_dir, gem_name}/#{filename}"
         content = File.read filename_fq
         content.scan('TODO').length
       end
 
       def initialize_repository(gem_name)
-        Dir.chdir Nugem.dest_root(gem_name) do
+        Dir.chdir Nugem.dest_root(@out_dir, gem_name) do
           # puts set_color("Working in #{Dir.pwd}", :green)
           run 'chmod +x bin/*'
           run 'chmod +x exe/*' if @executable

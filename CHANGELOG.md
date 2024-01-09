@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.8.4
+
+* Added `-o` option for specifying output directory
+
+
 ## 0.8.3
 
 * Added more files to generated projects.

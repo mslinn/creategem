@@ -28,7 +28,7 @@ module Nugem
   end
 
   def self.gem_path(file)
-    spec = self.current_spec(file)
+    spec = current_spec(file)
     spec&.full_gem_path
   end
 

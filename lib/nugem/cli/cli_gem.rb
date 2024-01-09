@@ -21,11 +21,13 @@ module Nugem
       # puts set_color("gem_name=#{gem_name}", :yellow)
       super if gem_name.empty?
 
-      @dir = Nugem.dest_root gem_name
+      @executable = options[:executable]
+      @host           = options[:host] # FIXME: conflicts with @host in create_plain_scaffold()
+      @out_dir        = options[:out_dir]
+      @private        = options[:private]
+      @test_framework = options[:test_framework]
 
-      @host           = options['host']
-      @private        = options['private']
-      @test_framework = options['test_framework']
+      @dir = Nugem.dest_root @out_dir, gem_name
 
       create_plain_scaffold gem_name
       initialize_repository gem_name
@@ -36,11 +38,8 @@ module Nugem
     # Defines globals for templates
     def create_plain_scaffold(gem_name)
       @gem_name = gem_name
-      puts set_color("Creating a scaffold for a new plain Ruby gem named #{@gem_name} in #{@dir}.", :green)
       @class_name = Nugem.camel_case @gem_name
-      @executable = options[:executable]
-      @host = options[:bitbucket] ? :bitbucket : :github
-      @private = options[:private]
+      @host       = options[:bitbucket] ? :bitbucket : :github # FIXME: conflicts with @host in plain()
       @repository = Nugem::Repository.new(
         host:           @host,
         user:           git_repository_user_name(@host),
@@ -48,6 +47,7 @@ module Nugem
         gem_server_url: gem_server_url(@private),
         private:        @private
       )
+      puts set_color("Creating a scaffold for a new plain Ruby gem named #{@gem_name} in #{@dir}.", :green)
       exclude_pattern = case @test_framework
                         when 'minitest' then /spec.*/
                         when 'rspec'    then /test.*/
