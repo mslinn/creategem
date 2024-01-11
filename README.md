@@ -54,7 +54,8 @@ $ gem update nugem
 ## Subcommands and Options
 
 `Nugem` has 4 subcommands `plain`, `jekyll`, `help` and `rails`.
-Currently, only `plain` and `help` have been properly tested.
+Currently, only `plain`, `jekyll` and `help` have been properly tested.
+
 
 ### `help` Subcommand
 
@@ -91,6 +92,12 @@ Common options for the `plain`, `jekyll` and `rails` subcommands are:
     <dd>
       specifies the git host; possible values are <code>bitbucket</code>,
       <code>github</code> and <code>geminabox</code>.
+    </dd>
+
+  <dt><code>--out_dir</code></dt>
+    <dd>
+      specifies the directory to write the generated gem to.
+      The default is <code>generated/</code>.
     </dd>
 
   <dt><code>--private</code></dt>
