@@ -158,12 +158,13 @@ In addition to the common options, the `jekyll`-specific `OPTIONS` are:
 
 `--block`, `--blockn`, `--filter`, `--hooks`, `--tag`, and `--tagn`.
 
+(Warning: only `--block` and `--tag` been properly tested.)
+
 Each of these options causes `nugem` to prompt the user for additional input.
 
 The test framework for `jekyll` plugins is `rspec`.
 
-All of the above options can be specified more than once,
-except the `--hooks` option.
+All of the above options can be specified more than once, except the `--hooks` option.
 For example:
 
 ```shell
@@ -181,7 +182,7 @@ my_tag2 usage: {% my_tag2 %}
 </pre>
 ```
 
-For more information, type
+For more information, type:
 
 ```shell
 $ nugem help jekyll
@@ -207,7 +208,7 @@ Each of these options causes `nugem` to prompt the user for additional input.
 
 The test framework for `rails` gems is `minitest`.
 
-For more information, type
+For more information, type:
 
 ```shell
 $ nugem help rails
@@ -316,7 +317,7 @@ After checking out the repository, run `bin/setup` to install dependencies.
 Then, run `rake test` to run the tests.
 You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
-To install this gem onto your local machine, run
+To install this gem onto your local machine, run:
 
 ```shell
 $ bundle exec rake install
