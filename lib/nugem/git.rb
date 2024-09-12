@@ -64,14 +64,14 @@ module Nugem
       end
 
       def gem_server_url(private_)
-        if private_
+        if private_ && Nugem::FEATURE_GEMINABOX
           global_config = Rugged::Config.global
           git_config_key = 'nugem.gemserver'
           url = global_config[git_config_key]
 
-          if url.to_s.empty?
+          if url.to_s.strip.empty?
             url = ask('What is the url of your Geminabox server?')
-            global_config[git_config_key] = url
+            global_config[git_config_key] = url unless url.to_s.strip.empty?
           end
           url
         else

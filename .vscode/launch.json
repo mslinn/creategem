@@ -5,6 +5,13 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "env": {},
+      "name": "Debug nugem jekyll jekyll_collection_index",
+      "program": "ruby ${workspaceFolder}/exe/nugem jekyll jekyll_collection_index --tag=ensure_last_modified_set --private --out_dir=/tmp/nugem",
+      "request": "launch",
+      "type": "ruby_lsp",
+    },
+    {
       "env": {"VO_DEBUGGING": "true"},
       "name": "Run exe/nugem plain test",
       "program": "${workspaceFolder}/exe/nugem plain -o /tmp test",
