@@ -1,4 +1,5 @@
 require 'jekyll_plugin_support'
+require 'helper/jekyll_plugin_helper'
 require_relative '<%= @gem_name %>/version'
 
 # See https://www.mslinn.com/jekyll/10200-jekyll-plugin-background.html
@@ -66,6 +67,6 @@ module <%= @class_name %>
       exit 3
     end
 
-    JekyllPluginHelper.register(self, PLUGIN_NAME)
+    ::JekyllSupport::JekyllPluginHelper.register(self, PLUGIN_NAME)
   end
 end
