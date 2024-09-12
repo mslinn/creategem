@@ -83,9 +83,8 @@ Style/TrailingCommaInHashLiteral:
 Style/TrailingCommaInArrayLiteral:
   EnforcedStyleForMultiline: comma
 
-RSpec/FilePath:
+RSpec/SpecFilePathFormat:
   IgnoreMethods: true
-  SpecSuffixOnly: true
 
 RSpec/ExampleLength:
   Enabled: false

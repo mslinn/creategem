@@ -14,9 +14,11 @@ require_relative '<%= @gem_name %>/version'
 #   <%= @jekyll_class_name %>: debug
 #
 module <%= class_name %>
+  <%= @class_name %>Error = ::JekyllSupport.define_error unless const_defined?(:<%= @class_name %>Error)
+
   # This class implements the Jekyll <%= @tag_name %> functionality
   class <%= @jekyll_class_name %> < JekyllSupport::JekyllTag
-    PLUGIN_NAME = ::'<%= @tag_name %>'.freeze
+    PLUGIN_NAME = '<%= @tag_name %>'.freeze unless const_defined?(:PLUGIN_NAME)
     VERSION = <%= @class_name %>::VERSION
 
     # See https://github.com/mslinn/jekyll_plugin_support#argument-parsing

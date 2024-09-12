@@ -67,9 +67,8 @@ Style/TrailingCommaInHashLiteral:
   EnforcedStyleForMultiline: comma
 <%- if @test_framework == 'rspec' -%>
 
-RSpec/FilePath:
+RSpec/SpecFilePathFormat:
   IgnoreMethods: true
-  SpecSuffixOnly: true
 
 RSpec/ExampleLength:
   Max: 30
