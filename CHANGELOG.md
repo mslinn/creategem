@@ -3,6 +3,7 @@
 ## 0.8.5
 
 * Added `-y` option to suppress confirmation messages and default to `yes`.
+* Suppresses the huge chunk of JSON that used to be displayed after the remote repository was created.
 
 
 ## 0.8.4
