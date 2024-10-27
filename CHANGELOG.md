@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.8.5
+
+* Added `-y` option to suppress confirmation messages and default to `yes`.
+
+
 ## 0.8.4
 
 * Added `-o` option for specifying output directory

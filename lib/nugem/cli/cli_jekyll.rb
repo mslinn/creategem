@@ -44,6 +44,7 @@ module Nugem
       @private        = options['private']
       @test_framework = options['test_framework']
       @todos          = options['todos']
+      @yes            = options['yes']
 
       @gem_name   = gem_name
       @dir        = Nugem.dest_root @out_dir, @gem_name

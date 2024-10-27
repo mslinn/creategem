@@ -12,9 +12,36 @@
       "type": "ruby_lsp",
     },
     {
+      "env": {
+        "VO_DEBUGGING": "true"
+      },
+      "name": "Run exe/nugem help",
+      "program": "${workspaceFolder}/exe/nugem help",
+      "request": "launch",
+      "type": "ruby_lsp"
+    },
+    {
+      "env": {
+        "VO_DEBUGGING": "true"
+      },
+      "name": "Run exe/nugem help plain",
+      "program": "${workspaceFolder}/exe/nugem help plain",
+      "request": "launch",
+      "type": "ruby_lsp"
+    },
+    {
+      "env": {
+        "VO_DEBUGGING": "true"
+      },
+      "name": "Run exe/nugem help jekyll",
+      "program": "${workspaceFolder}/exe/nugem help jekyll",
+      "request": "launch",
+      "type": "ruby_lsp"
+    },
+    {
       "env": {"VO_DEBUGGING": "true"},
       "name": "Run exe/nugem plain test",
-      "program": "${workspaceFolder}/exe/nugem plain -o /tmp test",
+      "program": "${workspaceFolder}/exe/nugem plain -o /tmp test --yes",
       "request": "launch",
       "type": "ruby_lsp"
     },

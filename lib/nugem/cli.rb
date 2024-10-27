@@ -37,6 +37,9 @@ module Nugem
     class_option :todos, type: :boolean, default: true,
                  desc: 'Generate TODO: messages in generated code.', group: :runtime, aliases: :t
 
+    class_option :yes, type: :boolean, default: false,
+                 desc: 'Answer yes to all questions.', aliases: :y
+
     # Surround gem_name with percent symbols when using the property to name files
     # within the template directory
     # For example: "generated/%gem_name%"
@@ -65,7 +68,7 @@ module Nugem
     require_relative 'cli/cli_jekyll'
     require_relative 'cli/cli_rails'
 
-    no_tasks do
+    no_tasks do # rubocop:disable Metrics/BlockLength
       def count_todos(filename)
         filename_fq = "#{Nugem.dest_root @out_dir, gem_name}/#{filename}"
         content = File.read filename_fq
@@ -81,8 +84,9 @@ module Nugem
           FileUtils.rm_f 'Gemfile.lock'
           # puts set_color("Running 'bundle install'", :green)
           # run 'bundle', abort_on_failure: false
-          create_remote_git_repository @repository \
-            if yes? set_color("Do you want to create a repository on #{@repository.host.camel_case} named #{gem_name}? (y/N)", :green)
+          create_repo = @yes || yes?(set_color("Do you want to create a repository on #{@repository.host.camel_case} named #{gem_name}? (y/N)",
+                                               :green))
+          create_remote_git_repository @repository if create_repo
         end
         puts set_color("The #{gem_name} gem was successfully created.", :green)
         report_todos gem_name

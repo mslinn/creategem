@@ -29,12 +29,13 @@ module Nugem
           token = gh_config&.dig('github.com', 'oauth_token')
 
           token ||= ask('What is your Github personal access token', echo: false)
-          run <<~END_CURL
+          curl_command = <<~END_CURL
             curl --request POST \
               --user '#{repository.user}:#{token}' \
               https://api.github.com/user/repos \
               -d '{"name":"#{repository.name}", "private":#{repository.private?}}'
           END_CURL
+          run(curl_command, capture: true)
         else # BitBucket
           password = ask('Please enter your Bitbucket password', echo: false)
           fork_policy = repository.public? ? 'allow_forks' : 'no_public_forks'

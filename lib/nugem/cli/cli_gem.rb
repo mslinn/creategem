@@ -26,6 +26,7 @@ module Nugem
       @out_dir        = options[:out_dir]
       @private        = options[:private]
       @test_framework = options[:test_framework]
+      @yes            = options[:yes]
 
       @dir = Nugem.dest_root @out_dir, gem_name
 

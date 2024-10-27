@@ -12,8 +12,9 @@ module Nugem
     def initialize(options)
       @host = HOSTS.find { |host| host.id == options[:host] }
       @private = options[:private]
-      @name = options[:name]
-      @user = options[:user]
+      @name    = options[:name]
+      @user    = options[:user]
+
       @global_config = Rugged::Config.global
       abort 'Git global config not found' if @global_config.nil?
 
