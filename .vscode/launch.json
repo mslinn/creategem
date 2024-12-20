@@ -24,8 +24,8 @@
       "env": {
         "VO_DEBUGGING": "true"
       },
-      "name": "Run exe/nugem help plain",
-      "program": "${workspaceFolder}/exe/nugem help plain",
+      "name": "Run exe/nugem help gem",
+      "program": "${workspaceFolder}/exe/nugem help gem",
       "request": "launch",
       "type": "ruby_lsp"
     },
@@ -40,14 +40,14 @@
     },
     {
       "env": {"VO_DEBUGGING": "true"},
-      "name": "Run exe/nugem plain test",
-      "program": "${workspaceFolder}/exe/nugem plain -o /tmp test --yes",
+      "name": "Run exe/nugem gem test",
+      "program": "${workspaceFolder}/exe/nugem gem -o /tmp test --yes",
       "request": "launch",
       "type": "ruby_lsp"
     },
     {
-      "name": "Run bin/demo plain test",
-      "program": "${workspaceFolder}/bin/demo plain test",
+      "name": "Run bin/demo gem test",
+      "program": "${workspaceFolder}/bin/demo gem test",
       "request": "launch",
       "type": "ruby_lsp"
     },

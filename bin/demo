@@ -33,12 +33,12 @@ module NugemDemo
 
       gem_type = ARGV[0] || 'jekyll'
       @gem_type = @shell.ask 'Type of gem to test.', :green, default:    gem_type,
-                                                             limited_to: %w[jekyll plain rails]
+                                                             limited_to: %w[jekyll gem rails]
 
       @gem_name = ARGV[1] || @shell.ask('Name of the gem.', :green, default: 'test')
 
       case @gem_type
-      when 'plain'
+      when 'gem'
         plain_info
 
       when 'jekyll'

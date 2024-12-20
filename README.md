@@ -53,8 +53,8 @@ $ gem update nugem
 
 ## Subcommands and Options
 
-`Nugem` has 4 subcommands `plain`, `jekyll`, `help` and `rails`.
-Currently, only `plain`, `jekyll` and `help` have been properly tested.
+`Nugem` has 4 subcommands `gem`, `jekyll`, `help` and `rails`.
+Currently, only `gem`, `jekyll` and `help` have been properly tested.
 
 
 ### `help` Subcommand
@@ -74,7 +74,7 @@ $ nugem help [SUBCOMMAND]
 
 ### Common Options
 
-The `plain`, `jekyll` and `rails` subcommands have common options.
+The `gem`, `jekyll` and `rails` subcommands have common options.
 
 The default option values assume that:
 
@@ -82,7 +82,7 @@ The default option values assume that:
 - The gem project will be hosted on a public GitHub git repository
 - The gem will be released to `rubygems.org`
 
-Common options for the `plain`, `jekyll` and `rails` subcommands are:
+Common options for the `gem`, `jekyll` and `rails` subcommands are:
 
 <dl>
   <dt><code>--executable</code></dt>
@@ -115,7 +115,7 @@ Common options for the `plain`, `jekyll` and `rails` subcommands are:
 
 ### Common Behavior
 
-The `plain`, `jekyll` and `rails` subcommands have common behavior.
+The `gem`, `jekyll` and `rails` subcommands have common behavior.
 
 Gem scaffolds are created within the `generated/` directory of the current directory.
 
@@ -128,25 +128,25 @@ Then commit the changes to git and invoke `rake release`,
 and your gem will be published.
 
 
-### `plain` Subcommand
+### `gem` Subcommand
 
 ```shell
-$ nugem plain NAME [COMMON_OPTIONS] [--test-framework=minitest|rspec]
+$ nugem gem NAME [COMMON_OPTIONS] [--test-framework=minitest|rspec]
 ```
 
 `NAME` is the name of the gem to be generated.
 
-The default test framework for the `plain` subcommand is `rspec`,
+The default test framework for the `gem` subcommand is `rspec`,
 but you can specify `minitest` instead like this:
 
 ```shell
-$ nugem plain my_gem --test-framework=minitest
+$ nugem gem my_gem --test-framework=minitest
 ```
 
 
 ### `jekyll` Subcommand
 
-The `jekyll` subcommand extends the `plain` subcommand and creates a new Jekyll plugin with the given NAME:
+The `jekyll` subcommand extends the `gem` subcommand and creates a new Jekyll plugin with the given NAME:
 
 ```shell
 $ nugem jekyll NAME [OPTIONS]
@@ -191,7 +191,7 @@ $ nugem help jekyll
 
 ### `rails` Subcommand
 
-The `rails` subcommand extends the `plain` subcommand and creates a new Rails plugin with the given NAME:
+The `rails` subcommand extends the `gem` subcommand and creates a new Rails plugin with the given NAME:
 
 ```shell
 $ nugem rails NAME [OPTIONS]

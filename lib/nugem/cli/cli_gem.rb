@@ -4,10 +4,10 @@ module Nugem
   class Cli < Thor
     include Thor::Actions
 
-    desc 'plain NAME', 'Creates a new plain gem scaffold.'
+    desc 'gem NAME', 'Creates a new gem gem scaffold.'
 
     long_desc <<~END_DESC
-      Creates a new plain gem scaffold with the given NAME,
+      Creates a new gem gem scaffold with the given NAME,
       by default hosted by GitHub and published on RubyGems.
     END_DESC
 
@@ -17,7 +17,7 @@ module Nugem
     method_option :private, type: :boolean, default: false,
       desc: 'Publish the gem in a private repository.'
 
-    def plain(gem_name)
+    def gem(gem_name)
       # puts set_color("gem_name=#{gem_name}", :yellow)
       super if gem_name.empty?
 
@@ -40,7 +40,7 @@ module Nugem
     def create_plain_scaffold(gem_name)
       @gem_name = gem_name
       @class_name = Nugem.camel_case @gem_name
-      @host       = options[:bitbucket] ? :bitbucket : :github # FIXME: conflicts with @host in plain()
+      @host       = options[:bitbucket] ? :bitbucket : :github # FIXME: conflicts with @host in gem()
       @repository = Nugem::Repository.new(
         host:           @host,
         user:           git_repository_user_name(@host),
@@ -48,7 +48,7 @@ module Nugem
         gem_server_url: gem_server_url(@private),
         private:        @private
       )
-      puts set_color("Creating a scaffold for a new plain Ruby gem named #{@gem_name} in #{@dir}.", :green)
+      puts set_color("Creating a scaffold for a new gem Ruby gem named #{@gem_name} in #{@dir}.", :green)
       exclude_pattern = case @test_framework
                         when 'minitest' then /spec.*/
                         when 'rspec'    then /test.*/

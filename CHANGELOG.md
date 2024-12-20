@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.9.0
+
+* Replaced old option parsing mechanism
+* Renamed 'plain' to 'gem'
+
 ## 0.8.5
 
 * Added `-y` option to suppress confirmation messages and default to `yes`.
