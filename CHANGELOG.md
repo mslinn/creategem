@@ -2,8 +2,11 @@
 
 ## 0.9.0
 
-* Replaced old option parsing mechanism
+* Added `OptionParser` starter for gems in `templates/common/executable_scaffold/lib/%gem_name%/options.rb.tt`.
 * Renamed 'plain' to 'gem'
+* Reorganized generated gem files so they all enhance the same module
+* All generated Ruby files are included on startup
+
 
 ## 0.8.5
 

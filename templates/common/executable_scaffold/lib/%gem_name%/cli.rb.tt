@@ -16,6 +16,6 @@ end
 module <%= @class_name %>
   def self.main
     @options = parse_options
-    puts "TODO: write main implementation in lib/<%= @class_name %>/cli.rb"
+    puts "TODO: write main implementation in lib/<%= @class_name %>/cli.rb".yellow
   end
 end
