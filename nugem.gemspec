@@ -32,6 +32,7 @@ Gem::Specification.new do |spec|
     'source_code_uri'   => host,
   }
   spec.name                  = 'nugem'
+  spec.platform              = Gem::Platform::RUBY
   spec.require_paths         = ['lib']
   spec.required_ruby_version = '>= 3.1.0'
   spec.summary               = 'Nugem creates a scaffold project for new gems.'
