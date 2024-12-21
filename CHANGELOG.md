@@ -6,6 +6,7 @@
 * Renamed 'plain' to 'gem'
 * Reorganized generated gem files so they all enhance the same module
 * All generated Ruby files are included on startup
+* Rails apps are deprecated, will be removed soon
 
 
 ## 0.8.5
