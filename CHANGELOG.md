@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.9.1 (in progress)
+
+* Added `spec.platform` to `templates/common/gem_scaffold/%gem_name%.gemspec.tt` because `RubyGems.org` now requires it
+
+
 ## 0.9.0
 
 * Added `OptionParser` starter for gems in `templates/common/executable_scaffold/lib/%gem_name%/options.rb.tt`.
