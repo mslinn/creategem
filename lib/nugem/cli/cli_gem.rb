@@ -4,10 +4,10 @@ module Nugem
   class Cli < Thor
     include Thor::Actions
 
-    desc 'gem NAME', 'Creates a new gem gem scaffold.'
+    desc 'gem NAME', 'Creates a new gem scaffold.'
 
     long_desc <<~END_DESC
-      Creates a new gem gem scaffold with the given NAME,
+      Creates a new gem scaffold with the given NAME,
       by default hosted by GitHub and published on RubyGems.
     END_DESC
 
@@ -22,7 +22,7 @@ module Nugem
       super if gem_name.empty?
 
       @executable = options[:executable]
-      @host           = options[:host] # FIXME: conflicts with @host in create_plain_scaffold()
+      @host           = options[:host] # FIXME: conflicts with @host in create_gem_scaffold()
       @out_dir        = options[:out_dir]
       @private        = options[:private]
       @test_framework = options[:test_framework]
@@ -48,7 +48,7 @@ module Nugem
         gem_server_url: gem_server_url(@private),
         private:        @private
       )
-      puts set_color("Creating a scaffold for a new gem Ruby gem named #{@gem_name} in #{@dir}.", :green)
+      puts set_color("Creating a scaffold for a new Ruby gem named #{@gem_name} in #{@dir}.", :green)
       exclude_pattern = case @test_framework
                         when 'minitest' then /spec.*/
                         when 'rspec'    then /test.*/

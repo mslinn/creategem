@@ -1,0 +1,31 @@
+require 'colorator'
+require 'optparse'
+
+def help(msg = nil)
+  printf "Error: #{msg}\n\n".yellow unless msg.nil?
+  msg = <<~END_HELP
+    <%= @gem_name %>: Describe this executable.
+
+    Syntax: <%= @gem_name %> [Options]
+
+    Options:
+      -h       Show this help message
+  END_HELP
+  printf msg.cyan
+  exit 1
+end
+
+def parse_options
+  options = { bpm: 120, overwrite: false }
+  OptionParser.new do |parser|
+    parser.program_name = File.basename __FILE__
+    @parser = parser
+
+    # parser.on('-b',      '--bpm BPM', OptionParser::DecimalInteger, 'Specify BPM (default is 120 bpm)')
+    # parser.on('-f',      '--overwrite',                             'Overwrite output MIDI file if present') {% endcomment %}
+    parser.on_tail('-h', '--help',                                  'Show this message') do
+      help
+    end
+  end.order!(into: options)
+  options
+end

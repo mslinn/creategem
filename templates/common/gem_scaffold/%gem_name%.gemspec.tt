@@ -52,6 +52,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rails', '~> 7.0.5'
   <%- end -%>
   <%- if @executable -%>
-  spec.add_dependency 'thor', '~> 1.2.2'
+  spec.add_dependency 'colorator'
+  spec.add_dependency 'optparse'
   <%- end -%>
 end

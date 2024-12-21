@@ -1,13 +1,21 @@
-require 'thor'
-require '<%= @gem_name %>'
+require 'colorator'
+require 'fileutils'
+require 'pathname'
+
+def require_subdirectory(dir)
+  Dir[File.join(dir, '*.rb')].each do |file|
+    require file unless file == __FILE__
+  end
+end
+
+require_subdirectory File.realpath(__dir__) # Require all Ruby files in 'lib/', except this file
+Pathname(__dir__).children.select(&:directory?).each do |directory|
+  require_subdirectory directory.to_s
+end
 
 module <%= @class_name %>
-  class Cli < Thor
-    include Thor::Actions
-
-    desc "do_something NAME", "<%= @todo %>task description"
-    def do_something(name)
-      puts "<%= @todo %>do something with: #{name}"
-    end
+  def self.main
+    @options = parse_options
+    puts "TODO: write main implementation in lib/<%= @class_name %>/cli.rb"
   end
 end

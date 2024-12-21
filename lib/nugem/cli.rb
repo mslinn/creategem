@@ -82,7 +82,7 @@ module Nugem
           run 'chmod +x exe/*' if @executable
           create_local_git_repository
           FileUtils.rm_f 'Gemfile.lock'
-          # puts set_color("Running 'bundle install'", :green)
+          # puts set_color("Running 'bundle'", :green)
           # run 'bundle', abort_on_failure: false
           create_repo = @yes || yes?(set_color("Do you want to create a repository on #{@repository.host.camel_case} named #{gem_name}? (y/N)",
                                                :green))
@@ -96,7 +96,7 @@ module Nugem
         gemspec_todos = count_todos "#{gem_name}.gemspec"
         readme_todos  = count_todos 'README.md'
         if readme_todos.zero? && gemspec_todos.zero?
-          puts set_color("There are no TODOs. You can run 'bundle install' from within your new gem project now.", :blue)
+          puts set_color("There are no TODOs. You can run 'bundle' from within your new gem project now.", :blue)
           return
         end
 

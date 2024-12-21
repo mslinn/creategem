@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
 
-require '<%= @gem_name %>/cli'
+require_relative '../lib/<%= @gem_name %>/cli'
 
-<%= @class_name %>::Cli.start
+<%= @class_name %>.main
