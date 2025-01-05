@@ -39,7 +39,7 @@ DIR=$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )
 cd "$DIR/.." || exit
 
 run="serve \
-    --livereload-port 25721 \
+    --livereload-port 25724 \
     --force_polling \
     --host 0.0.0.0 \
     --port 4444 \

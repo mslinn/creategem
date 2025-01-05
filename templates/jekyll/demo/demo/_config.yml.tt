@@ -37,10 +37,8 @@ plugin_loggers:
   SiteHooks: warn
 permalink: "/blog/:year/:month/:day/:title:output_ext"
 plugins: # Use file name of the plugin entry point, not the gem name
-  - classifier-reborn
   - jekyll
   - jekyll_plugin_logger
-  - html-proofer
   - <%= @gem_name %>
 sass:
   style: compressed
