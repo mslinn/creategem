@@ -19,6 +19,9 @@ module <%= class_name %>
 
   # This class implements the Jekyll <%= @tag_name %> functionality
   class <%= @jekyll_class_name %> < JekyllSupport::JekyllTag
+    # Defines class methods, see https://mslinn.com/jekyll/10700-designing-for-testability.html:
+    extend <%= @jekyll_class_name %>Module
+
     PLUGIN_NAME = '<%= @tag_name %>'.freeze unless const_defined?(:PLUGIN_NAME)
     VERSION = <%= @class_name %>::VERSION
 

@@ -89,6 +89,7 @@ module Nugem
           create_remote_git_repository @repository if create_repo
         end
         puts set_color("The #{gem_name} gem was successfully created.", :green)
+        puts set_color('Remember to run bin/setup in the new gem directory', :green)
         report_todos gem_name
       end
 

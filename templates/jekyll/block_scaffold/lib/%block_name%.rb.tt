@@ -20,6 +20,9 @@ require_relative '<%= @gem_name %>/version'
 module <%= @class_name %>
   # This class implements the Jekyll <%= @tag_name %> functionality
   class <%= @jekyll_class_name %> < JekyllSupport::JekyllBlock
+    # Defines class methods, see https://mslinn.com/jekyll/10700-designing-for-testability.html:
+    extend <%= @jekyll_class_name %>Module
+
     PLUGIN_NAME = '<%= @block_name %>'.freeze
     VERSION = <%= @class_name %>::VERSION
 

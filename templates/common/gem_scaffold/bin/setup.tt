@@ -16,12 +16,20 @@ fi
 
 rm -f Gemfile.lock
 if [[ -z "$( which bundle )" ]]; then gem install bundler; fi
-BUNDLE_WITH="development" bundle
+export BUNDLE_WITH="development"
+bundle
 
 <%- if @jekyll -%>
-bundle binstubs jekyll         --force --path binstub
+bundle binstubs jekyll --force --path binstub
 <%- end -%>
-bundle binstubs rspec-core     --force --path binstub
-bundle binstubs rubocop        --force --path binstub
+# See https://www.honeybadger.io/blog/rbenv-rubygems-bundler-path/
+# See https://linuxtut.com/visual-studio-code-i-get-a-syntax-error-when-debugging-when-using-rbenv-6ee58/
+for X in debug rake rspec-core rubocop; do
+  bundle binstubs "$X" --force --path binstub
+done
+
+<%- if @jekyll -%>
+if [ "$1" != nodemo ]; then demo/_bin/setup; fi
+<%- end -%>
 
 # Do any other automated setup that you need to do here

@@ -6,6 +6,9 @@ module <%= @class_name %>
 
   # This class implements the Jekyll block tag functionality
   class <%= @jekyll_class_name %> < JekyllBlock
+    # Defines class methods, see https://mslinn.com/jekyll/10700-designing-for-testability.html:
+    extend <%= @jekyll_class_name %>Module
+
     VERSION = <%= @class_name %>::VERSION
 
     def initialize(tag_name, argument_string, parse_context)
