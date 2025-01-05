@@ -40,6 +40,7 @@ module Nugem
     def create_plain_scaffold(gem_name)
       @gem_name = gem_name
       @class_name = Nugem.camel_case @gem_name
+      @module_name = "#{@class_name}Module"
       @host       = options[:bitbucket] ? :bitbucket : :github # FIXME: conflicts with @host in gem()
       @repository = Nugem::Repository.new(
         host:           @host,

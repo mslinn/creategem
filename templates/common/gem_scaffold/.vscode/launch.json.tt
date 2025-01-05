@@ -8,10 +8,10 @@
     {
       "args": [
         "serve",
-        "--livereload_port", "35721",
+        "--livereload_port", "35724",
         "--force_polling",
         "--host", "0.0.0.0",
-        "--port", "4001",
+        "--port", "4444",
         "--future",
         "--incremental",
         "--livereload",
@@ -54,7 +54,7 @@
     },
     {
       "name": "RSpec - active spec file only",
-      "program": "binstub/rspec -I ${workspaceRoot} ${file}",
+      "program": "${workspaceRoot}/binstub/rspec -I ${workspaceRoot} ${file}",
       "request": "launch",
       "type": "ruby_lsp",
     },
